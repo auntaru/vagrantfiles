@@ -3,8 +3,6 @@
 set -x
 set -e
 
-SERVICE_OPTION=${1:-""}
-
 cat << EOF | sudo tee /etc/yum.repos.d/MariaDB.repo
 [mariadb]
 name = MariaDB
@@ -39,4 +37,6 @@ sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
 # systemctl stop firewalld.service
 # systemctl disable firewalld.service
 
-# service mysql start ${SERVICE_OPTION}
+# node1 : galera_new_cluster
+# node2 : systemctl start mariadb.service
+# node3 : garbd -a gcomm://192.168.33.11,192.168.33.12,192.168.33.13 -g auntaru_mariadb
