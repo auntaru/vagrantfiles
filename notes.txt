@@ -1,0 +1,62 @@
+MariaDB
+
+root@mdbgal1 ~]# # hostnamectl set-hostname mdbgal1
+[root@mdbgal1 ~]# 
+[root@mdbgal1 ~]# hostname
+mdbgal1
+[root@mdbgal1 ~]#
+
+
+   To create a Java sample which connects to another master when 
+the current one is down ;
+
+
+https://linuxacademy.com/blog/linux/vagrant-cheat-sheet-get-started-with-vagrant/
+
+https://www.osso.nl/blog/two-node-mariadb-galera-cluster-with-arbiter/
+
+https://cloud.centos.org/centos/7/vagrant/x86_64/images/
+
+https://inside-out.xyz/technology/making-selinux-work-with-a-mariadb-galera-cluster.html
+https://ahmermansoor.blogspot.com/2019/02/install-mariadb-galera-cluster-on-centos-7.html
+
+https://github.com/marcindulak/vagrant-mariadb-galera-tutorial-centos7/blob/master/README.md
+https://github.com/marcindulak/vagrant-mariadb-galera-tutorial-centos7/blob/master/Vagrantfile
+
+# setenforce 0
+$setenforce_0 = <<SCRIPT
+if test `getenforce` = 'Enforcing'; then setenforce 0; fi
+#sed -Ei 's/^SELINUX=.*/SELINUX=Permissive/' /etc/selinux/config
+SCRIPT
+
+# stop firewalld
+$systemctl_stop_firewalld = <<SCRIPT
+systemctl stop firewalld.service
+SCRIPT
+
+
+galera_new_cluster
+systemctl start mariadb.service
+garbd -a gcomm://192.168.33.11,192.168.33.12,192.168.33.13 -g auntaru_mariadb
+
+
+mysqladmin -u root -p shutdown 
+
+#mysqld_safe OFF: 
+mysqladmin shutdown
+
+
+
+cat /etc/my.cnf.d/server.cnf
+tail -f /var/lib/mysql/error.log
+
+watch -n1 "mysql -e \"SHOW STATUS LIKE 'wsrep_cluster_size'\""
+
+
+
+https://mariadb.com/kb/en/galera-cluster-address/
+
+A useful option to set is pc.wait_prim=no to ensure the server will start running even if it can't determine a primary node. 
+This is useful if all members go down at the same time.
+
+
