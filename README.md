@@ -2,7 +2,7 @@
 Vagrantfiles for Databases
 
 <h2>MySQL 8 Router - High Availability - with Pacemaker on CentOS 8</h2>
-https://pantestmb.blogspot.com/2020/09/mysql-8-router-high-availability-with.html
+https://pantestmb.blogspot.com/2020/09/mysql-8-router-high-availability-with.html<br>
 https://www.youtube.com/watch?v=EVb_YhO3c7U<br>
 
 <h2>MariaDB Galera Cluster with Arbitrator</h2>
