@@ -1,0 +1,13 @@
+  275  git clone https://github.com/auntaru/vagrantfiles.git
+  277  git status
+  278  # git add MySQL-iNNoDB-CLuSTeR-pacemaker-RouTeR/*
+  280  git add MySQL-iNNoDB-CLuSTeR-pacemaker-RouTeR/*
+  281  git status
+  282  git commit -m "MySQL-RouTeR with pacemaker corosync and heartbeat"
+  283  git config --global user.email "auntaru@gmail.com"
+  284  git config --global user.name "Alex Untaru"
+  285  git commit -m "MySQL-RouTeR with pacemaker corosync and heartbeat"
+  286  git push -u origin
+  289  # git commit -m "updated README"
+  291  history | grep "git "
+  292  history | grep "git " >> ./gitnotes.txt
