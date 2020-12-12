@@ -1,0 +1,1901 @@
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ vagrant status
+Current machine states:
+
+node1pg96p                not created (virtualbox)
+node2pg96s                not created (virtualbox)
+node3pg96m                not created (virtualbox)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ vagrant up
+Bringing machine 'node1pg96p' up with 'virtualbox' provider...
+Bringing machine 'node2pg96s' up with 'virtualbox' provider...
+Bringing machine 'node3pg96m' up with 'virtualbox' provider...
+==> node1pg96p: Importing base box 'CentOS/8-stream'...
+==> node1pg96p: Matching MAC address for NAT networking...
+==> node1pg96p: Setting the name of the VM: pgsql96centos8stream_node1pg96p_1607808260940_45991
+==> node1pg96p: Fixed port collision for 22 => 2222. Now on port 2201.
+==> node1pg96p: Clearing any previously set network interfaces...
+==> node1pg96p: Preparing network interfaces based on configuration...
+    node1pg96p: Adapter 1: nat
+    node1pg96p: Adapter 2: hostonly
+==> node1pg96p: Forwarding ports...
+    node1pg96p: 22 (guest) => 2201 (host) (adapter 1)
+==> node1pg96p: Running 'pre-boot' VM customizations...
+==> node1pg96p: Booting VM...
+==> node1pg96p: Waiting for machine to boot. This may take a few minutes...
+    node1pg96p: SSH address: 127.0.0.1:2201
+    node1pg96p: SSH username: vagrant
+    node1pg96p: SSH auth method: private key
+    node1pg96p: 
+    node1pg96p: Vagrant insecure key detected. Vagrant will automatically replace
+    node1pg96p: this with a newly generated keypair for better security.
+    node1pg96p: 
+    node1pg96p: Inserting generated public key within guest...
+    node1pg96p: Removing insecure key from the guest if it's present...
+    node1pg96p: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> node1pg96p: Machine booted and ready!
+==> node1pg96p: Checking for guest additions in VM...
+    node1pg96p: No guest additions were detected on the base box for this VM! Guest
+    node1pg96p: additions are required for forwarded ports, shared folders, host only
+    node1pg96p: networking, and more. If SSH fails on this machine, please install
+    node1pg96p: the guest additions and repackage the box to continue.
+    node1pg96p: 
+    node1pg96p: This is not an error message; everything may continue to work properly,
+    node1pg96p: in which case you may ignore this message.
+==> node1pg96p: Setting hostname...
+==> node1pg96p: Configuring and enabling network interfaces...
+==> node1pg96p: Rsyncing folder: /home/vagrant/postgres/pgsql96centos8stream/ => /vagrant
+==> node1pg96p: Running provisioner: file...
+    node1pg96p: ./pgbouncer.ini => /tmp/pgbouncer.ini
+==> node1pg96p: Running provisioner: file...
+    node1pg96p: ./userlist.txt => /tmp/userlist.txt
+==> node1pg96p: Running provisioner: shell...
+    node1pg96p: Running: /tmp/vagrant-shell20201212-609053-1ikro1p.sh
+    node1pg96p: + set -e
+    node1pg96p: + yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    node1pg96p: CentOS Stream 8 - AppStream                     2.5 MB/s | 6.3 MB     00:02    
+    node1pg96p: CentOS Stream 8 - BaseOS                        3.2 MB/s | 2.3 MB     00:00    
+    node1pg96p: CentOS Stream 8 - Extras                         26 kB/s | 7.0 kB     00:00    
+    node1pg96p: pgdg-redhat-repo-latest.noarch.rpm               19 kB/s |  11 kB     00:00    
+    node1pg96p: Dependencies resolved.
+    node1pg96p: ================================================================================
+    node1pg96p:  Package                 Architecture  Version        Repository           Size
+    node1pg96p: ================================================================================
+    node1pg96p: Installing:
+    node1pg96p:  pgdg-redhat-repo        noarch        42.0-14        @commandline         11 k
+    node1pg96p: 
+    node1pg96p: Transaction Summary
+    node1pg96p: ================================================================================
+    node1pg96p: Install  1 Package
+    node1pg96p: Total size: 11 k
+    node1pg96p: Installed size: 11 k
+    node1pg96p: Downloading Packages:
+    node1pg96p: Running transaction check
+    node1pg96p: Transaction check succeeded.
+    node1pg96p: Running transaction test
+    node1pg96p: Transaction test succeeded.
+    node1pg96p: Running transaction
+    node1pg96p:   Preparing        :                                                        1/1
+    node1pg96p:  
+    node1pg96p:   Installing       : pgdg-redhat-repo-42.0-14.noarch                        1/1
+    node1pg96p:  
+    node1pg96p:   Verifying        : pgdg-redhat-repo-42.0-14.noarch                        1/1
+    node1pg96p:  
+    node1pg96p: 
+    node1pg96p: Installed:
+    node1pg96p:   pgdg-redhat-repo-42.0-14.noarch                                               
+    node1pg96p: Complete!
+    node1pg96p: + dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    node1pg96p: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 472 kB/s | 511 kB     00:01    
+    node1pg96p: PostgreSQL 13 for RHEL/CentOS 8 - x86_64        134 kB/s | 193 kB     00:01    
+    node1pg96p: PostgreSQL 12 for RHEL/CentOS 8 - x86_64        289 kB/s | 416 kB     00:01    
+    node1pg96p: PostgreSQL 11 for RHEL/CentOS 8 - x86_64        592 kB/s | 606 kB     00:01    
+    node1pg96p: PostgreSQL 10 for RHEL/CentOS 8 - x86_64        448 kB/s | 409 kB     00:00    
+    node1pg96p: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64       434 kB/s | 398 kB     00:00    
+    node1pg96p: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64       345 kB/s | 355 kB     00:01    
+    node1pg96p: epel-release-latest-8.noarch.rpm                 25 kB/s |  22 kB     00:00    
+    node1pg96p: Dependencies resolved.
+    node1pg96p: ================================================================================
+    node1pg96p:  Package              Architecture   Version         Repository            Size
+    node1pg96p: ================================================================================
+    node1pg96p: Installing:
+    node1pg96p:  epel-release         noarch         8-9.el8         @commandline          22 k
+    node1pg96p: 
+    node1pg96p: Transaction Summary
+    node1pg96p: ================================================================================
+    node1pg96p: Install  1 Package
+    node1pg96p: Total size: 22 k
+    node1pg96p: Installed size: 32 k
+    node1pg96p: Downloading Packages:
+    node1pg96p: Running transaction check
+    node1pg96p: Transaction check succeeded.
+    node1pg96p: Running transaction test
+    node1pg96p: Transaction test succeeded.
+    node1pg96p: Running transaction
+    node1pg96p:   Preparing        :                                                        1/1
+    node1pg96p:  
+    node1pg96p:   Installing       : epel-release-8-9.el8.noarch                            1/1
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: epel-release-8-9.el8.noarch                            1/1
+    node1pg96p:  
+    node1pg96p:   Verifying        : epel-release-8-9.el8.noarch                            1/1
+    node1pg96p:  
+    node1pg96p: 
+    node1pg96p: Installed:
+    node1pg96p:   epel-release-8-9.el8.noarch                                                   
+    node1pg96p: 
+    node1pg96p: Complete!
+    node1pg96p: + dnf -y module disable postgresql
+    node1pg96p: Extra Packages for Enterprise Linux Modular 8 - 125 kB/s |  98 kB     00:00    
+    node1pg96p: Extra Packages for Enterprise Linux 8 - x86_64  1.0 MB/s | 8.6 MB     00:08    
+    node1pg96p: Dependencies resolved.
+    node1pg96p: ================================================================================
+    node1pg96p:  Package           Architecture     Version             Repository         Size
+    node1pg96p: ================================================================================
+    node1pg96p: Disabling modules:
+    node1pg96p:  postgresql                                                                    
+    node1pg96p: 
+    node1pg96p: Transaction Summary
+    node1pg96p: ================================================================================
+    node1pg96p: Complete!
+    node1pg96p: + yum-config-manager --enable pgdg96
+    node1pg96p: + dnf -y install postgresql96 postgresql96-server postgresql96-contrib mc iproute net-tools pgbouncer pgbconsole
+    node1pg96p: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_  11 kB/s | 3.0 kB     00:00    
+    node1pg96p: PostgreSQL 13 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 12 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 11 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 10 for RHEL/CentOS 8 - x86_64         11 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64        11 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64        12 kB/s | 3.8 kB     00:00    
+    node1pg96p: Package iproute-5.3.0-5.el8.x86_64 is already installed.
+    node1pg96p: Dependencies resolved.
+    node1pg96p: ========================================================================================
+    node1pg96p:  Package                  Arch    Version                             Repository    Size
+    node1pg96p: ========================================================================================
+    node1pg96p: Installing:
+    node1pg96p:  mc                       x86_64  1:4.8.19-9.el8                      appstream    1.9 M
+    node1pg96p:  net-tools                x86_64  2.0-0.52.20160912git.el8            baseos       322 k
+    node1pg96p:  pgbconsole               x86_64  0.1.1-2.rhel8                       pgdg-common   31 k
+    node1pg96p:  pgbouncer                x86_64  1.15.0-1.rhel8                      pgdg-common  226 k
+    node1pg96p:  postgresql96             x86_64  9.6.20-1PGDG.rhel8                  pgdg96       1.5 M
+    node1pg96p:  postgresql96-contrib     x86_64  9.6.20-1PGDG.rhel8                  pgdg96       596 k
+    node1pg96p:  postgresql96-server      x86_64  9.6.20-1PGDG.rhel8                  pgdg96       4.7 M
+    node1pg96p: Upgrading:
+    node1pg96p:  iproute                  x86_64  5.9.0-1.el8                         baseos       692 k
+    node1pg96p: Installing dependencies:
+    node1pg96p:  gpm-libs                 x86_64  1.20.7-15.el8                       appstream     39 k
+    node1pg96p:  libpq5                   x86_64  13.0-10PGDG.rhel8                   pgdg-common  450 k
+    node1pg96p:  perl-Carp                noarch  1.42-396.el8                        baseos        30 k
+    node1pg96p:  perl-Errno               x86_64  1.28-416.el8                        baseos        76 k
+    node1pg96p:  perl-Exporter            noarch  5.72-396.el8                        baseos        34 k
+    node1pg96p:  perl-File-Path           noarch  2.15-2.el8                          baseos        38 k
+    node1pg96p:  perl-File-Temp           noarch  0.230.600-1.el8                     baseos        63 k
+    node1pg96p:  perl-IO                  x86_64  1.38-416.el8                        baseos       141 k
+    node1pg96p:  perl-PathTools           x86_64  3.74-1.el8                          baseos        90 k
+    node1pg96p:  perl-Scalar-List-Utils   x86_64  3:1.49-2.el8                        baseos        68 k
+    node1pg96p:  perl-Socket              x86_64  4:2.027-3.el8                       baseos        59 k
+    node1pg96p:  perl-Text-Tabs+Wrap      noarch  2013.0523-395.el8                   baseos        24 k
+    node1pg96p:  perl-Unicode-Normalize   x86_64  1.25-396.el8                        baseos        82 k
+    node1pg96p:  perl-constant            noarch  1.33-396.el8                        baseos        25 k
+    node1pg96p:  perl-interpreter         x86_64  4:5.26.3-416.el8                    baseos       6.3 M
+    node1pg96p:  perl-libs                x86_64  4:5.26.3-416.el8                    baseos       1.6 M
+    node1pg96p:  perl-macros              x86_64  4:5.26.3-416.el8                    baseos        72 k
+    node1pg96p:  perl-parent              noarch  1:0.237-1.el8                       baseos        20 k
+    node1pg96p:  perl-threads             x86_64  1:2.21-2.el8                        baseos        61 k
+    node1pg96p:  perl-threads-shared      x86_64  1.58-2.el8                          baseos        48 k
+    node1pg96p:  postgresql96-libs        x86_64  9.6.20-1PGDG.rhel8                  pgdg96       347 k
+    node1pg96p:  python3-pip              noarch  9.0.3-18.el8                        appstream     20 k
+    node1pg96p:  python3-psycopg2         x86_64  2.8.6-1.rhel8                       pgdg-common  178 k
+    node1pg96p:  python3-setuptools       noarch  39.2.0-6.el8                        baseos       163 k
+    node1pg96p:  python36                 x86_64  3.6.8-2.module_el8.3.0+389+6a62c88d appstream     19 k
+    node1pg96p: Enabling module streams:
+    node1pg96p:  python36                         3.6                                                   
+    node1pg96p: 
+    node1pg96p: Transaction Summary
+    node1pg96p: ========================================================================================
+    node1pg96p: Install  32 Packages
+    node1pg96p: Upgrade   1 Package
+    node1pg96p: Total download size: 20 M
+    node1pg96p: Downloading Packages:
+    node1pg96p: (1/33): gpm-libs-1.20.7-15.el8.x86_64.rpm       603 kB/s |  39 kB     00:00    
+    node1pg96p: (2/33): python3-pip-9.0.3-18.el8.noarch.rpm     303 kB/s |  20 kB     00:00    
+    node1pg96p: (3/33): python36-3.6.8-2.module_el8.3.0+389+6a6 1.1 MB/s |  19 kB     00:00    
+    node1pg96p: (4/33): perl-Carp-1.42-396.el8.noarch.rpm       368 kB/s |  30 kB     00:00    
+    node1pg96p: (5/33): perl-Errno-1.28-416.el8.x86_64.rpm      1.0 MB/s |  76 kB     00:00    
+    node1pg96p: (6/33): perl-Exporter-5.72-396.el8.noarch.rpm   687 kB/s |  34 kB     00:00    
+    node1pg96p: (7/33): perl-File-Path-2.15-2.el8.noarch.rpm    692 kB/s |  38 kB     00:00    
+    node1pg96p: (8/33): perl-File-Temp-0.230.600-1.el8.noarch.r 1.2 MB/s |  63 kB     00:00    
+    node1pg96p: (9/33): perl-IO-1.38-416.el8.x86_64.rpm         1.5 MB/s | 141 kB     00:00    
+    node1pg96p: (10/33): perl-PathTools-3.74-1.el8.x86_64.rpm   1.8 MB/s |  90 kB     00:00    
+    node1pg96p: (11/33): mc-4.8.19-9.el8.x86_64.rpm             3.3 MB/s | 1.9 MB     00:00    
+    node1pg96p: (12/33): net-tools-2.0-0.52.20160912git.el8.x86 621 kB/s | 322 kB     00:00    
+    node1pg96p: (13/33): perl-Scalar-List-Utils-1.49-2.el8.x86_ 1.3 MB/s |  68 kB     00:00    
+    node1pg96p: (14/33): perl-Unicode-Normalize-1.25-396.el8.x8 1.6 MB/s |  82 kB     00:00    
+    node1pg96p: (15/33): perl-Socket-2.027-3.el8.x86_64.rpm     704 kB/s |  59 kB     00:00    
+    node1pg96p: (16/33): perl-Text-Tabs+Wrap-2013.0523-395.el8. 296 kB/s |  24 kB     00:00    
+    node1pg96p: (17/33): perl-constant-1.33-396.el8.noarch.rpm  988 kB/s |  25 kB     00:00    
+    node1pg96p: (18/33): perl-macros-5.26.3-416.el8.x86_64.rpm  754 kB/s |  72 kB     00:00    
+    node1pg96p: (19/33): perl-parent-0.237-1.el8.noarch.rpm     697 kB/s |  20 kB     00:00    
+    node1pg96p: (20/33): perl-threads-2.21-2.el8.x86_64.rpm     1.2 MB/s |  61 kB     00:00    
+    node1pg96p: (21/33): perl-threads-shared-1.58-2.el8.x86_64. 975 kB/s |  48 kB     00:00    
+    node1pg96p: (22/33): python3-setuptools-39.2.0-6.el8.noarch 1.3 MB/s | 163 kB     00:00    
+    node1pg96p: (23/33): perl-libs-5.26.3-416.el8.x86_64.rpm    3.5 MB/s | 1.6 MB     00:00    
+    node1pg96p: (24/33): pgbconsole-0.1.1-2.rhel8.x86_64.rpm     78 kB/s |  31 kB     00:00    
+    node1pg96p: (25/33): libpq5-13.0-10PGDG.rhel8.x86_64.rpm    681 kB/s | 450 kB     00:00    
+    node1pg96p: (26/33): pgbouncer-1.15.0-1.rhel8.x86_64.rpm    1.1 MB/s | 226 kB     00:00    
+    node1pg96p: (27/33): python3-psycopg2-2.8.6-1.rhel8.x86_64. 2.4 MB/s | 178 kB     00:00    
+    node1pg96p: (28/33): postgresql96-contrib-9.6.20-1PGDG.rhel 3.7 MB/s | 596 kB     00:00    
+    node1pg96p: (29/33): postgresql96-libs-9.6.20-1PGDG.rhel8.x 2.9 MB/s | 347 kB     00:00    
+    node1pg96p: (30/33): postgresql96-9.6.20-1PGDG.rhel8.x86_64 4.0 MB/s | 1.5 MB     00:00    
+    node1pg96p: (31/33): iproute-5.9.0-1.el8.x86_64.rpm         1.6 MB/s | 692 kB     00:00    
+    node1pg96p: (32/33): postgresql96-server-9.6.20-1PGDG.rhel8 6.8 MB/s | 4.7 MB     00:00    
+    node1pg96p: (33/33): perl-interpreter-5.26.3-416.el8.x86_64 1.2 MB/s | 6.3 MB     00:05    
+    node1pg96p: --------------------------------------------------------------------------------
+    node1pg96p: Total                                           3.3 MB/s |  20 MB     00:06     
+    node1pg96p: warning: /var/cache/dnf/appstream-df3f4ffab27dbdcf/packages/gpm-libs-1.20.7-15.el8.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 8483c65d: NOKEY
+    node1pg96p: CentOS Stream 8 - AppStream                     1.6 MB/s | 1.6 kB     00:00    
+    node1pg96p: Importing GPG key 0x8483C65D:
+    node1pg96p:  Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+    node1pg96p:  Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+    node1pg96p:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+    node1pg96p: Key imported successfully
+    node1pg96p: warning: /var/cache/dnf/pgdg-common-38b6c5045045f841/packages/libpq5-13.0-10PGDG.rhel8.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
+    node1pg96p: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 1.6 MB/s | 1.7 kB     00:00    
+    node1pg96p: Importing GPG key 0x442DF0F8:
+    node1pg96p:  Userid     : "PostgreSQL RPM Building Project <pgsqlrpms-hackers@pgfoundry.org>"
+    node1pg96p:  Fingerprint: 68C9 E2B9 1A37 D136 FE74 D176 1F16 D2E1 442D F0F8
+    node1pg96p:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
+    node1pg96p: Key imported successfully
+    node1pg96p: Running transaction check
+    node1pg96p: Transaction check succeeded.
+    node1pg96p: Running transaction test
+    node1pg96p: Transaction test succeeded.
+    node1pg96p: Running transaction
+    node1pg96p:   Preparing        :                                                        1/1
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Exporter-5.72-396.el8.noarch                     1/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-libs-4:5.26.3-416.el8.x86_64                     2/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Carp-1.42-396.el8.noarch                         3/34
+    node1pg96p:  
+    node1pg96p:   Installing       : libpq5-13.0-10PGDG.rhel8.x86_64                       4/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: libpq5-13.0-10PGDG.rhel8.x86_64                       4/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64            5/34
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64           6/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64           6/34
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql96-9.6.20-1PGDG.rhel8.x86_64                7/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql96-9.6.20-1PGDG.rhel8.x86_64                7/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-parent-1:0.237-1.el8.noarch                      8/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node1pg96p:  
+    node1pg96p:   Installing       : python3-psycopg2-2.8.6-1.rhel8.x86_64                10/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-macros-4:5.26.3-416.el8.x86_64                  11/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Errno-1.28-416.el8.x86_64                       12/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Socket-4:2.027-3.el8.x86_64                     13/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         14/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-Unicode-Normalize-1.25-396.el8.x86_64           15/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-File-Path-2.15-2.el8.noarch                     16/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-IO-1.38-416.el8.x86_64                          17/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-PathTools-3.74-1.el8.x86_64                     18/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-constant-1.33-396.el8.noarch                    19/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-threads-1:2.21-2.el8.x86_64                     20/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-threads-shared-1.58-2.el8.x86_64                21/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-interpreter-4:5.26.3-416.el8.x86_64             22/34
+    node1pg96p:  
+    node1pg96p:   Installing       : perl-File-Temp-0.230.600-1.el8.noarch                23/34
+    node1pg96p:  
+    node1pg96p:   Installing       : python3-setuptools-39.2.0-6.el8.noarch               24/34
+    node1pg96p:  
+    node1pg96p:   Installing       : python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6   25/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6   25/34
+    node1pg96p:  
+    node1pg96p:   Installing       : python3-pip-9.0.3-18.el8.noarch                      26/34
+    node1pg96p:  
+    node1pg96p:   Installing       : gpm-libs-1.20.7-15.el8.x86_64                        27/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: gpm-libs-1.20.7-15.el8.x86_64                        27/34
+    node1pg96p:  
+    node1pg96p:   Installing       : mc-1:4.8.19-9.el8.x86_64                             28/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node1pg96p:  
+    node1pg96p:   Installing       : pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64       30/34
+    node1pg96p:  
+    node1pg96p:   Installing       : pgbconsole-0.1.1-2.rhel8.x86_64                      31/34
+    node1pg96p:  
+    node1pg96p:   Upgrading        : iproute-5.9.0-1.el8.x86_64                           32/34
+    node1pg96p:  
+    node1pg96p:   Installing       : net-tools-2.0-0.52.20160912git.el8.x86_64            33/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: net-tools-2.0-0.52.20160912git.el8.x86_64            33/34
+    node1pg96p:  
+    node1pg96p:   Cleanup          : iproute-5.3.0-5.el8.x86_64                           34/34
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: iproute-5.3.0-5.el8.x86_64                           34/34
+    node1pg96p:  
+    node1pg96p:   Verifying        : gpm-libs-1.20.7-15.el8.x86_64                         1/34 
+    node1pg96p:   Verifying        : mc-1:4.8.19-9.el8.x86_64                              2/34 
+    node1pg96p:   Verifying        : python3-pip-9.0.3-18.el8.noarch                       3/34 
+    node1pg96p:   Verifying        : python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6    4/34 
+    node1pg96p:   Verifying        : net-tools-2.0-0.52.20160912git.el8.x86_64             5/34 
+    node1pg96p:   Verifying        : perl-Carp-1.42-396.el8.noarch                         6/34 
+    node1pg96p:   Verifying        : perl-Errno-1.28-416.el8.x86_64                        7/34 
+    node1pg96p:   Verifying        : perl-Exporter-5.72-396.el8.noarch                     8/34 
+    node1pg96p:   Verifying        : perl-File-Path-2.15-2.el8.noarch                      9/34 
+    node1pg96p:   Verifying        : perl-File-Temp-0.230.600-1.el8.noarch                10/34 
+    node1pg96p:   Verifying        : perl-IO-1.38-416.el8.x86_64                          11/34 
+    node1pg96p:   Verifying        : perl-PathTools-3.74-1.el8.x86_64                     12/34 
+    node1pg96p:   Verifying        : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64           13/34 
+    node1pg96p:   Verifying        : perl-Socket-4:2.027-3.el8.x86_64                     14/34 
+    node1pg96p:   Verifying        : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         15/34 
+    node1pg96p:   Verifying        : perl-Unicode-Normalize-1.25-396.el8.x86_64           16/34 
+    node1pg96p:   Verifying        : perl-constant-1.33-396.el8.noarch                    17/34 
+    node1pg96p:   Verifying        : perl-interpreter-4:5.26.3-416.el8.x86_64             18/34 
+    node1pg96p:   Verifying        : perl-libs-4:5.26.3-416.el8.x86_64                    19/34 
+    node1pg96p:   Verifying        : perl-macros-4:5.26.3-416.el8.x86_64                  20/34 
+    node1pg96p:   Verifying        : perl-parent-1:0.237-1.el8.noarch                     21/34 
+    node1pg96p:   Verifying        : perl-threads-1:2.21-2.el8.x86_64                     22/34 
+    node1pg96p:   Verifying        : perl-threads-shared-1.58-2.el8.x86_64                23/34 
+    node1pg96p:   Verifying        : python3-setuptools-39.2.0-6.el8.noarch               24/34 
+    node1pg96p:   Verifying        : libpq5-13.0-10PGDG.rhel8.x86_64                      25/34 
+    node1pg96p:   Verifying        : pgbconsole-0.1.1-2.rhel8.x86_64                      26/34 
+    node1pg96p:   Verifying        : pgbouncer-1.15.0-1.rhel8.x86_64                      27/34 
+    node1pg96p:   Verifying        : python3-psycopg2-2.8.6-1.rhel8.x86_64                28/34 
+    node1pg96p:   Verifying        : postgresql96-9.6.20-1PGDG.rhel8.x86_64               29/34 
+    node1pg96p:   Verifying        : postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64       30/34 
+    node1pg96p:   Verifying        : postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64          31/34 
+    node1pg96p:   Verifying        : postgresql96-server-9.6.20-1PGDG.rhel8.x86_64        32/34 
+    node1pg96p:   Verifying        : iproute-5.9.0-1.el8.x86_64                           33/34 
+    node1pg96p:   Verifying        : iproute-5.3.0-5.el8.x86_64                           34/34
+    node1pg96p:  
+    node1pg96p: 
+    node1pg96p: Upgraded:
+    node1pg96p:   iproute-5.9.0-1.el8.x86_64                                                    
+    node1pg96p: 
+    node1pg96p: Installed:
+    node1pg96p:   gpm-libs-1.20.7-15.el8.x86_64                                                 
+    node1pg96p:   libpq5-13.0-10PGDG.rhel8.x86_64                                               
+    node1pg96p:   mc-1:4.8.19-9.el8.x86_64                                                      
+    node1pg96p:   net-tools-2.0-0.52.20160912git.el8.x86_64                                     
+    node1pg96p:   perl-Carp-1.42-396.el8.noarch                                                 
+    node1pg96p:   perl-Errno-1.28-416.el8.x86_64                                                
+    node1pg96p:   perl-Exporter-5.72-396.el8.noarch                                             
+    node1pg96p:   perl-File-Path-2.15-2.el8.noarch                                              
+    node1pg96p:   perl-File-Temp-0.230.600-1.el8.noarch                                         
+    node1pg96p:   perl-IO-1.38-416.el8.x86_64                                                   
+    node1pg96p:   perl-PathTools-3.74-1.el8.x86_64                                              
+    node1pg96p:   perl-Scalar-List-Utils-3:1.49-2.el8.x86_64                                    
+    node1pg96p:   perl-Socket-4:2.027-3.el8.x86_64                                              
+    node1pg96p:   perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch                                  
+    node1pg96p:   perl-Unicode-Normalize-1.25-396.el8.x86_64                                    
+    node1pg96p:   perl-constant-1.33-396.el8.noarch                                             
+    node1pg96p:   perl-interpreter-4:5.26.3-416.el8.x86_64                                      
+    node1pg96p:   perl-libs-4:5.26.3-416.el8.x86_64                                             
+    node1pg96p:   perl-macros-4:5.26.3-416.el8.x86_64                                           
+    node1pg96p:   perl-parent-1:0.237-1.el8.noarch                                              
+    node1pg96p:   perl-threads-1:2.21-2.el8.x86_64                                              
+    node1pg96p:   perl-threads-shared-1.58-2.el8.x86_64                                         
+    node1pg96p:   pgbconsole-0.1.1-2.rhel8.x86_64                                               
+    node1pg96p:   pgbouncer-1.15.0-1.rhel8.x86_64                                               
+    node1pg96p:   postgresql96-9.6.20-1PGDG.rhel8.x86_64                                        
+    node1pg96p:   postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64                                
+    node1pg96p:   postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64                                   
+    node1pg96p:   postgresql96-server-9.6.20-1PGDG.rhel8.x86_64                                 
+    node1pg96p:   python3-pip-9.0.3-18.el8.noarch                                               
+    node1pg96p:   python3-psycopg2-2.8.6-1.rhel8.x86_64                                         
+    node1pg96p:   python3-setuptools-39.2.0-6.el8.noarch                                        
+    node1pg96p:   python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_64                           
+    node1pg96p: 
+    node1pg96p: Complete!
+    node1pg96p: + yum-config-manager --enable pgdg12
+    node1pg96p: + yum -y install postgresql12 postgresql12-server postgresql12-contrib
+    node1pg96p: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 7.4 kB/s | 3.0 kB     00:00    
+    node1pg96p: PostgreSQL 13 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 12 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 11 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 10 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64        11 kB/s | 3.8 kB     00:00    
+    node1pg96p: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64        12 kB/s | 3.8 kB     00:00    
+    node1pg96p: Dependencies resolved.
+    node1pg96p: ================================================================================
+    node1pg96p:  Package                   Arch        Version                Repository   Size
+    node1pg96p: ================================================================================
+    node1pg96p: Installing:
+    node1pg96p:  postgresql12              x86_64      12.5-1PGDG.rhel8       pgdg12      1.7 M
+    node1pg96p:  postgresql12-contrib      x86_64      12.5-1PGDG.rhel8       pgdg12      640 k
+    node1pg96p:  postgresql12-server       x86_64      12.5-1PGDG.rhel8       pgdg12      5.2 M
+    node1pg96p: Installing dependencies:
+    node1pg96p:  postgresql12-libs         x86_64      12.5-1PGDG.rhel8       pgdg12      396 k
+    node1pg96p: 
+    node1pg96p: Transaction Summary
+    node1pg96p: ================================================================================
+    node1pg96p: Install  4 Packages
+    node1pg96p: Total download size: 7.9 M
+    node1pg96p: Installed size: 33 M
+    node1pg96p: Downloading Packages:
+    node1pg96p: (1/4): postgresql12-libs-12.5-1PGDG.rhel8.x86_6 580 kB/s | 396 kB     00:00    
+    node1pg96p: (2/4): postgresql12-contrib-12.5-1PGDG.rhel8.x8 905 kB/s | 640 kB     00:00    
+    node1pg96p: (3/4): postgresql12-12.5-1PGDG.rhel8.x86_64.rpm 2.0 MB/s | 1.7 MB     00:00    
+    node1pg96p: (4/4): postgresql12-server-12.5-1PGDG.rhel8.x86 7.7 MB/s | 5.2 MB     00:00    
+    node1pg96p: --------------------------------------------------------------------------------
+    node1pg96p: Total                                           5.8 MB/s | 7.9 MB     00:01     
+    node1pg96p: Running transaction check
+    node1pg96p: Transaction check succeeded.
+    node1pg96p: Running transaction test
+    node1pg96p: Transaction test succeeded.
+    node1pg96p: Running transaction
+    node1pg96p:   Preparing        :                                                        1/1
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql12-libs-12.5-1PGDG.rhel8.x86_64              1/4
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql12-libs-12.5-1PGDG.rhel8.x86_64              1/4
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql12-12.5-1PGDG.rhel8.x86_64                   2/4
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql12-12.5-1PGDG.rhel8.x86_64                   2/4
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node1pg96p:  
+    node1pg96p:   Installing       : postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           4/4
+    node1pg96p:  
+    node1pg96p:   Running scriptlet: postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           4/4
+    node1pg96p:  
+    node1pg96p:   Verifying        : postgresql12-12.5-1PGDG.rhel8.x86_64                   1/4 
+    node1pg96p:   Verifying        : postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           2/4 
+    node1pg96p:   Verifying        : postgresql12-libs-12.5-1PGDG.rhel8.x86_64              3/4
+    node1pg96p:  
+    node1pg96p:   Verifying        : postgresql12-server-12.5-1PGDG.rhel8.x86_64            4/4
+    node1pg96p:  
+    node1pg96p: 
+    node1pg96p: Installed:
+    node1pg96p:   postgresql12-12.5-1PGDG.rhel8.x86_64                                          
+    node1pg96p:   postgresql12-contrib-12.5-1PGDG.rhel8.x86_64                                  
+    node1pg96p:   postgresql12-libs-12.5-1PGDG.rhel8.x86_64                                     
+    node1pg96p:   postgresql12-server-12.5-1PGDG.rhel8.x86_64                                   
+    node1pg96p: 
+    node1pg96p: Complete!
+    node1pg96p: + yum clean all
+    node1pg96p: 82 files removed
+    node1pg96p: + INSTALL_DIR=/data
+    node1pg96p: + mkdir -m a=rwx /data
+    node1pg96p: + chown postgres:postgres /data
+    node1pg96p: + INSTALL_DIR12=/data12
+    node1pg96p: + mkdir -m u=rwx /data12
+    node1pg96p: + chown postgres:postgres /data12
+    node1pg96p: + chmod 700 /data
+    node1pg96p: + chmod 700 /data12
+    node1pg96p: define-primary
+    node1pg96p: + echo define-primary
+    node1pg96p:  Primary PostgreSQL 
+    node1pg96p: + '[' define-primary = define-primary ']'
+    node1pg96p: + echo ' Primary PostgreSQL '
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/initdb -D /data'
+    node1pg96p: The files belonging to this database system will be owned by user "postgres".
+    node1pg96p: This user must also own the server process.
+    node1pg96p: 
+    node1pg96p: The database cluster will be initialized with locale "en_US.UTF-8".
+    node1pg96p: The default database encoding has accordingly been set to "UTF8".
+    node1pg96p: The default text search configuration will be set to "english".
+    node1pg96p: 
+    node1pg96p: Data page checksums are disabled.
+    node1pg96p: 
+    node1pg96p: fixing permissions on existing directory /data ... ok
+    node1pg96p: creating subdirectories ... 
+    node1pg96p: ok
+    node1pg96p: selecting default max_connections ... 
+    node1pg96p: 100
+    node1pg96p: selecting default shared_buffers ... 
+    node1pg96p: 128MB
+    node1pg96p: selecting default timezone ... 
+    node1pg96p: UTC
+    node1pg96p: selecting dynamic shared memory implementation ... 
+    node1pg96p: posix
+    node1pg96p: creating configuration files ... 
+    node1pg96p: ok
+    node1pg96p: running bootstrap script ... 
+    node1pg96p: ok
+    node1pg96p: performing post-bootstrap initialization ... 
+    node1pg96p: ok
+    node1pg96p: syncing data to disk ... 
+    node1pg96p: ok
+    node1pg96p: 
+    node1pg96p: Success. You can now start the database server using:
+    node1pg96p: 
+    node1pg96p:     /usr/pgsql-9.6/bin/pg_ctl -D /data -l logfile start
+    node1pg96p: 
+    node1pg96p: WARNING: enabling "trust" authentication for local connections
+    node1pg96p: You can change this by editing pg_hba.conf or using the option -A, or
+    node1pg96p: --auth-local and --auth-host, the next time you run initdb.
+    node1pg96p: + echo 'listen_addresses='\''*'\'''
+    node1pg96p: + echo 'max_wal_senders = 5'
+    node1pg96p: + echo 'wal_keep_segments = 500'
+    node1pg96p: + echo 'hot_standby = on'
+    node1pg96p: + echo 'wal_level = replica'
+    node1pg96p: + echo 'max_wal_size = 1GB'
+    node1pg96p: + echo 'host all  all    0.0.0.0/0  trust'
+    node1pg96p: + echo 'host replication replicator 0.0.0.0/0 trust'
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/pg_ctl -D /data start'
+    node1pg96p: server starting
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/psql -c '\''CREATE USER replicator with REPLICATION'\'''
+    node1pg96p: < 2020-12-12 21:25:43.228 UTC > LOG:  redirecting log output to logging collector process
+    node1pg96p: < 2020-12-12 21:25:43.228 UTC > HINT:  Future log output will appear in directory "pg_log".
+    node1pg96p: CREATE ROLE
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/psql -c '\''CREATE USER pgb with SUPERUSER'\'''
+    node1pg96p: CREATE ROLE
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/psql -c '\''CREATE database pgb owner pgb'\'''
+    node1pg96p: CREATE DATABASE
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/psql -d pgb -c '\''CREATE TABLE a AS SELECT id AS a, id AS b, id AS c FROM generate_series(1, 500000) AS id'\'''
+    node1pg96p: SELECT 500000
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/psql -d pgb -c '\''CREATE INDEX idx_a_a ON a (a)'\'''
+    node1pg96p: CREATE INDEX
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/psql -d pgb -c '\''CREATE TABLE b AS SELECT * FROM a'\'''
+    node1pg96p: SELECT 500000
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/pg_ctl -D /data stop'
+    node1pg96p: waiting for server to shut down....
+    node1pg96p:  done
+    node1pg96p: server stopped
+    node1pg96p: + su - postgres -c '/usr/pgsql-12/bin/initdb -D /data12'
+    node1pg96p: The files belonging to this database system will be owned by user "postgres".
+    node1pg96p: This user must also own the server process.
+    node1pg96p: 
+    node1pg96p: The database cluster will be initialized with locale "en_US.UTF-8".
+    node1pg96p: The default database encoding has accordingly been set to "UTF8".
+    node1pg96p: The default text search configuration will be set to "english".
+    node1pg96p: 
+    node1pg96p: Data page checksums are disabled.
+    node1pg96p: 
+    node1pg96p: fixing permissions on existing directory /data12 ... ok
+    node1pg96p: creating subdirectories ... 
+    node1pg96p: ok
+    node1pg96p: selecting dynamic shared memory implementation ... posix
+    node1pg96p: selecting default max_connections ... 
+    node1pg96p: 100
+    node1pg96p: selecting default shared_buffers ... 
+    node1pg96p: 128MB
+    node1pg96p: selecting default time zone ... 
+    node1pg96p: UTC
+    node1pg96p: creating configuration files ... 
+    node1pg96p: ok
+    node1pg96p: running bootstrap script ... 
+    node1pg96p: ok
+    node1pg96p: performing post-bootstrap initialization ... 
+    node1pg96p: ok
+    node1pg96p: syncing data to disk ... 
+    node1pg96p: ok
+    node1pg96p: 
+    node1pg96p: 
+    node1pg96p: Success. You can now start the database server using:
+    node1pg96p: 
+    node1pg96p:     /usr/pgsql-12/bin/pg_ctl -D /data12 -l logfile start
+    node1pg96p: initdb: warning: enabling "trust" authentication for local connections
+    node1pg96p: You can change this by editing pg_hba.conf or using the option -A, or
+    node1pg96p: --auth-local and --auth-host, the next time you run initdb.
+    node1pg96p: + su - postgres -c 'time /usr/pgsql-12/bin/pg_upgrade -d /data -D /data12 -b /usr/pgsql-9.6/bin -B /usr/pgsql-12/bin '
+    node1pg96p: Performing Consistency Checks
+    node1pg96p: -----------------------------
+    node1pg96p: Checking cluster versions                                   ok
+    node1pg96p: Checking database user is the install user                  
+    node1pg96p: ok
+    node1pg96p: Checking database connection settings                       
+    node1pg96p: ok
+    node1pg96p: Checking for prepared transactions                          
+    node1pg96p: ok
+    node1pg96p: Checking for reg* data types in user tables                 
+    node1pg96p: ok
+    node1pg96p: Checking for contrib/isn with bigint-passing mismatch       ok
+    node1pg96p: Checking for tables WITH OIDS                               
+    node1pg96p: ok
+    node1pg96p: Checking for invalid "sql_identifier" user columns          
+    node1pg96p: ok
+    node1pg96p: Checking for invalid "unknown" user columns                 
+    node1pg96p: ok
+    node1pg96p: Creating dump of global objects                             
+    node1pg96p: ok
+    node1pg96p: Creating dump of database schemas
+    node1pg96p:   pgb
+    node1pg96p:   postgres
+    node1pg96p:   template1
+    node1pg96p:                                                             ok
+    node1pg96p: Checking for presence of required libraries                 ok
+    node1pg96p: Checking database user is the install user                  
+    node1pg96p: ok
+    node1pg96p: Checking for prepared transactions                          
+    node1pg96p: ok
+    node1pg96p: Checking for new cluster tablespace directories             ok
+    node1pg96p: 
+    node1pg96p: If pg_upgrade fails after this point, you must re-initdb the
+    node1pg96p: new cluster before continuing.
+    node1pg96p: 
+    node1pg96p: Performing Upgrade
+    node1pg96p: ------------------
+    node1pg96p: Analyzing all rows in the new cluster                       
+    node1pg96p: ok
+    node1pg96p: Freezing all rows in the new cluster                        
+    node1pg96p: ok
+    node1pg96p: Deleting files from new pg_xact                             
+    node1pg96p: ok
+    node1pg96p: Copying old pg_clog to new server                           
+    node1pg96p: ok
+    node1pg96p: Setting next transaction ID and epoch for new cluster       
+    node1pg96p: ok
+    node1pg96p: Deleting files from new pg_multixact/offsets                
+    node1pg96p: ok
+    node1pg96p: Copying old pg_multixact/offsets to new server              
+    node1pg96p: ok
+    node1pg96p: Deleting files from new pg_multixact/members                
+    node1pg96p: ok
+    node1pg96p: Copying old pg_multixact/members to new server              
+    node1pg96p: ok
+    node1pg96p: Setting next multixact ID and offset for new cluster        
+    node1pg96p: ok
+    node1pg96p: Resetting WAL archives                                      
+    node1pg96p: ok
+    node1pg96p: Setting frozenxid and minmxid counters in new cluster       
+    node1pg96p: ok
+    node1pg96p: Restoring global objects in the new cluster                 
+    node1pg96p: ok
+    node1pg96p: Restoring database schemas in the new cluster
+    node1pg96p:   template1
+    node1pg96p:   pgb
+    node1pg96p:   postgres
+    node1pg96p:                                                             ok
+    node1pg96p: Copying user relation files
+    node1pg96p:   /data/base/16386/2613
+    node1pg96p:   /data/base/16386/2683
+    node1pg96p:   /data/base/16386/16387
+    node1pg96p:   /data/base/16386/16390
+    node1pg96p:   /data/base/16386/16391
+    node1pg96p:   /data/base/12456/2613
+    node1pg96p:   /data/base/12456/2683
+    node1pg96p:   /data/base/1/2613
+    node1pg96p:   /data/base/1/2683
+    node1pg96p:                                                             ok
+    node1pg96p: Setting next OID for new cluster                            
+    node1pg96p: ok
+    node1pg96p: Sync data directory to disk                                 
+    node1pg96p: ok
+    node1pg96p: Creating script to analyze new cluster                      
+    node1pg96p: ok
+    node1pg96p: Creating script to delete old cluster                       
+    node1pg96p: ok
+    node1pg96p: Checking for hash indexes                                   
+    node1pg96p: ok
+    node1pg96p: 
+    node1pg96p: Upgrade Complete
+    node1pg96p: ----------------
+    node1pg96p: Optimizer statistics are not transferred by pg_upgrade so,
+    node1pg96p: once you start the new server, consider running:
+    node1pg96p:     ./analyze_new_cluster.sh
+    node1pg96p: 
+    node1pg96p: Running this script will delete the old cluster's data files:
+    node1pg96p:     ./delete_old_cluster.sh
+    node1pg96p: 
+    node1pg96p: real	0m4.462s
+    node1pg96p: user	0m0.140s
+    node1pg96p: sys	0m0.230s
+    node1pg96p: + echo 'listen_addresses='\''*'\'''
+    node1pg96p: + echo 'host replication replicator 0.0.0.0/0 trust'
+    node1pg96p: + su - postgres -c '/usr/pgsql-12/bin/pg_ctl -D /data12 -o '\'' -p5433'\'' start'
+    node1pg96p: waiting for server to start....
+    node1pg96p: 2020-12-12 21:25:51.016 UTC [26584] LOG:  starting PostgreSQL 12.5 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 8.3.1 20191121 (Red Hat 8.3.1-5), 64-bit
+    node1pg96p: 2020-12-12 21:25:51.016 UTC [26584] LOG:  listening on IPv4 address "0.0.0.0", port 5433
+    node1pg96p: 2020-12-12 21:25:51.016 UTC [26584] LOG:  listening on IPv6 address "::", port 5433
+    node1pg96p: 2020-12-12 21:25:51.017 UTC [26584] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5433"
+    node1pg96p: 2020-12-12 21:25:51.019 UTC [26584] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+    node1pg96p: 2020-12-12 21:25:51.026 UTC [26584] LOG:  redirecting log output to logging collector process
+    node1pg96p: 2020-12-12 21:25:51.026 UTC [26584] HINT:  Future log output will appear in directory "log".
+    node1pg96p:  done
+    node1pg96p: server started
+    node1pg96p: + su - postgres -c '/usr/pgsql-12/bin/pg_ctl -D /data12 status'
+    node1pg96p: pg_ctl: server is running (PID: 26584)
+    node1pg96p: /usr/pgsql-12/bin/postgres "-D" "/data12" "-p5433"
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/pg_ctl -D /data start'
+    node1pg96p: server starting
+    node1pg96p: + su - postgres -c '/usr/pgsql-9.6/bin/pg_ctl -D /data status'
+    node1pg96p: < 2020-12-12 21:25:51.231 UTC > LOG:  redirecting log output to logging collector process
+    node1pg96p: < 2020-12-12 21:25:51.231 UTC > HINT:  Future log output will appear in directory "pg_log".
+    node1pg96p: pg_ctl: server is running (PID: 26646)
+    node1pg96p: /usr/pgsql-9.6/bin/postgres "-D" "/data"
+    node1pg96p: + netstat -vatn
+    node1pg96p: + grep 543
+    node1pg96p: tcp        0      0 0.0.0.0:5432            0.0.0.0:*               LISTEN     
+    node1pg96p: tcp        0      0 0.0.0.0:5433            0.0.0.0:*               LISTEN     
+    node1pg96p: tcp6       0      0 :::5432                 :::*                    LISTEN     
+    node1pg96p: tcp6       0      0 :::5433                 :::*                    LISTEN     
+    node1pg96p: + ps -ef
+    node1pg96p: + grep postgres
+    node1pg96p: postgres   26584       1  0 21:25 ?        00:00:00 /usr/pgsql-12/bin/postgres -D /data12 -p5433
+    node1pg96p: postgres   26585   26584  0 21:25 ?        00:00:00 postgres: logger   
+    node1pg96p: postgres   26587   26584  0 21:25 ?        00:00:00 postgres: checkpointer   
+    node1pg96p: postgres   26588   26584  0 21:25 ?        00:00:00 postgres: background writer   
+    node1pg96p: postgres   26589   26584  0 21:25 ?        00:00:00 postgres: walwriter   
+    node1pg96p: postgres   26590   26584  0 21:25 ?        00:00:00 postgres: autovacuum launcher   
+    node1pg96p: postgres   26591   26584  0 21:25 ?        00:00:00 postgres: stats collector   
+    node1pg96p: postgres   26592   26584  0 21:25 ?        00:00:00 postgres: logical replication launcher   
+    node1pg96p: postgres   26646       1  0 21:25 ?        00:00:00 /usr/pgsql-9.6/bin/postgres -D /data
+    node1pg96p: postgres   26654   26646  0 21:25 ?        00:00:00 postgres: logger process   
+    node1pg96p: postgres   26659   26646  0 21:25 ?        00:00:00 postgres: checkpointer process   
+    node1pg96p: postgres   26661   26646  0 21:25 ?        00:00:00 postgres: writer process   
+    node1pg96p: postgres   26662   26646  0 21:25 ?        00:00:00 postgres: wal writer process   
+    node1pg96p: postgres   26663   26646  0 21:25 ?        00:00:00 postgres: autovacuum launcher process   
+    node1pg96p: postgres   26664   26646  0 21:25 ?        00:00:00 postgres: stats collector process   
+    node1pg96p: root       26683    5236  0 21:25 ?        00:00:00 grep postgres
+    node1pg96p: ++ getenforce
+    node1pg96p: + test Enforcing = Enforcing
+    node1pg96p: + setenforce 0
+    node1pg96p: + sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+==> node2pg96s: Importing base box 'CentOS/8-stream'...
+==> node2pg96s: Matching MAC address for NAT networking...
+==> node2pg96s: Setting the name of the VM: pgsql96centos8stream_node2pg96s_1607808357501_73838
+==> node2pg96s: Fixed port collision for 22 => 2222. Now on port 2202.
+==> node2pg96s: Clearing any previously set network interfaces...
+==> node2pg96s: Preparing network interfaces based on configuration...
+    node2pg96s: Adapter 1: nat
+    node2pg96s: Adapter 2: hostonly
+==> node2pg96s: Forwarding ports...
+    node2pg96s: 22 (guest) => 2202 (host) (adapter 1)
+==> node2pg96s: Running 'pre-boot' VM customizations...
+==> node2pg96s: Booting VM...
+==> node2pg96s: Waiting for machine to boot. This may take a few minutes...
+    node2pg96s: SSH address: 127.0.0.1:2202
+    node2pg96s: SSH username: vagrant
+    node2pg96s: SSH auth method: private key
+    node2pg96s: 
+    node2pg96s: Vagrant insecure key detected. Vagrant will automatically replace
+    node2pg96s: this with a newly generated keypair for better security.
+    node2pg96s: 
+    node2pg96s: Inserting generated public key within guest...
+    node2pg96s: Removing insecure key from the guest if it's present...
+    node2pg96s: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> node2pg96s: Machine booted and ready!
+==> node2pg96s: Checking for guest additions in VM...
+    node2pg96s: No guest additions were detected on the base box for this VM! Guest
+    node2pg96s: additions are required for forwarded ports, shared folders, host only
+    node2pg96s: networking, and more. If SSH fails on this machine, please install
+    node2pg96s: the guest additions and repackage the box to continue.
+    node2pg96s: 
+    node2pg96s: This is not an error message; everything may continue to work properly,
+    node2pg96s: in which case you may ignore this message.
+==> node2pg96s: Setting hostname...
+==> node2pg96s: Configuring and enabling network interfaces...
+==> node2pg96s: Rsyncing folder: /home/vagrant/postgres/pgsql96centos8stream/ => /vagrant
+==> node2pg96s: Running provisioner: file...
+    node2pg96s: ./pgbouncer.ini => /tmp/pgbouncer.ini
+==> node2pg96s: Running provisioner: file...
+    node2pg96s: ./userlist.txt => /tmp/userlist.txt
+==> node2pg96s: Running provisioner: shell...
+    node2pg96s: Running: /tmp/vagrant-shell20201212-609053-xo4r9e.sh
+    node2pg96s: + set -e
+    node2pg96s: + yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    node2pg96s: CentOS Stream 8 - AppStream                     4.4 MB/s | 6.3 MB     00:01    
+    node2pg96s: CentOS Stream 8 - BaseOS                        2.2 MB/s | 2.3 MB     00:01    
+    node2pg96s: CentOS Stream 8 - Extras                         24 kB/s | 7.0 kB     00:00    
+    node2pg96s: pgdg-redhat-repo-latest.noarch.rpm               11 kB/s |  11 kB     00:01    
+    node2pg96s: Dependencies resolved.
+    node2pg96s: ================================================================================
+    node2pg96s:  Package                 Architecture  Version        Repository           Size
+    node2pg96s: ================================================================================
+    node2pg96s: Installing:
+    node2pg96s:  pgdg-redhat-repo        noarch        42.0-14        @commandline         11 k
+    node2pg96s: 
+    node2pg96s: Transaction Summary
+    node2pg96s: ================================================================================
+    node2pg96s: Install  1 Package
+    node2pg96s: Total size: 11 k
+    node2pg96s: Installed size: 11 k
+    node2pg96s: Downloading Packages:
+    node2pg96s: Running transaction check
+    node2pg96s: Transaction check succeeded.
+    node2pg96s: Running transaction test
+    node2pg96s: Transaction test succeeded.
+    node2pg96s: Running transaction
+    node2pg96s:   Preparing        :                                                        1/1
+    node2pg96s:  
+    node2pg96s:   Installing       : pgdg-redhat-repo-42.0-14.noarch                        1/1
+    node2pg96s:  
+    node2pg96s:   Verifying        : pgdg-redhat-repo-42.0-14.noarch                        1/1
+    node2pg96s:  
+    node2pg96s: 
+    node2pg96s: Installed:
+    node2pg96s:   pgdg-redhat-repo-42.0-14.noarch                                               
+    node2pg96s: Complete!
+    node2pg96s: + dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    node2pg96s: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 605 kB/s | 511 kB     00:00    
+    node2pg96s: PostgreSQL 13 for RHEL/CentOS 8 - x86_64        255 kB/s | 193 kB     00:00    
+    node2pg96s: PostgreSQL 12 for RHEL/CentOS 8 - x86_64        485 kB/s | 416 kB     00:00    
+    node2pg96s: PostgreSQL 11 for RHEL/CentOS 8 - x86_64        675 kB/s | 606 kB     00:00    
+    node2pg96s: PostgreSQL 10 for RHEL/CentOS 8 - x86_64        462 kB/s | 409 kB     00:00    
+    node2pg96s: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64       476 kB/s | 398 kB     00:00    
+    node2pg96s: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64       440 kB/s | 355 kB     00:00    
+    node2pg96s: epel-release-latest-8.noarch.rpm                 16 kB/s |  22 kB     00:01    
+    node2pg96s: Dependencies resolved.
+    node2pg96s: ================================================================================
+    node2pg96s:  Package              Architecture   Version         Repository            Size
+    node2pg96s: ================================================================================
+    node2pg96s: Installing:
+    node2pg96s:  epel-release         noarch         8-9.el8         @commandline          22 k
+    node2pg96s: 
+    node2pg96s: Transaction Summary
+    node2pg96s: ================================================================================
+    node2pg96s: Install  1 Package
+    node2pg96s: Total size: 22 k
+    node2pg96s: Installed size: 32 k
+    node2pg96s: Downloading Packages:
+    node2pg96s: Running transaction check
+    node2pg96s: Transaction check succeeded.
+    node2pg96s: Running transaction test
+    node2pg96s: Transaction test succeeded.
+    node2pg96s: Running transaction
+    node2pg96s:   Preparing        :                                                        1/1
+    node2pg96s:  
+    node2pg96s:   Installing       : epel-release-8-9.el8.noarch                            1/1
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: epel-release-8-9.el8.noarch                            1/1
+    node2pg96s:  
+    node2pg96s:   Verifying        : epel-release-8-9.el8.noarch                            1/1
+    node2pg96s:  
+    node2pg96s: 
+    node2pg96s: Installed:
+    node2pg96s:   epel-release-8-9.el8.noarch                                                   
+    node2pg96s: 
+    node2pg96s: Complete!
+    node2pg96s: + dnf -y module disable postgresql
+    node2pg96s: Extra Packages for Enterprise Linux Modular 8 -  28 kB/s |  98 kB     00:03    
+    node2pg96s: Extra Packages for Enterprise Linux 8 - x86_64  931 kB/s | 8.6 MB     00:09    
+    node2pg96s: Dependencies resolved.
+    node2pg96s: ================================================================================
+    node2pg96s:  Package           Architecture     Version             Repository         Size
+    node2pg96s: ================================================================================
+    node2pg96s: Disabling modules:
+    node2pg96s:  postgresql                                                                    
+    node2pg96s: 
+    node2pg96s: Transaction Summary
+    node2pg96s: ================================================================================
+    node2pg96s: Complete!
+    node2pg96s: + yum-config-manager --enable pgdg96
+    node2pg96s: + dnf -y install postgresql96 postgresql96-server postgresql96-contrib mc iproute net-tools pgbouncer pgbconsole
+    node2pg96s: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_  10 kB/s | 3.0 kB     00:00    
+    node2pg96s: PostgreSQL 13 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 12 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 11 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 10 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64        14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64        14 kB/s | 3.8 kB     00:00    
+    node2pg96s: Package iproute-5.3.0-5.el8.x86_64 is already installed.
+    node2pg96s: Dependencies resolved.
+    node2pg96s: ========================================================================================
+    node2pg96s:  Package                  Arch    Version                             Repository    Size
+    node2pg96s: ========================================================================================
+    node2pg96s: Installing:
+    node2pg96s:  mc                       x86_64  1:4.8.19-9.el8                      appstream    1.9 M
+    node2pg96s:  net-tools                x86_64  2.0-0.52.20160912git.el8            baseos       322 k
+    node2pg96s:  pgbconsole               x86_64  0.1.1-2.rhel8                       pgdg-common   31 k
+    node2pg96s:  pgbouncer                x86_64  1.15.0-1.rhel8                      pgdg-common  226 k
+    node2pg96s:  postgresql96             x86_64  9.6.20-1PGDG.rhel8                  pgdg96       1.5 M
+    node2pg96s:  postgresql96-contrib     x86_64  9.6.20-1PGDG.rhel8                  pgdg96       596 k
+    node2pg96s:  postgresql96-server      x86_64  9.6.20-1PGDG.rhel8                  pgdg96       4.7 M
+    node2pg96s: Upgrading:
+    node2pg96s:  iproute                  x86_64  5.9.0-1.el8                         baseos       692 k
+    node2pg96s: Installing dependencies:
+    node2pg96s:  gpm-libs                 x86_64  1.20.7-15.el8                       appstream     39 k
+    node2pg96s:  libpq5                   x86_64  13.0-10PGDG.rhel8                   pgdg-common  450 k
+    node2pg96s:  perl-Carp                noarch  1.42-396.el8                        baseos        30 k
+    node2pg96s:  perl-Errno               x86_64  1.28-416.el8                        baseos        76 k
+    node2pg96s:  perl-Exporter            noarch  5.72-396.el8                        baseos        34 k
+    node2pg96s:  perl-File-Path           noarch  2.15-2.el8                          baseos        38 k
+    node2pg96s:  perl-File-Temp           noarch  0.230.600-1.el8                     baseos        63 k
+    node2pg96s:  perl-IO                  x86_64  1.38-416.el8                        baseos       141 k
+    node2pg96s:  perl-PathTools           x86_64  3.74-1.el8                          baseos        90 k
+    node2pg96s:  perl-Scalar-List-Utils   x86_64  3:1.49-2.el8                        baseos        68 k
+    node2pg96s:  perl-Socket              x86_64  4:2.027-3.el8                       baseos        59 k
+    node2pg96s:  perl-Text-Tabs+Wrap      noarch  2013.0523-395.el8                   baseos        24 k
+    node2pg96s:  perl-Unicode-Normalize   x86_64  1.25-396.el8                        baseos        82 k
+    node2pg96s:  perl-constant            noarch  1.33-396.el8                        baseos        25 k
+    node2pg96s:  perl-interpreter         x86_64  4:5.26.3-416.el8                    baseos       6.3 M
+    node2pg96s:  perl-libs                x86_64  4:5.26.3-416.el8                    baseos       1.6 M
+    node2pg96s:  perl-macros              x86_64  4:5.26.3-416.el8                    baseos        72 k
+    node2pg96s:  perl-parent              noarch  1:0.237-1.el8                       baseos        20 k
+    node2pg96s:  perl-threads             x86_64  1:2.21-2.el8                        baseos        61 k
+    node2pg96s:  perl-threads-shared      x86_64  1.58-2.el8                          baseos        48 k
+    node2pg96s:  postgresql96-libs        x86_64  9.6.20-1PGDG.rhel8                  pgdg96       347 k
+    node2pg96s:  python3-pip              noarch  9.0.3-18.el8                        appstream     20 k
+    node2pg96s:  python3-psycopg2         x86_64  2.8.6-1.rhel8                       pgdg-common  178 k
+    node2pg96s:  python3-setuptools       noarch  39.2.0-6.el8                        baseos       163 k
+    node2pg96s:  python36                 x86_64  3.6.8-2.module_el8.3.0+389+6a62c88d appstream     19 k
+    node2pg96s: Enabling module streams:
+    node2pg96s:  python36                         3.6                                                   
+    node2pg96s: 
+    node2pg96s: Transaction Summary
+    node2pg96s: ========================================================================================
+    node2pg96s: Install  32 Packages
+    node2pg96s: Upgrade   1 Package
+    node2pg96s: Total download size: 20 M
+    node2pg96s: Downloading Packages:
+    node2pg96s: (1/33): gpm-libs-1.20.7-15.el8.x86_64.rpm       581 kB/s |  39 kB     00:00    
+    node2pg96s: (2/33): python3-pip-9.0.3-18.el8.noarch.rpm     282 kB/s |  20 kB     00:00    
+    node2pg96s: (3/33): python36-3.6.8-2.module_el8.3.0+389+6a6 845 kB/s |  19 kB     00:00    
+    node2pg96s: (4/33): perl-Carp-1.42-396.el8.noarch.rpm       353 kB/s |  30 kB     00:00    
+    node2pg96s: (5/33): perl-Errno-1.28-416.el8.x86_64.rpm      747 kB/s |  76 kB     00:00    
+    node2pg96s: (6/33): perl-Exporter-5.72-396.el8.noarch.rpm   808 kB/s |  34 kB     00:00    
+    node2pg96s: (7/33): perl-File-Path-2.15-2.el8.noarch.rpm    683 kB/s |  38 kB     00:00    
+    node2pg96s: (8/33): net-tools-2.0-0.52.20160912git.el8.x86_ 1.0 MB/s | 322 kB     00:00    
+    node2pg96s: (9/33): perl-File-Temp-0.230.600-1.el8.noarch.r 1.3 MB/s |  63 kB     00:00    
+    node2pg96s: (10/33): perl-IO-1.38-416.el8.x86_64.rpm        1.6 MB/s | 141 kB     00:00    
+    node2pg96s: (11/33): perl-PathTools-3.74-1.el8.x86_64.rpm   1.5 MB/s |  90 kB     00:00    
+    node2pg96s: (12/33): perl-Scalar-List-Utils-1.49-2.el8.x86_ 1.2 MB/s |  68 kB     00:00    
+    node2pg96s: (13/33): perl-Socket-2.027-3.el8.x86_64.rpm     1.1 MB/s |  59 kB     00:00    
+    node2pg96s: (14/33): perl-Text-Tabs+Wrap-2013.0523-395.el8. 1.1 MB/s |  24 kB     00:00    
+    node2pg96s: (15/33): perl-constant-1.33-396.el8.noarch.rpm  775 kB/s |  25 kB     00:00    
+    node2pg96s: (16/33): perl-Unicode-Normalize-1.25-396.el8.x8 1.1 MB/s |  82 kB     00:00    
+    node2pg96s: (17/33): mc-4.8.19-9.el8.x86_64.rpm             1.7 MB/s | 1.9 MB     00:01    
+    node2pg96s: (18/33): perl-macros-5.26.3-416.el8.x86_64.rpm  601 kB/s |  72 kB     00:00    
+    node2pg96s: (19/33): perl-parent-0.237-1.el8.noarch.rpm     690 kB/s |  20 kB     00:00    
+    node2pg96s: (20/33): perl-libs-5.26.3-416.el8.x86_64.rpm    2.3 MB/s | 1.6 MB     00:00    
+    node2pg96s: (21/33): perl-threads-2.21-2.el8.x86_64.rpm     1.1 MB/s |  61 kB     00:00    
+    node2pg96s: (22/33): perl-threads-shared-1.58-2.el8.x86_64. 1.4 MB/s |  48 kB     00:00    
+    node2pg96s: (23/33): python3-setuptools-39.2.0-6.el8.noarch 1.3 MB/s | 163 kB     00:00    
+    node2pg96s: (24/33): pgbconsole-0.1.1-2.rhel8.x86_64.rpm     89 kB/s |  31 kB     00:00    
+    node2pg96s: (25/33): perl-interpreter-5.26.3-416.el8.x86_64 4.7 MB/s | 6.3 MB     00:01    
+    node2pg96s: (26/33): libpq5-13.0-10PGDG.rhel8.x86_64.rpm    760 kB/s | 450 kB     00:00    
+    node2pg96s: (27/33): pgbouncer-1.15.0-1.rhel8.x86_64.rpm    969 kB/s | 226 kB     00:00    
+    node2pg96s: (28/33): postgresql96-contrib-9.6.20-1PGDG.rhel 4.0 MB/s | 596 kB     00:00    
+    node2pg96s: (29/33): postgresql96-9.6.20-1PGDG.rhel8.x86_64 4.5 MB/s | 1.5 MB     00:00    
+    node2pg96s: (30/33): postgresql96-libs-9.6.20-1PGDG.rhel8.x 4.7 MB/s | 347 kB     00:00    
+    node2pg96s: (31/33): iproute-5.9.0-1.el8.x86_64.rpm         5.5 MB/s | 692 kB     00:00    
+    node2pg96s: (32/33): python3-psycopg2-2.8.6-1.rhel8.x86_64. 344 kB/s | 178 kB     00:00    
+    node2pg96s: (33/33): postgresql96-server-9.6.20-1PGDG.rhel8 7.0 MB/s | 4.7 MB     00:00    
+    node2pg96s: --------------------------------------------------------------------------------
+    node2pg96s: Total                                           6.3 MB/s |  20 MB     00:03     
+    node2pg96s: warning: /var/cache/dnf/appstream-df3f4ffab27dbdcf/packages/gpm-libs-1.20.7-15.el8.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 8483c65d: NOKEY
+    node2pg96s: CentOS Stream 8 - AppStream                     1.6 MB/s | 1.6 kB     00:00    
+    node2pg96s: Importing GPG key 0x8483C65D:
+    node2pg96s:  Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+    node2pg96s:  Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+    node2pg96s:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+    node2pg96s: Key imported successfully
+    node2pg96s: warning: /var/cache/dnf/pgdg-common-38b6c5045045f841/packages/libpq5-13.0-10PGDG.rhel8.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
+    node2pg96s: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 1.6 MB/s | 1.7 kB     00:00    
+    node2pg96s: Importing GPG key 0x442DF0F8:
+    node2pg96s:  Userid     : "PostgreSQL RPM Building Project <pgsqlrpms-hackers@pgfoundry.org>"
+    node2pg96s:  Fingerprint: 68C9 E2B9 1A37 D136 FE74 D176 1F16 D2E1 442D F0F8
+    node2pg96s:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
+    node2pg96s: Key imported successfully
+    node2pg96s: Running transaction check
+    node2pg96s: Transaction check succeeded.
+    node2pg96s: Running transaction test
+    node2pg96s: Transaction test succeeded.
+    node2pg96s: Running transaction
+    node2pg96s:   Preparing        :                                                        1/1
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Exporter-5.72-396.el8.noarch                     1/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-libs-4:5.26.3-416.el8.x86_64                     2/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Carp-1.42-396.el8.noarch                         3/34
+    node2pg96s:  
+    node2pg96s:   Installing       : libpq5-13.0-10PGDG.rhel8.x86_64                       4/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: libpq5-13.0-10PGDG.rhel8.x86_64                       4/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64            5/34
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64           6/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64           6/34
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql96-9.6.20-1PGDG.rhel8.x86_64                7/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql96-9.6.20-1PGDG.rhel8.x86_64                7/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-parent-1:0.237-1.el8.noarch                      8/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node2pg96s:  
+    node2pg96s:   Installing       : python3-psycopg2-2.8.6-1.rhel8.x86_64                10/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-macros-4:5.26.3-416.el8.x86_64                  11/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Errno-1.28-416.el8.x86_64                       12/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Socket-4:2.027-3.el8.x86_64                     13/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         14/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-Unicode-Normalize-1.25-396.el8.x86_64           15/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-File-Path-2.15-2.el8.noarch                     16/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-IO-1.38-416.el8.x86_64                          17/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-PathTools-3.74-1.el8.x86_64                     18/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-constant-1.33-396.el8.noarch                    19/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-threads-1:2.21-2.el8.x86_64                     20/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-threads-shared-1.58-2.el8.x86_64                21/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-interpreter-4:5.26.3-416.el8.x86_64             22/34
+    node2pg96s:  
+    node2pg96s:   Installing       : perl-File-Temp-0.230.600-1.el8.noarch                23/34
+    node2pg96s:  
+    node2pg96s:   Installing       : python3-setuptools-39.2.0-6.el8.noarch               24/34
+    node2pg96s:  
+    node2pg96s:   Installing       : python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6   25/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6   25/34
+    node2pg96s:  
+    node2pg96s:   Installing       : python3-pip-9.0.3-18.el8.noarch                      26/34
+    node2pg96s:  
+    node2pg96s:   Installing       : gpm-libs-1.20.7-15.el8.x86_64                        27/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: gpm-libs-1.20.7-15.el8.x86_64                        27/34
+    node2pg96s:  
+    node2pg96s:   Installing       : mc-1:4.8.19-9.el8.x86_64                             28/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node2pg96s:  
+    node2pg96s:   Installing       : pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64       30/34
+    node2pg96s:  
+    node2pg96s:   Installing       : pgbconsole-0.1.1-2.rhel8.x86_64                      31/34
+    node2pg96s:  
+    node2pg96s:   Upgrading        : iproute-5.9.0-1.el8.x86_64                           32/34
+    node2pg96s:  
+    node2pg96s:   Installing       : net-tools-2.0-0.52.20160912git.el8.x86_64            33/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: net-tools-2.0-0.52.20160912git.el8.x86_64            33/34
+    node2pg96s:  
+    node2pg96s:   Cleanup          : iproute-5.3.0-5.el8.x86_64                           34/34
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: iproute-5.3.0-5.el8.x86_64                           34/34
+    node2pg96s:  
+    node2pg96s:   Verifying        : gpm-libs-1.20.7-15.el8.x86_64                         1/34 
+    node2pg96s:   Verifying        : mc-1:4.8.19-9.el8.x86_64                              2/34 
+    node2pg96s:   Verifying        : python3-pip-9.0.3-18.el8.noarch                       3/34 
+    node2pg96s:   Verifying        : python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6    4/34 
+    node2pg96s:   Verifying        : net-tools-2.0-0.52.20160912git.el8.x86_64             5/34 
+    node2pg96s:   Verifying        : perl-Carp-1.42-396.el8.noarch                         6/34
+    node2pg96s:  
+    node2pg96s:   Verifying        : perl-Errno-1.28-416.el8.x86_64                        7/34 
+    node2pg96s:   Verifying        : perl-Exporter-5.72-396.el8.noarch                     8/34 
+    node2pg96s:   Verifying        : perl-File-Path-2.15-2.el8.noarch                      9/34 
+    node2pg96s:   Verifying        : perl-File-Temp-0.230.600-1.el8.noarch                10/34 
+    node2pg96s:   Verifying        : perl-IO-1.38-416.el8.x86_64                          11/34 
+    node2pg96s:   Verifying        : perl-PathTools-3.74-1.el8.x86_64                     12/34 
+    node2pg96s:   Verifying        : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64           13/34 
+    node2pg96s:   Verifying        : perl-Socket-4:2.027-3.el8.x86_64                     14/34 
+    node2pg96s:   Verifying        : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         15/34 
+    node2pg96s:   Verifying        : perl-Unicode-Normalize-1.25-396.el8.x86_64           16/34 
+    node2pg96s:   Verifying        : perl-constant-1.33-396.el8.noarch                    17/34 
+    node2pg96s:   Verifying        : perl-interpreter-4:5.26.3-416.el8.x86_64             18/34 
+    node2pg96s:   Verifying        : perl-libs-4:5.26.3-416.el8.x86_64                    19/34 
+    node2pg96s:   Verifying        : perl-macros-4:5.26.3-416.el8.x86_64                  20/34 
+    node2pg96s:   Verifying        : perl-parent-1:0.237-1.el8.noarch                     21/34 
+    node2pg96s:   Verifying        : perl-threads-1:2.21-2.el8.x86_64                     22/34 
+    node2pg96s:   Verifying        : perl-threads-shared-1.58-2.el8.x86_64                23/34 
+    node2pg96s:   Verifying        : python3-setuptools-39.2.0-6.el8.noarch               24/34 
+    node2pg96s:   Verifying        : libpq5-13.0-10PGDG.rhel8.x86_64                      25/34 
+    node2pg96s:   Verifying        : pgbconsole-0.1.1-2.rhel8.x86_64                      26/34 
+    node2pg96s:   Verifying        : pgbouncer-1.15.0-1.rhel8.x86_64                      27/34 
+    node2pg96s:   Verifying        : python3-psycopg2-2.8.6-1.rhel8.x86_64                28/34 
+    node2pg96s:   Verifying        : postgresql96-9.6.20-1PGDG.rhel8.x86_64               29/34 
+    node2pg96s:   Verifying        : postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64       30/34 
+    node2pg96s:   Verifying        : postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64          31/34 
+    node2pg96s:   Verifying        : postgresql96-server-9.6.20-1PGDG.rhel8.x86_64        32/34 
+    node2pg96s:   Verifying        : iproute-5.9.0-1.el8.x86_64                           33/34 
+    node2pg96s:   Verifying        : iproute-5.3.0-5.el8.x86_64                           34/34
+    node2pg96s:  
+    node2pg96s: 
+    node2pg96s: Upgraded:
+    node2pg96s:   iproute-5.9.0-1.el8.x86_64                                                    
+    node2pg96s: 
+    node2pg96s: Installed:
+    node2pg96s:   gpm-libs-1.20.7-15.el8.x86_64                                                 
+    node2pg96s:   libpq5-13.0-10PGDG.rhel8.x86_64                                               
+    node2pg96s:   mc-1:4.8.19-9.el8.x86_64                                                      
+    node2pg96s:   net-tools-2.0-0.52.20160912git.el8.x86_64                                     
+    node2pg96s:   perl-Carp-1.42-396.el8.noarch                                                 
+    node2pg96s:   perl-Errno-1.28-416.el8.x86_64                                                
+    node2pg96s:   perl-Exporter-5.72-396.el8.noarch                                             
+    node2pg96s:   perl-File-Path-2.15-2.el8.noarch                                              
+    node2pg96s:   perl-File-Temp-0.230.600-1.el8.noarch                                         
+    node2pg96s:   perl-IO-1.38-416.el8.x86_64                                                   
+    node2pg96s:   perl-PathTools-3.74-1.el8.x86_64                                              
+    node2pg96s:   perl-Scalar-List-Utils-3:1.49-2.el8.x86_64                                    
+    node2pg96s:   perl-Socket-4:2.027-3.el8.x86_64                                              
+    node2pg96s:   perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch                                  
+    node2pg96s:   perl-Unicode-Normalize-1.25-396.el8.x86_64                                    
+    node2pg96s:   perl-constant-1.33-396.el8.noarch                                             
+    node2pg96s:   perl-interpreter-4:5.26.3-416.el8.x86_64                                      
+    node2pg96s:   perl-libs-4:5.26.3-416.el8.x86_64                                             
+    node2pg96s:   perl-macros-4:5.26.3-416.el8.x86_64                                           
+    node2pg96s:   perl-parent-1:0.237-1.el8.noarch                                              
+    node2pg96s:   perl-threads-1:2.21-2.el8.x86_64                                              
+    node2pg96s:   perl-threads-shared-1.58-2.el8.x86_64                                         
+    node2pg96s:   pgbconsole-0.1.1-2.rhel8.x86_64                                               
+    node2pg96s:   pgbouncer-1.15.0-1.rhel8.x86_64                                               
+    node2pg96s:   postgresql96-9.6.20-1PGDG.rhel8.x86_64                                        
+    node2pg96s:   postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64                                
+    node2pg96s:   postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64                                   
+    node2pg96s:   postgresql96-server-9.6.20-1PGDG.rhel8.x86_64                                 
+    node2pg96s:   python3-pip-9.0.3-18.el8.noarch                                               
+    node2pg96s:   python3-psycopg2-2.8.6-1.rhel8.x86_64                                         
+    node2pg96s:   python3-setuptools-39.2.0-6.el8.noarch                                        
+    node2pg96s:   python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_64                           
+    node2pg96s: 
+    node2pg96s: Complete!
+    node2pg96s: + yum-config-manager --enable pgdg12
+    node2pg96s: + yum -y install postgresql12 postgresql12-server postgresql12-contrib
+    node2pg96s: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_  12 kB/s | 3.0 kB     00:00    
+    node2pg96s: PostgreSQL 13 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 12 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 11 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 10 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64        14 kB/s | 3.8 kB     00:00    
+    node2pg96s: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64        13 kB/s | 3.8 kB     00:00    
+    node2pg96s: Dependencies resolved.
+    node2pg96s: ================================================================================
+    node2pg96s:  Package                   Arch        Version                Repository   Size
+    node2pg96s: ================================================================================
+    node2pg96s: Installing:
+    node2pg96s:  postgresql12              x86_64      12.5-1PGDG.rhel8       pgdg12      1.7 M
+    node2pg96s:  postgresql12-contrib      x86_64      12.5-1PGDG.rhel8       pgdg12      640 k
+    node2pg96s:  postgresql12-server       x86_64      12.5-1PGDG.rhel8       pgdg12      5.2 M
+    node2pg96s: Installing dependencies:
+    node2pg96s:  postgresql12-libs         x86_64      12.5-1PGDG.rhel8       pgdg12      396 k
+    node2pg96s: 
+    node2pg96s: Transaction Summary
+    node2pg96s: ================================================================================
+    node2pg96s: Install  4 Packages
+    node2pg96s: Total download size: 7.9 M
+    node2pg96s: Installed size: 33 M
+    node2pg96s: Downloading Packages:
+    node2pg96s: (1/4): postgresql12-contrib-12.5-1PGDG.rhel8.x8 1.1 MB/s | 640 kB     00:00    
+    node2pg96s: (2/4): postgresql12-libs-12.5-1PGDG.rhel8.x86_6 688 kB/s | 396 kB     00:00    
+    node2pg96s: (3/4): postgresql12-12.5-1PGDG.rhel8.x86_64.rpm 2.2 MB/s | 1.7 MB     00:00    
+    node2pg96s: (4/4): postgresql12-server-12.5-1PGDG.rhel8.x86 6.6 MB/s | 5.2 MB     00:00    
+    node2pg96s: --------------------------------------------------------------------------------
+    node2pg96s: Total                                           5.8 MB/s | 7.9 MB     00:01     
+    node2pg96s: Running transaction check
+    node2pg96s: Transaction check succeeded.
+    node2pg96s: Running transaction test
+    node2pg96s: Transaction test succeeded.
+    node2pg96s: Running transaction
+    node2pg96s:   Preparing        :                                                        1/1
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql12-libs-12.5-1PGDG.rhel8.x86_64              1/4
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql12-libs-12.5-1PGDG.rhel8.x86_64              1/4
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql12-12.5-1PGDG.rhel8.x86_64                   2/4
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql12-12.5-1PGDG.rhel8.x86_64                   2/4
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node2pg96s:  
+    node2pg96s:   Installing       : postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           4/4
+    node2pg96s:  
+    node2pg96s:   Running scriptlet: postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           4/4
+    node2pg96s:  
+    node2pg96s:   Verifying        : postgresql12-12.5-1PGDG.rhel8.x86_64                   1/4 
+    node2pg96s:   Verifying        : postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           2/4 
+    node2pg96s:   Verifying        : postgresql12-libs-12.5-1PGDG.rhel8.x86_64              3/4
+    node2pg96s:  
+    node2pg96s:   Verifying        : postgresql12-server-12.5-1PGDG.rhel8.x86_64            4/4
+    node2pg96s:  
+    node2pg96s: 
+    node2pg96s: Installed:
+    node2pg96s:   postgresql12-12.5-1PGDG.rhel8.x86_64                                          
+    node2pg96s:   postgresql12-contrib-12.5-1PGDG.rhel8.x86_64                                  
+    node2pg96s:   postgresql12-libs-12.5-1PGDG.rhel8.x86_64                                     
+    node2pg96s:   postgresql12-server-12.5-1PGDG.rhel8.x86_64                                   
+    node2pg96s: 
+    node2pg96s: Complete!
+    node2pg96s: + yum clean all
+    node2pg96s: 82 files removed
+    node2pg96s: + INSTALL_DIR=/data
+    node2pg96s: + mkdir -m a=rwx /data
+    node2pg96s: + chown postgres:postgres /data
+    node2pg96s: + INSTALL_DIR12=/data12
+    node2pg96s: + mkdir -m u=rwx /data12
+    node2pg96s: + chown postgres:postgres /data12
+    node2pg96s: + chmod 700 /data
+    node2pg96s: + chmod 700 /data12
+    node2pg96s: define-standby
+    node2pg96s: + echo define-standby
+    node2pg96s:  entered else of if - no replication setup yet 
+    node2pg96s: + '[' define-standby = define-primary ']'
+    node2pg96s: + '[' define-standby = define-standby ']'
+    node2pg96s: + echo ' entered else of if - no replication setup yet '
+    node2pg96s: + chmod 700 /data
+    node2pg96s: + chmod 700 /data12
+    node2pg96s: + su - postgres -c '/usr/pgsql-9.6/bin/pg_basebackup -h 192.168.44.90 -U replicator --no-password -p 5432 -D /data -Fp -Xs -P -R '
+    node2pg96s: waiting for checkpoint
+    node2pg96s:     0/83624 kB (0%), 0/1 tablespace
+83634/83634 kB (100%), 1/1 tablespace, 0/1 tablespace
+    node2pg96s: + sleep 5
+    node2pg96s: + su - postgres -c '/usr/pgsql-12/bin/pg_basebackup -h 192.168.44.90 -U replicator --no-password -p 5433 -D /data12 -Fp -Xs -P -R '
+    node2pg96s: waiting for checkpoint
+    node2pg96s:     0/86937 kB (0%), 0/1 tablespace
+    node2pg96s: 86947/86947 kB (100%), 0/1 tablespace
+    node2pg96s: 86947/86947 kB (100%), 1/1 tablespace
+    node2pg96s: + su - postgres -c '/usr/pgsql-9.6/bin/pg_ctl start -D /data'
+    node2pg96s: server starting
+    node2pg96s: + su - postgres -c '/usr/pgsql-12/bin/pg_ctl -D /data12 -o '\'' -p5433'\'' start'
+    node2pg96s: < 2020-12-12 21:27:29.044 UTC > LOG:  redirecting log output to logging collector process
+    node2pg96s: < 2020-12-12 21:27:29.044 UTC > HINT:  Future log output will appear in directory "pg_log".
+    node2pg96s: waiting for server to start....
+    node2pg96s: 2020-12-12 21:27:29.099 UTC [26185] LOG:  starting PostgreSQL 12.5 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 8.3.1 20191121 (Red Hat 8.3.1-5), 64-bit
+    node2pg96s: 2020-12-12 21:27:29.099 UTC [26185] LOG:  listening on IPv4 address "0.0.0.0", port 5433
+    node2pg96s: 2020-12-12 21:27:29.099 UTC [26185] LOG:  listening on IPv6 address "::", port 5433
+    node2pg96s: 2020-12-12 21:27:29.100 UTC [26185] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5433"
+    node2pg96s: 2020-12-12 21:27:29.103 UTC [26185] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5433"
+    node2pg96s: 2020-12-12 21:27:29.113 UTC [26185] LOG:  redirecting log output to logging collector process
+    node2pg96s: 2020-12-12 21:27:29.113 UTC [26185] HINT:  Future log output will appear in directory "log".
+    node2pg96s:  done
+    node2pg96s: server started
+    node2pg96s: + su - postgres -c '/usr/pgsql-12/bin/pg_ctl -D /data12 status'
+    node2pg96s: pg_ctl: server is running (PID: 26185)
+    node2pg96s: /usr/pgsql-12/bin/postgres "-D" "/data12" "-p5433"
+    node2pg96s: + netstat -vatn
+    node2pg96s: + grep 543
+    node2pg96s: tcp        0      0 0.0.0.0:5432            0.0.0.0:*               LISTEN     
+    node2pg96s: tcp        0      0 0.0.0.0:5433            0.0.0.0:*               LISTEN     
+    node2pg96s: tcp        0      0 192.168.44.92:52908     192.168.44.90:5432      ESTABLISHED
+    node2pg96s: tcp        0      0 192.168.44.92:51588     192.168.44.90:5433      TIME_WAIT  
+    node2pg96s: tcp        0      0 192.168.44.92:51594     192.168.44.90:5433      ESTABLISHED
+    node2pg96s: tcp        0      0 192.168.44.92:52900     192.168.44.90:5432      TIME_WAIT  
+    node2pg96s: tcp6       0      0 :::5432                 :::*                    LISTEN     
+    node2pg96s: tcp6       0      0 :::5433                 :::*                    LISTEN     
+    node2pg96s: + ps -ef
+    node2pg96s: + grep postgres
+    node2pg96s: postgres   26155       1  0 21:27 ?        00:00:00 /usr/pgsql-9.6/bin/postgres -D /data
+    node2pg96s: postgres   26168   26155  0 21:27 ?        00:00:00 postgres: logger process   
+    node2pg96s: postgres   26170   26155  0 21:27 ?        00:00:00 postgres: startup process   waiting for 000000010000000000000008
+    node2pg96s: postgres   26185       1  0 21:27 ?        00:00:00 /usr/pgsql-12/bin/postgres -D /data12 -p5433
+    node2pg96s: postgres   26186   26185  0 21:27 ?        00:00:00 postgres: logger   
+    node2pg96s: postgres   26187   26185  0 21:27 ?        00:00:00 postgres: startup   waiting for 00000001000000000000000A
+    node2pg96s: postgres   26188   26155  0 21:27 ?        00:00:00 postgres: checkpointer process   
+    node2pg96s: postgres   26189   26155  0 21:27 ?        00:00:00 postgres: writer process   
+    node2pg96s: postgres   26190   26155  0 21:27 ?        00:00:00 postgres: stats collector process   
+    node2pg96s: postgres   26191   26155  0 21:27 ?        00:00:00 postgres: wal receiver process   
+    node2pg96s: postgres   26192   26185  0 21:27 ?        00:00:00 postgres: checkpointer   
+    node2pg96s: postgres   26193   26185  0 21:27 ?        00:00:00 postgres: background writer   
+    node2pg96s: postgres   26194   26185  0 21:27 ?        00:00:00 postgres: stats collector   
+    node2pg96s: postgres   26195   26185  0 21:27 ?        00:00:00 postgres: walreceiver   
+    node2pg96s: root       26225    5229  0 21:27 ?        00:00:00 grep postgres
+    node2pg96s: ++ getenforce
+    node2pg96s: + test Enforcing = Enforcing
+    node2pg96s: + setenforce 0
+    node2pg96s: + sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+==> node3pg96m: Importing base box 'CentOS/8-stream'...
+==> node3pg96m: Matching MAC address for NAT networking...
+==> node3pg96m: Setting the name of the VM: pgsql96centos8stream_node3pg96m_1607808455710_11939
+==> node3pg96m: Fixed port collision for 22 => 2222. Now on port 2203.
+==> node3pg96m: Clearing any previously set network interfaces...
+==> node3pg96m: Preparing network interfaces based on configuration...
+    node3pg96m: Adapter 1: nat
+    node3pg96m: Adapter 2: hostonly
+==> node3pg96m: Forwarding ports...
+    node3pg96m: 22 (guest) => 2203 (host) (adapter 1)
+==> node3pg96m: Running 'pre-boot' VM customizations...
+==> node3pg96m: Booting VM...
+==> node3pg96m: Waiting for machine to boot. This may take a few minutes...
+    node3pg96m: SSH address: 127.0.0.1:2203
+    node3pg96m: SSH username: vagrant
+    node3pg96m: SSH auth method: private key
+    node3pg96m: 
+    node3pg96m: Vagrant insecure key detected. Vagrant will automatically replace
+    node3pg96m: this with a newly generated keypair for better security.
+    node3pg96m: 
+    node3pg96m: Inserting generated public key within guest...
+    node3pg96m: Removing insecure key from the guest if it's present...
+    node3pg96m: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> node3pg96m: Machine booted and ready!
+==> node3pg96m: Checking for guest additions in VM...
+    node3pg96m: No guest additions were detected on the base box for this VM! Guest
+    node3pg96m: additions are required for forwarded ports, shared folders, host only
+    node3pg96m: networking, and more. If SSH fails on this machine, please install
+    node3pg96m: the guest additions and repackage the box to continue.
+    node3pg96m: 
+    node3pg96m: This is not an error message; everything may continue to work properly,
+    node3pg96m: in which case you may ignore this message.
+==> node3pg96m: Setting hostname...
+==> node3pg96m: Configuring and enabling network interfaces...
+==> node3pg96m: Rsyncing folder: /home/vagrant/postgres/pgsql96centos8stream/ => /vagrant
+==> node3pg96m: Running provisioner: file...
+    node3pg96m: ./pgbouncer.ini => /tmp/pgbouncer.ini
+==> node3pg96m: Running provisioner: file...
+    node3pg96m: ./userlist.txt => /tmp/userlist.txt
+==> node3pg96m: Running provisioner: shell...
+    node3pg96m: Running: /tmp/vagrant-shell20201212-609053-crqs35.sh
+    node3pg96m: + set -e
+    node3pg96m: + yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    node3pg96m: CentOS Stream 8 - AppStream                     6.2 MB/s | 6.3 MB     00:01    
+    node3pg96m: CentOS Stream 8 - BaseOS                        1.2 MB/s | 2.3 MB     00:01    
+    node3pg96m: CentOS Stream 8 - Extras                        7.0 kB/s | 7.0 kB     00:00    
+    node3pg96m: pgdg-redhat-repo-latest.noarch.rpm               33 kB/s |  11 kB     00:00    
+    node3pg96m: Dependencies resolved.
+    node3pg96m: ================================================================================
+    node3pg96m:  Package                 Architecture  Version        Repository           Size
+    node3pg96m: ================================================================================
+    node3pg96m: Installing:
+    node3pg96m:  pgdg-redhat-repo        noarch        42.0-14        @commandline         11 k
+    node3pg96m: 
+    node3pg96m: Transaction Summary
+    node3pg96m: ================================================================================
+    node3pg96m: Install  1 Package
+    node3pg96m: Total size: 11 k
+    node3pg96m: Installed size: 11 k
+    node3pg96m: Downloading Packages:
+    node3pg96m: Running transaction check
+    node3pg96m: Transaction check succeeded.
+    node3pg96m: Running transaction test
+    node3pg96m: Transaction test succeeded.
+    node3pg96m: Running transaction
+    node3pg96m:   Preparing        :                                                        1/1
+    node3pg96m:  
+    node3pg96m:   Installing       : pgdg-redhat-repo-42.0-14.noarch                        1/1
+    node3pg96m:  
+    node3pg96m:   Verifying        : pgdg-redhat-repo-42.0-14.noarch                        1/1
+    node3pg96m:  
+    node3pg96m: 
+    node3pg96m: Installed:
+    node3pg96m:   pgdg-redhat-repo-42.0-14.noarch                                               
+    node3pg96m: Complete!
+    node3pg96m: + dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    node3pg96m: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 584 kB/s | 511 kB     00:00    
+    node3pg96m: PostgreSQL 13 for RHEL/CentOS 8 - x86_64        245 kB/s | 193 kB     00:00    
+    node3pg96m: PostgreSQL 12 for RHEL/CentOS 8 - x86_64        519 kB/s | 416 kB     00:00    
+    node3pg96m: PostgreSQL 11 for RHEL/CentOS 8 - x86_64        715 kB/s | 606 kB     00:00    
+    node3pg96m: PostgreSQL 10 for RHEL/CentOS 8 - x86_64        455 kB/s | 409 kB     00:00    
+    node3pg96m: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64       451 kB/s | 398 kB     00:00    
+    node3pg96m: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64       413 kB/s | 355 kB     00:00    
+    node3pg96m: epel-release-latest-8.noarch.rpm                 14 kB/s |  22 kB     00:01    
+    node3pg96m: Dependencies resolved.
+    node3pg96m: ================================================================================
+    node3pg96m:  Package              Architecture   Version         Repository            Size
+    node3pg96m: ================================================================================
+    node3pg96m: Installing:
+    node3pg96m:  epel-release         noarch         8-9.el8         @commandline          22 k
+    node3pg96m: 
+    node3pg96m: Transaction Summary
+    node3pg96m: ================================================================================
+    node3pg96m: Install  1 Package
+    node3pg96m: Total size: 22 k
+    node3pg96m: Installed size: 32 k
+    node3pg96m: Downloading Packages:
+    node3pg96m: Running transaction check
+    node3pg96m: Transaction check succeeded.
+    node3pg96m: Running transaction test
+    node3pg96m: Transaction test succeeded.
+    node3pg96m: Running transaction
+    node3pg96m:   Preparing        :                                                        1/1
+    node3pg96m:  
+    node3pg96m:   Installing       : epel-release-8-9.el8.noarch                            1/1
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: epel-release-8-9.el8.noarch                            1/1
+    node3pg96m:  
+    node3pg96m:   Verifying        : epel-release-8-9.el8.noarch                            1/1
+    node3pg96m:  
+    node3pg96m: 
+    node3pg96m: Installed:
+    node3pg96m:   epel-release-8-9.el8.noarch                                                   
+    node3pg96m: 
+    node3pg96m: Complete!
+    node3pg96m: + dnf -y module disable postgresql
+    node3pg96m: Extra Packages for Enterprise Linux Modular 8 -  50 kB/s |  98 kB     00:01    
+    node3pg96m: Extra Packages for Enterprise Linux 8 - x86_64  1.6 MB/s | 8.6 MB     00:05    
+    node3pg96m: Dependencies resolved.
+    node3pg96m: ================================================================================
+    node3pg96m:  Package           Architecture     Version             Repository         Size
+    node3pg96m: ================================================================================
+    node3pg96m: Disabling modules:
+    node3pg96m:  postgresql                                                                    
+    node3pg96m: 
+    node3pg96m: Transaction Summary
+    node3pg96m: ================================================================================
+    node3pg96m: Complete!
+    node3pg96m: + yum-config-manager --enable pgdg96
+    node3pg96m: + dnf -y install postgresql96 postgresql96-server postgresql96-contrib mc iproute net-tools pgbouncer pgbconsole
+    node3pg96m: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_  11 kB/s | 3.0 kB     00:00    
+    node3pg96m: PostgreSQL 13 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 12 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 11 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 10 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64        13 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64        12 kB/s | 3.8 kB     00:00    
+    node3pg96m: Package iproute-5.3.0-5.el8.x86_64 is already installed.
+    node3pg96m: Dependencies resolved.
+    node3pg96m: ========================================================================================
+    node3pg96m:  Package                  Arch    Version                             Repository    Size
+    node3pg96m: ========================================================================================
+    node3pg96m: Installing:
+    node3pg96m:  mc                       x86_64  1:4.8.19-9.el8                      appstream    1.9 M
+    node3pg96m:  net-tools                x86_64  2.0-0.52.20160912git.el8            baseos       322 k
+    node3pg96m:  pgbconsole               x86_64  0.1.1-2.rhel8                       pgdg-common   31 k
+    node3pg96m:  pgbouncer                x86_64  1.15.0-1.rhel8                      pgdg-common  226 k
+    node3pg96m:  postgresql96             x86_64  9.6.20-1PGDG.rhel8                  pgdg96       1.5 M
+    node3pg96m:  postgresql96-contrib     x86_64  9.6.20-1PGDG.rhel8                  pgdg96       596 k
+    node3pg96m:  postgresql96-server      x86_64  9.6.20-1PGDG.rhel8                  pgdg96       4.7 M
+    node3pg96m: Upgrading:
+    node3pg96m:  iproute                  x86_64  5.9.0-1.el8                         baseos       692 k
+    node3pg96m: Installing dependencies:
+    node3pg96m:  gpm-libs                 x86_64  1.20.7-15.el8                       appstream     39 k
+    node3pg96m:  libpq5                   x86_64  13.0-10PGDG.rhel8                   pgdg-common  450 k
+    node3pg96m:  perl-Carp                noarch  1.42-396.el8                        baseos        30 k
+    node3pg96m:  perl-Errno               x86_64  1.28-416.el8                        baseos        76 k
+    node3pg96m:  perl-Exporter            noarch  5.72-396.el8                        baseos        34 k
+    node3pg96m:  perl-File-Path           noarch  2.15-2.el8                          baseos        38 k
+    node3pg96m:  perl-File-Temp           noarch  0.230.600-1.el8                     baseos        63 k
+    node3pg96m:  perl-IO                  x86_64  1.38-416.el8                        baseos       141 k
+    node3pg96m:  perl-PathTools           x86_64  3.74-1.el8                          baseos        90 k
+    node3pg96m:  perl-Scalar-List-Utils   x86_64  3:1.49-2.el8                        baseos        68 k
+    node3pg96m:  perl-Socket              x86_64  4:2.027-3.el8                       baseos        59 k
+    node3pg96m:  perl-Text-Tabs+Wrap      noarch  2013.0523-395.el8                   baseos        24 k
+    node3pg96m:  perl-Unicode-Normalize   x86_64  1.25-396.el8                        baseos        82 k
+    node3pg96m:  perl-constant            noarch  1.33-396.el8                        baseos        25 k
+    node3pg96m:  perl-interpreter         x86_64  4:5.26.3-416.el8                    baseos       6.3 M
+    node3pg96m:  perl-libs                x86_64  4:5.26.3-416.el8                    baseos       1.6 M
+    node3pg96m:  perl-macros              x86_64  4:5.26.3-416.el8                    baseos        72 k
+    node3pg96m:  perl-parent              noarch  1:0.237-1.el8                       baseos        20 k
+    node3pg96m:  perl-threads             x86_64  1:2.21-2.el8                        baseos        61 k
+    node3pg96m:  perl-threads-shared      x86_64  1.58-2.el8                          baseos        48 k
+    node3pg96m:  postgresql96-libs        x86_64  9.6.20-1PGDG.rhel8                  pgdg96       347 k
+    node3pg96m:  python3-pip              noarch  9.0.3-18.el8                        appstream     20 k
+    node3pg96m:  python3-psycopg2         x86_64  2.8.6-1.rhel8                       pgdg-common  178 k
+    node3pg96m:  python3-setuptools       noarch  39.2.0-6.el8                        baseos       163 k
+    node3pg96m:  python36                 x86_64  3.6.8-2.module_el8.3.0+389+6a62c88d appstream     19 k
+    node3pg96m: Enabling module streams:
+    node3pg96m:  python36                         3.6                                                   
+    node3pg96m: 
+    node3pg96m: Transaction Summary
+    node3pg96m: ========================================================================================
+    node3pg96m: Install  32 Packages
+    node3pg96m: Upgrade   1 Package
+    node3pg96m: Total download size: 20 M
+    node3pg96m: Downloading Packages:
+    node3pg96m: (1/33): python3-pip-9.0.3-18.el8.noarch.rpm     237 kB/s |  20 kB     00:00    
+    node3pg96m: (2/33): gpm-libs-1.20.7-15.el8.x86_64.rpm       371 kB/s |  39 kB     00:00    
+    node3pg96m: (3/33): python36-3.6.8-2.module_el8.3.0+389+6a6 864 kB/s |  19 kB     00:00    
+    node3pg96m: (4/33): perl-Carp-1.42-396.el8.noarch.rpm       306 kB/s |  30 kB     00:00    
+    node3pg96m: (5/33): perl-Errno-1.28-416.el8.x86_64.rpm      898 kB/s |  76 kB     00:00    
+    node3pg96m: (6/33): mc-4.8.19-9.el8.x86_64.rpm              5.7 MB/s | 1.9 MB     00:00    
+    node3pg96m: (7/33): perl-Exporter-5.72-396.el8.noarch.rpm   662 kB/s |  34 kB     00:00    
+    node3pg96m: (8/33): net-tools-2.0-0.52.20160912git.el8.x86_ 1.1 MB/s | 322 kB     00:00    
+    node3pg96m: (9/33): perl-File-Temp-0.230.600-1.el8.noarch.r 1.5 MB/s |  63 kB     00:00    
+    node3pg96m: (10/33): perl-File-Path-2.15-2.el8.noarch.rpm   419 kB/s |  38 kB     00:00    
+    node3pg96m: (11/33): perl-IO-1.38-416.el8.x86_64.rpm        2.0 MB/s | 141 kB     00:00    
+    node3pg96m: (12/33): perl-PathTools-3.74-1.el8.x86_64.rpm   1.4 MB/s |  90 kB     00:00    
+    node3pg96m: (13/33): perl-Text-Tabs+Wrap-2013.0523-395.el8. 964 kB/s |  24 kB     00:00    
+    node3pg96m: (14/33): perl-Socket-2.027-3.el8.x86_64.rpm     2.1 MB/s |  59 kB     00:00    
+    node3pg96m: (15/33): perl-Scalar-List-Utils-1.49-2.el8.x86_ 1.1 MB/s |  68 kB     00:00    
+    node3pg96m: (16/33): perl-constant-1.33-396.el8.noarch.rpm  529 kB/s |  25 kB     00:00    
+    node3pg96m: (17/33): perl-Unicode-Normalize-1.25-396.el8.x8 1.1 MB/s |  82 kB     00:00    
+    node3pg96m: (18/33): perl-macros-5.26.3-416.el8.x86_64.rpm  1.3 MB/s |  72 kB     00:00    
+    node3pg96m: (19/33): perl-parent-0.237-1.el8.noarch.rpm     659 kB/s |  20 kB     00:00    
+    node3pg96m: (20/33): perl-threads-2.21-2.el8.x86_64.rpm     1.2 MB/s |  61 kB     00:00    
+    node3pg96m: (21/33): perl-threads-shared-1.58-2.el8.x86_64. 1.2 MB/s |  48 kB     00:00    
+    node3pg96m: (22/33): python3-setuptools-39.2.0-6.el8.noarch 1.8 MB/s | 163 kB     00:00    
+    node3pg96m: (23/33): perl-libs-5.26.3-416.el8.x86_64.rpm    4.1 MB/s | 1.6 MB     00:00    
+    node3pg96m: (24/33): pgbconsole-0.1.1-2.rhel8.x86_64.rpm     89 kB/s |  31 kB     00:00    
+    node3pg96m: (25/33): libpq5-13.0-10PGDG.rhel8.x86_64.rpm    769 kB/s | 450 kB     00:00    
+    node3pg96m: (26/33): pgbouncer-1.15.0-1.rhel8.x86_64.rpm    1.2 MB/s | 226 kB     00:00    
+    node3pg96m: (27/33): python3-psycopg2-2.8.6-1.rhel8.x86_64. 2.6 MB/s | 178 kB     00:00    
+    node3pg96m: (28/33): perl-interpreter-5.26.3-416.el8.x86_64 6.0 MB/s | 6.3 MB     00:01    
+    node3pg96m: (29/33): postgresql96-contrib-9.6.20-1PGDG.rhel 3.2 MB/s | 596 kB     00:00    
+    node3pg96m: (30/33): postgresql96-9.6.20-1PGDG.rhel8.x86_64 4.4 MB/s | 1.5 MB     00:00    
+    node3pg96m: (31/33): postgresql96-libs-9.6.20-1PGDG.rhel8.x 633 kB/s | 347 kB     00:00    
+    node3pg96m: (32/33): iproute-5.9.0-1.el8.x86_64.rpm         1.6 MB/s | 692 kB     00:00    
+    node3pg96m: (33/33): postgresql96-server-9.6.20-1PGDG.rhel8 6.7 MB/s | 4.7 MB     00:00    
+    node3pg96m: --------------------------------------------------------------------------------
+    node3pg96m: Total                                           5.2 MB/s |  20 MB     00:03     
+    node3pg96m: warning: /var/cache/dnf/appstream-df3f4ffab27dbdcf/packages/gpm-libs-1.20.7-15.el8.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 8483c65d: NOKEY
+    node3pg96m: CentOS Stream 8 - AppStream                     1.6 MB/s | 1.6 kB     00:00    
+    node3pg96m: Importing GPG key 0x8483C65D:
+    node3pg96m:  Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+    node3pg96m:  Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+    node3pg96m:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+    node3pg96m: Key imported successfully
+    node3pg96m: warning: /var/cache/dnf/pgdg-common-38b6c5045045f841/packages/libpq5-13.0-10PGDG.rhel8.x86_64.rpm: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
+    node3pg96m: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_ 1.6 MB/s | 1.7 kB     00:00    
+    node3pg96m: Importing GPG key 0x442DF0F8:
+    node3pg96m:  Userid     : "PostgreSQL RPM Building Project <pgsqlrpms-hackers@pgfoundry.org>"
+    node3pg96m:  Fingerprint: 68C9 E2B9 1A37 D136 FE74 D176 1F16 D2E1 442D F0F8
+    node3pg96m:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG
+    node3pg96m: Key imported successfully
+    node3pg96m: Running transaction check
+    node3pg96m: Transaction check succeeded.
+    node3pg96m: Running transaction test
+    node3pg96m: Transaction test succeeded.
+    node3pg96m: Running transaction
+    node3pg96m:   Preparing        :                                                        1/1
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Exporter-5.72-396.el8.noarch                     1/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-libs-4:5.26.3-416.el8.x86_64                     2/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Carp-1.42-396.el8.noarch                         3/34
+    node3pg96m:  
+    node3pg96m:   Installing       : libpq5-13.0-10PGDG.rhel8.x86_64                       4/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: libpq5-13.0-10PGDG.rhel8.x86_64                       4/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64            5/34
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64           6/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64           6/34
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql96-9.6.20-1PGDG.rhel8.x86_64                7/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql96-9.6.20-1PGDG.rhel8.x86_64                7/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-parent-1:0.237-1.el8.noarch                      8/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql96-server-9.6.20-1PGDG.rhel8.x86_64         9/34
+    node3pg96m:  
+    node3pg96m:   Installing       : python3-psycopg2-2.8.6-1.rhel8.x86_64                10/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-macros-4:5.26.3-416.el8.x86_64                  11/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Errno-1.28-416.el8.x86_64                       12/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Socket-4:2.027-3.el8.x86_64                     13/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         14/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-Unicode-Normalize-1.25-396.el8.x86_64           15/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-File-Path-2.15-2.el8.noarch                     16/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-IO-1.38-416.el8.x86_64                          17/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-PathTools-3.74-1.el8.x86_64                     18/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-constant-1.33-396.el8.noarch                    19/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-threads-1:2.21-2.el8.x86_64                     20/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-threads-shared-1.58-2.el8.x86_64                21/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-interpreter-4:5.26.3-416.el8.x86_64             22/34
+    node3pg96m:  
+    node3pg96m:   Installing       : perl-File-Temp-0.230.600-1.el8.noarch                23/34
+    node3pg96m:  
+    node3pg96m:   Installing       : python3-setuptools-39.2.0-6.el8.noarch               24/34
+    node3pg96m:  
+    node3pg96m:   Installing       : python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6   25/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6   25/34
+    node3pg96m:  
+    node3pg96m:   Installing       : python3-pip-9.0.3-18.el8.noarch                      26/34
+    node3pg96m:  
+    node3pg96m:   Installing       : gpm-libs-1.20.7-15.el8.x86_64                        27/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: gpm-libs-1.20.7-15.el8.x86_64                        27/34
+    node3pg96m:  
+    node3pg96m:   Installing       : mc-1:4.8.19-9.el8.x86_64                             28/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node3pg96m:  
+    node3pg96m:   Installing       : pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: pgbouncer-1.15.0-1.rhel8.x86_64                      29/34
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64       30/34
+    node3pg96m:  
+    node3pg96m:   Installing       : pgbconsole-0.1.1-2.rhel8.x86_64                      31/34
+    node3pg96m:  
+    node3pg96m:   Upgrading        : iproute-5.9.0-1.el8.x86_64                           32/34
+    node3pg96m:  
+    node3pg96m:   Installing       : net-tools-2.0-0.52.20160912git.el8.x86_64            33/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: net-tools-2.0-0.52.20160912git.el8.x86_64            33/34
+    node3pg96m:  
+    node3pg96m:   Cleanup          : iproute-5.3.0-5.el8.x86_64                           34/34
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: iproute-5.3.0-5.el8.x86_64                           34/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : gpm-libs-1.20.7-15.el8.x86_64                         1/34 
+    node3pg96m:   Verifying        : mc-1:4.8.19-9.el8.x86_64                              2/34 
+    node3pg96m:   Verifying        : python3-pip-9.0.3-18.el8.noarch                       3/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_6    4/34 
+    node3pg96m:   Verifying        : net-tools-2.0-0.52.20160912git.el8.x86_64             5/34 
+    node3pg96m:   Verifying        : perl-Carp-1.42-396.el8.noarch                         6/34 
+    node3pg96m:   Verifying        : perl-Errno-1.28-416.el8.x86_64                        7/34 
+    node3pg96m:   Verifying        : perl-Exporter-5.72-396.el8.noarch                     8/34 
+    node3pg96m:   Verifying        : perl-File-Path-2.15-2.el8.noarch                      9/34 
+    node3pg96m:   Verifying        : perl-File-Temp-0.230.600-1.el8.noarch                10/34 
+    node3pg96m:   Verifying        : perl-IO-1.38-416.el8.x86_64                          11/34 
+    node3pg96m:   Verifying        : perl-PathTools-3.74-1.el8.x86_64                     12/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64           13/34 
+    node3pg96m:   Verifying        : perl-Socket-4:2.027-3.el8.x86_64                     14/34 
+    node3pg96m:   Verifying        : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         15/34 
+    node3pg96m:   Verifying        : perl-Unicode-Normalize-1.25-396.el8.x86_64           16/34 
+    node3pg96m:   Verifying        : perl-constant-1.33-396.el8.noarch                    17/34 
+    node3pg96m:   Verifying        : perl-interpreter-4:5.26.3-416.el8.x86_64             18/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : perl-libs-4:5.26.3-416.el8.x86_64                    19/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : perl-macros-4:5.26.3-416.el8.x86_64                  20/34 
+    node3pg96m:   Verifying        : perl-parent-1:0.237-1.el8.noarch                     21/34 
+    node3pg96m:   Verifying        : perl-threads-1:2.21-2.el8.x86_64                     22/34 
+    node3pg96m:   Verifying        : perl-threads-shared-1.58-2.el8.x86_64                23/34 
+    node3pg96m:   Verifying        : python3-setuptools-39.2.0-6.el8.noarch               24/34 
+    node3pg96m:   Verifying        : libpq5-13.0-10PGDG.rhel8.x86_64                      25/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : pgbconsole-0.1.1-2.rhel8.x86_64                      26/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : pgbouncer-1.15.0-1.rhel8.x86_64                      27/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : python3-psycopg2-2.8.6-1.rhel8.x86_64                28/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : postgresql96-9.6.20-1PGDG.rhel8.x86_64               29/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64       30/34
+    node3pg96m:  
+    node3pg96m:   Verifying        : postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64          31/34 
+    node3pg96m:   Verifying        : postgresql96-server-9.6.20-1PGDG.rhel8.x86_64        32/34 
+    node3pg96m:   Verifying        : iproute-5.9.0-1.el8.x86_64                           33/34 
+    node3pg96m:   Verifying        : iproute-5.3.0-5.el8.x86_64                           34/34
+    node3pg96m:  
+    node3pg96m: 
+    node3pg96m: Upgraded:
+    node3pg96m:   iproute-5.9.0-1.el8.x86_64                                                    
+    node3pg96m: 
+    node3pg96m: Installed:
+    node3pg96m:   gpm-libs-1.20.7-15.el8.x86_64                                                 
+    node3pg96m:   libpq5-13.0-10PGDG.rhel8.x86_64                                               
+    node3pg96m:   mc-1:4.8.19-9.el8.x86_64                                                      
+    node3pg96m:   net-tools-2.0-0.52.20160912git.el8.x86_64                                     
+    node3pg96m:   perl-Carp-1.42-396.el8.noarch                                                 
+    node3pg96m:   perl-Errno-1.28-416.el8.x86_64                                                
+    node3pg96m:   perl-Exporter-5.72-396.el8.noarch                                             
+    node3pg96m:   perl-File-Path-2.15-2.el8.noarch                                              
+    node3pg96m:   perl-File-Temp-0.230.600-1.el8.noarch                                         
+    node3pg96m:   perl-IO-1.38-416.el8.x86_64                                                   
+    node3pg96m:   perl-PathTools-3.74-1.el8.x86_64                                              
+    node3pg96m:   perl-Scalar-List-Utils-3:1.49-2.el8.x86_64                                    
+    node3pg96m:   perl-Socket-4:2.027-3.el8.x86_64                                              
+    node3pg96m:   perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch                                  
+    node3pg96m:   perl-Unicode-Normalize-1.25-396.el8.x86_64                                    
+    node3pg96m:   perl-constant-1.33-396.el8.noarch                                             
+    node3pg96m:   perl-interpreter-4:5.26.3-416.el8.x86_64                                      
+    node3pg96m:   perl-libs-4:5.26.3-416.el8.x86_64                                             
+    node3pg96m:   perl-macros-4:5.26.3-416.el8.x86_64                                           
+    node3pg96m:   perl-parent-1:0.237-1.el8.noarch                                              
+    node3pg96m:   perl-threads-1:2.21-2.el8.x86_64                                              
+    node3pg96m:   perl-threads-shared-1.58-2.el8.x86_64                                         
+    node3pg96m:   pgbconsole-0.1.1-2.rhel8.x86_64                                               
+    node3pg96m:   pgbouncer-1.15.0-1.rhel8.x86_64                                               
+    node3pg96m:   postgresql96-9.6.20-1PGDG.rhel8.x86_64                                        
+    node3pg96m:   postgresql96-contrib-9.6.20-1PGDG.rhel8.x86_64                                
+    node3pg96m:   postgresql96-libs-9.6.20-1PGDG.rhel8.x86_64                                   
+    node3pg96m:   postgresql96-server-9.6.20-1PGDG.rhel8.x86_64                                 
+    node3pg96m:   python3-pip-9.0.3-18.el8.noarch                                               
+    node3pg96m:   python3-psycopg2-2.8.6-1.rhel8.x86_64                                         
+    node3pg96m:   python3-setuptools-39.2.0-6.el8.noarch                                        
+    node3pg96m:   python36-3.6.8-2.module_el8.3.0+389+6a62c88d.x86_64                           
+    node3pg96m: Complete!
+    node3pg96m: + yum-config-manager --enable pgdg12
+    node3pg96m: + yum -y install postgresql12 postgresql12-server postgresql12-contrib
+    node3pg96m: PostgreSQL common RPMs for RHEL/CentOS 8 - x86_  11 kB/s | 3.0 kB     00:00    
+    node3pg96m: PostgreSQL 13 for RHEL/CentOS 8 - x86_64         14 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 12 for RHEL/CentOS 8 - x86_64         15 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 11 for RHEL/CentOS 8 - x86_64         13 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 10 for RHEL/CentOS 8 - x86_64         12 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 9.6 for RHEL/CentOS 8 - x86_64        14 kB/s | 3.8 kB     00:00    
+    node3pg96m: PostgreSQL 9.5 for RHEL/CentOS 8 - x86_64        13 kB/s | 3.8 kB     00:00    
+    node3pg96m: Dependencies resolved.
+    node3pg96m: ================================================================================
+    node3pg96m:  Package                   Arch        Version                Repository   Size
+    node3pg96m: ================================================================================
+    node3pg96m: Installing:
+    node3pg96m:  postgresql12              x86_64      12.5-1PGDG.rhel8       pgdg12      1.7 M
+    node3pg96m:  postgresql12-contrib      x86_64      12.5-1PGDG.rhel8       pgdg12      640 k
+    node3pg96m:  postgresql12-server       x86_64      12.5-1PGDG.rhel8       pgdg12      5.2 M
+    node3pg96m: Installing dependencies:
+    node3pg96m:  postgresql12-libs         x86_64      12.5-1PGDG.rhel8       pgdg12      396 k
+    node3pg96m: 
+    node3pg96m: Transaction Summary
+    node3pg96m: ================================================================================
+    node3pg96m: Install  4 Packages
+    node3pg96m: Total download size: 7.9 M
+    node3pg96m: Installed size: 33 M
+    node3pg96m: Downloading Packages:
+    node3pg96m: (1/4): postgresql12-libs-12.5-1PGDG.rhel8.x86_6 739 kB/s | 396 kB     00:00    
+    node3pg96m: (2/4): postgresql12-contrib-12.5-1PGDG.rhel8.x8 1.0 MB/s | 640 kB     00:00    
+    node3pg96m: (3/4): postgresql12-12.5-1PGDG.rhel8.x86_64.rpm 2.1 MB/s | 1.7 MB     00:00    
+    node3pg96m: (4/4): postgresql12-server-12.5-1PGDG.rhel8.x86 6.3 MB/s | 5.2 MB     00:00    
+    node3pg96m: --------------------------------------------------------------------------------
+    node3pg96m: Total                                           5.8 MB/s | 7.9 MB     00:01     
+    node3pg96m: Running transaction check
+    node3pg96m: Transaction check succeeded.
+    node3pg96m: Running transaction test
+    node3pg96m: Transaction test succeeded.
+    node3pg96m: Running transaction
+    node3pg96m:   Preparing        :                                                        1/1
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql12-libs-12.5-1PGDG.rhel8.x86_64              1/4
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql12-libs-12.5-1PGDG.rhel8.x86_64              1/4
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql12-12.5-1PGDG.rhel8.x86_64                   2/4
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql12-12.5-1PGDG.rhel8.x86_64                   2/4
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql12-server-12.5-1PGDG.rhel8.x86_64            3/4
+    node3pg96m:  
+    node3pg96m:   Installing       : postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           4/4
+    node3pg96m:  
+    node3pg96m:   Running scriptlet: postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           4/4
+    node3pg96m:  
+    node3pg96m:   Verifying        : postgresql12-12.5-1PGDG.rhel8.x86_64                   1/4 
+    node3pg96m:   Verifying        : postgresql12-contrib-12.5-1PGDG.rhel8.x86_64           2/4
+    node3pg96m:  
+    node3pg96m:   Verifying        : postgresql12-libs-12.5-1PGDG.rhel8.x86_64              3/4
+    node3pg96m:  
+    node3pg96m:   Verifying        : postgresql12-server-12.5-1PGDG.rhel8.x86_64            4/4
+    node3pg96m:  
+    node3pg96m: 
+    node3pg96m: Installed:
+    node3pg96m:   postgresql12-12.5-1PGDG.rhel8.x86_64                                          
+    node3pg96m:   postgresql12-contrib-12.5-1PGDG.rhel8.x86_64                                  
+    node3pg96m:   postgresql12-libs-12.5-1PGDG.rhel8.x86_64                                     
+    node3pg96m:   postgresql12-server-12.5-1PGDG.rhel8.x86_64                                   
+    node3pg96m: Complete!
+    node3pg96m: + yum clean all
+    node3pg96m: 82 files removed
+    node3pg96m: + INSTALL_DIR=/data
+    node3pg96m: + mkdir -m a=rwx /data
+    node3pg96m: + chown postgres:postgres /data
+    node3pg96m: + INSTALL_DIR12=/data12
+    node3pg96m: + mkdir -m u=rwx /data12
+    node3pg96m: + chown postgres:postgres /data12
+    node3pg96m: + chmod 700 /data
+    node3pg96m: + chmod 700 /data12
+    node3pg96m: + echo
+    node3pg96m: + '[' = define-primary ']'
+    node3pg96m: /tmp/vagrant-shell: line 39: [: =: unary operator expected
+    node3pg96m: + '[' = define-standby ']'
+    node3pg96m: /tmp/vagrant-shell: line 76: [: =: unary operator expected
+    node3pg96m: + /usr/bin/pgbouncer -d -u pgbouncer /tmp/pgbouncer.ini
+    node3pg96m: + sleep 5
+    node3pg96m: + netstat -vatn
+    node3pg96m: + grep 6432
+    node3pg96m: tcp        0      0 127.0.0.1:6432          0.0.0.0:*               LISTEN     
+    node3pg96m: tcp        0      0 10.0.2.15:36432         185.45.12.22:80         TIME_WAIT  
+    node3pg96m: + /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c '\c'
+    node3pg96m: You are now connected to database "pgb" as user "pgb".
+    node3pg96m: + /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c '\l+'
+    node3pg96m:                                                                     List of databases
+    node3pg96m:    Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   |  Size   | Tablespace |                Description                 
+    node3pg96m: -----------+----------+----------+-------------+-------------+-----------------------+---------+------------+--------------------------------------------
+    node3pg96m:  pgb       | pgb      | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 60 MB   | pg_default | 
+    node3pg96m:  postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 7087 kB | pg_default | default administrative connection database
+    node3pg96m:  template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +| 6977 kB | pg_default | unmodifiable empty database
+    node3pg96m:            |          |          |             |             | postgres=CTc/postgres |         |            | 
+    node3pg96m:  template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +| 7087 kB | pg_default | default template for new databases
+    node3pg96m:            |          |          |             |             | postgres=CTc/postgres |         |            | 
+    node3pg96m: (4 rows)
+    node3pg96m: + /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c '\dn+'
+    node3pg96m:                           List of schemas
+    node3pg96m:   Name  |  Owner   |  Access privileges   |      Description       
+    node3pg96m: --------+----------+----------------------+------------------------
+    node3pg96m:  public | postgres | postgres=UC/postgres+| standard public schema
+    node3pg96m:         |          | =UC/postgres         | 
+    node3pg96m: (1 row)
+    node3pg96m: + /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c '\du+'
+    node3pg96m:                                            List of roles
+    node3pg96m:  Role name  |                         Attributes                         | Member of | Description 
+    node3pg96m: ------------+------------------------------------------------------------+-----------+-------------
+    node3pg96m:  pgb        | Superuser                                                  | {}        | 
+    node3pg96m:  postgres   | Superuser, Create role, Create DB, Replication, Bypass RLS | {}        | 
+    node3pg96m:  replicator | Replication                                                | {}        | 
+    node3pg96m: + ps -ef
+    node3pg96m: + grep pgbounder
+    node3pg96m: root       26085    5234  0 21:28 ?        00:00:00 grep pgbounder
+    node3pg96m: ++ getenforce
+    node3pg96m: + test Enforcing = Enforcing
+    node3pg96m: + setenforce 0
+    node3pg96m: + sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ vagrant status
+Current machine states:
+
+node1pg96p                running (virtualbox)
+node2pg96s                running (virtualbox)
+node3pg96m                running (virtualbox)
+
+This environment represents multiple VMs. The VMs are all listed
+above with their current state. For more information about a specific
+VM, run `vagrant status NAME`.
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ 
+alex@Lenovo-Legion:/home/vagrant/postgres/pgsql96centos8stream$ vagrant ssh node2pg96s
+[vagrant@postgres96-standby ~]$ 
+[vagrant@postgres96-standby ~]$ sudo su -
+[root@postgres96-standby ~]# 
+[root@postgres96-standby ~]# 
+[root@postgres96-standby ~]# ps -ef | grep postgres
+postgres   26155       1  0 21:27 ?        00:00:00 /usr/pgsql-9.6/bin/postgres -D /data
+postgres   26168   26155  0 21:27 ?        00:00:00 postgres: logger process   
+postgres   26170   26155  0 21:27 ?        00:00:00 postgres: startup process   recovering 000000010000000000000008
+postgres   26185       1  0 21:27 ?        00:00:00 /usr/pgsql-12/bin/postgres -D /data12 -p5433
+postgres   26186   26185  0 21:27 ?        00:00:00 postgres: logger   
+postgres   26187   26185  0 21:27 ?        00:00:00 postgres: startup   recovering 00000001000000000000000A
+postgres   26188   26155  0 21:27 ?        00:00:00 postgres: checkpointer process   
+postgres   26189   26155  0 21:27 ?        00:00:00 postgres: writer process   
+postgres   26190   26155  0 21:27 ?        00:00:00 postgres: stats collector process   
+postgres   26191   26155  0 21:27 ?        00:00:00 postgres: wal receiver process   streaming 0/8000140
+postgres   26192   26185  0 21:27 ?        00:00:00 postgres: checkpointer   
+postgres   26193   26185  0 21:27 ?        00:00:00 postgres: background writer   
+postgres   26194   26185  0 21:27 ?        00:00:00 postgres: stats collector   
+postgres   26195   26185  0 21:27 ?        00:00:00 postgres: walreceiver   streaming 0/A000148
+root       26309   26275  0 21:36 pts/0    00:00:00 grep --color=auto postgres
+[root@postgres96-standby ~]# 
+[root@postgres96-standby ~]# 
+

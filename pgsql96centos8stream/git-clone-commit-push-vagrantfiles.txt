@@ -1,0 +1,78 @@
+git-clone-commit-push vagrantfiles
+root@Lenovo-Legion:/home/git# 
+root@Lenovo-Legion:/home/git# git clone https://github.com/auntaru/vagrantfiles.git
+Cloning into 'vagrantfiles'...
+remote: Enumerating objects: 39, done.
+remote: Counting objects: 100% (39/39), done.
+remote: Compressing objects: 100% (30/30), done.
+remote: Total 39 (delta 16), reused 21 (delta 7), pack-reused 0
+Unpacking objects: 100% (39/39), 9.11 KiB | 405.00 KiB/s, done.
+root@Lenovo-Legion:/home/git# 
+root@Lenovo-Legion:/home/git# 
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# pwd
+/home/git/vagrantfiles
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	pgsql96centos8stream/
+
+nothing added to commit but untracked files present (use "git add" to track)
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# git add pgsql96centos8stream/*
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   pgsql96centos8stream/Vagrantfile
+	new file:   pgsql96centos8stream/ini_provision_01.txt
+	new file:   pgsql96centos8stream/ini_provision_96.txt
+	new file:   pgsql96centos8stream/pgbouncer.ini
+	new file:   pgsql96centos8stream/provision.sh
+	new file:   pgsql96centos8stream/userlist.txt
+
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# git commit -m "PostgreSQL Upgrade from 9.6 to 12 with Replication - On CentOS 8 Stream" 
+[master 8887011] PostgreSQL Upgrade from 9.6 to 12 with Replication - On CentOS 8 Stream
+ 6 files changed, 336 insertions(+)
+ create mode 100644 pgsql96centos8stream/Vagrantfile
+ create mode 100644 pgsql96centos8stream/ini_provision_01.txt
+ create mode 100644 pgsql96centos8stream/ini_provision_96.txt
+ create mode 100644 pgsql96centos8stream/pgbouncer.ini
+ create mode 100755 pgsql96centos8stream/provision.sh
+ create mode 100644 pgsql96centos8stream/userlist.txt
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+root@Lenovo-Legion:/home/git/vagrantfiles# git push -u origin master
+Username for 'https://github.com': auntaru@gmail.com
+Password for 'https://auntaru@gmail.com@github.com': 
+Enumerating objects: 10, done.
+Counting objects: 100% (10/10), done.
+Delta compression using up to 6 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (9/9), 3.08 KiB | 1.03 MiB/s, done.
+Total 9 (delta 3), reused 0 (delta 0)
+remote: Resolving deltas: 100% (3/3), completed with 1 local object.
+To https://github.com/auntaru/vagrantfiles.git
+   adc433a..8887011  master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+root@Lenovo-Legion:/home/git/vagrantfiles# 
+
