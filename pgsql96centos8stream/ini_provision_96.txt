@@ -1,0 +1,74 @@
+#!/usr/bin/env sh
+
+set -x
+set -e
+
+# yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+#dnf install https://download.postgresql.org/pub/repos/yum/9.6/fedora/fedora-31-x86_64/pgdg-fedora-repo-latest.noarch.rpm
+dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+dnf -y module disable postgresql
+#yum -y install epel-release yum-utils
+#yum-config-manager --enable pgdg12
+yum-config-manager --enable pgdg96
+#yum -y install postgresql12 postgresql12-server postgresql12-contrib mc iproute net-tools
+#dnf -y module enable postgresql:9.6
+#dnf -y install @postgresql:9.6 
+dnf -y install postgresql96 postgresql96-server postgresql96-contrib mc iproute net-tools pgbouncer pgbconsole
+#dnf -y install mc iproute net-tools pgbouncer pgbconsole
+
+
+yum clean all
+INSTALL_DIR="/data"
+mkdir -m a=rwx ${INSTALL_DIR}
+chown postgres:postgres ${INSTALL_DIR}
+
+
+#USER postgres
+
+echo $1 
+if [ $1 = "define-primary" ] ; then 
+    echo " Primary PostgreSQL "
+    # su - postgres -c "/usr/pgsql-12/bin/initdb -D /data"
+    su - postgres -c '/usr/pgsql-9.6/bin/initdb -D /data'
+    # su - postgres -c '/usr/bin/initdb -D /data'
+    echo "listen_addresses='*'" >> /data/postgresql.conf
+    echo "max_wal_senders = 5" >> /data/postgresql.conf
+    echo "wal_keep_segments = 500" >> /data/postgresql.conf
+    echo "hot_standby = on" >> /data/postgresql.conf
+    echo "wal_level = replica" >> /data/postgresql.conf
+    echo "max_wal_size = 1GB" >> /data/postgresql.conf
+    echo "host all  all    0.0.0.0/0  trust" >> /data/pg_hba.conf
+    echo "host replication replicator 0.0.0.0/0 trust" >> /data/pg_hba.conf
+    # su - postgres -c "/usr/pgsql-12/bin/pg_ctl start -D /data" ; 
+    # su - postgres -c "/usr/pgsql-12/bin/psql -c 'CREATE USER replicator with REPLICATION'";
+    su - postgres -c "/usr/pgsql-9.6/bin/pg_ctl -D /data start";
+    # su - postgres -c "/usr/bin/pg_ctl -D /data start";
+    su - postgres -c "/usr/pgsql-9.6/bin/psql -c 'CREATE USER replicator with REPLICATION'";
+    # su - postgres -c "/usr/bin/psql -c 'CREATE USER replicator with REPLICATION'";
+    su - postgres -c "/usr/pgsql-9.6/bin/psql -c 'CREATE USER pgb with SUPERUSER'";    
+    #su - postgres -c "/usr/bin/psql -c 'CREATE USER pgb with SUPERUSER'";    
+    su - postgres -c "/usr/pgsql-9.6/bin/psql -c 'CREATE database pgb owner pgb'";
+    #su - postgres -c "/usr/bin/psql -c 'CREATE database pgb owner pgb'";
+elif [ $1 = "define-standby" ] ; then
+    echo " entered else of if - no replication setup yet "
+    chmod 700 /data 
+    # su - postgres -c "/usr/bin/pg_basebackup -h 192.168.44.90 -U replicator --no-password -p 5432 -D $INSTALL_DIR -Fp -Xs -P -R "; 
+    su - postgres -c "/usr/pgsql-9.6/bin/pg_basebackup -h 192.168.44.90 -U replicator --no-password -p 5432 -D $INSTALL_DIR -Fp -Xs -P -R "; 
+    # su - postgres -c "/usr/pgsql-12/bin/pg_ctl start -D /data" ; 
+    su - postgres -c "/usr/pgsql-9.6/bin/pg_ctl start -D /data" ;
+    # su - postgres -c "/usr/bin/pg_ctl start -D /data" ;
+else
+    /usr/bin/pgbouncer -d -u pgbouncer /tmp/pgbouncer.ini
+    /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c "\c";
+    /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c "\l+";
+    /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c "\dn+";
+    /usr/pgsql-9.6/bin/psql -U pgb -h 127.0.0.1 -p 6432 pgb -c "\du+";
+    ps -ef | grep pgbounder
+fi
+
+
+# disable SELINUX
+if test `getenforce` = 'Enforcing'; then setenforce 0; fi
+sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+

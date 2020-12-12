@@ -1,0 +1,53 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.define :node1pg96p, primary: true do |node1|
+    node1.vm.box = "CentOS/8-stream"
+    config.vm.box_url = "https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-Vagrant-8-20201019.1.x86_64.vagrant-virtualbox.box"
+    node1.vm.hostname = "postgres96-primary"
+    # node1.vm.box_version = "20180425"
+    node1.vm.network "private_network", ip: "192.168.44.90"
+    node1.vm.provider "virtualbox" do |vb|
+      vb.cpus = "2"
+      vb.memory = "1024"
+    end
+    node1.vm.provision :shell do |shell|
+      shell.path = "provision.sh"
+      shell.args = ["define-primary"]
+    end
+  end
+  config.vm.define :node2pg96s do |node2|
+    node2.vm.box = "CentOS/8-stream"
+    config.vm.box_url = "https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-Vagrant-8-20201019.1.x86_64.vagrant-virtualbox.box"
+    node2.vm.hostname = "postgres96-standby"
+    # node2.vm.box_version = "20180425"
+    node2.vm.network "private_network", ip: "192.168.44.92"
+    node2.vm.provider "virtualbox" do |vb|
+      vb.cpus = "2"
+      vb.memory = "1024"
+    end
+    node2.vm.provision :shell do |shell|
+      shell.path = "provision.sh"
+      shell.args = ["define-standby"]
+    end
+  end
+  config.vm.define :node3pg96m do |node3|
+    node3.vm.box = "CentOS/8-stream"
+    config.vm.box_url = "https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-Vagrant-8-20201019.1.x86_64.vagrant-virtualbox.box"
+    node3.vm.hostname = "postgres96-middleware"
+    # node3.vm.box_version = "20180425"
+    node3.vm.network "private_network", ip: "192.168.44.94"
+    node3.vm.provider "virtualbox" do |vb|
+      vb.cpus = "2"
+      vb.memory = "1024"
+    end
+    node3.vm.provision :shell do |shell|
+      shell.path = "provision.sh"
+      shell.args = []
+    end
+   config.vm.provision "file", source: "./pgbouncer.ini", destination: "/tmp/pgbouncer.ini"
+   config.vm.provision "file", source: "./userlist.txt",  destination: "/tmp/userlist.txt"
+  end
+end
