@@ -1,0 +1,1103 @@
+movies_restore_bulk_docs_20210101
+movies_restored_20210101
+
+
+Web Data Management : a book published by Cambridge University Press
+http://webdam.inria.fr/Jorge/html/wdmch21.html#x27-402006r1
+
+Web Data Management
+http://webdam.inria.fr/Jorge/html/
+
+Putting into Practice: COUCHDB, a JSON Semi-Structured Database
+http://webdam.inria.fr/Jorge/index786a.html?action=datasets
+
+
+Getting Started with CouchDB
+https://www.oreilly.com/library/view/getting-started-with/9781449309589/
+CHAPTER 4
+Design Documents
+
+CouchDB primer part 1 - the basics
+http://blog.sigman.pl/posts/couchdb-primer-part-1-the-basics
+CouchDB primer part 2 - design documents and views
+http://blog.sigman.pl/posts/couchdb-primer-part-2-design-documents-and-views
+
+
+in browser , shows as HTML : 
+http://192.168.83.86:5984/movies_restored_20210103/_design/sample/_show/detail/f96b64a80ecaffd8c12dbd4e4f004b74
+
+
+[root@cos8cdb3node1 ~]# curl -s http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/actors
+{"total_rows":16,"offset":0,"rows":[
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Andrew","Garfield"],"value":"The Social network"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":["Clint","Eastwood"],"value":"Unforgiven"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["Ed","Harris"],"value":"A History of Violence"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":["Gene","Hackman"],"value":"Unforgiven"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0097ad","key":["Jason","Schwartzman"],"value":"Marie Antoinette"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Jesse","Eisenberg"],"value":"The Social network"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Justin","Timberlake"],"value":"The Social network"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":["Kirsten","Dunst"],"value":"Spider-Man"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0097ad","key":["Kirsten","Dunst"],"value":"Marie Antoinette"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["Maria","Bello"],"value":"A History of Violence"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":["Morgan","Freeman"],"value":"Unforgiven"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Rooney","Mara"],"value":"The Social network"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":["Tobey","Maguire"],"value":"Spider-Man"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["Vigo","Mortensen"],"value":"A History of Violence"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":["Willem","Dafoe"],"value":"Spider-Man"},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["William","Hurt"],"value":"A History of Violence"}
+]}
+[root@cos8cdb3node1 ~]#
+
+
+journalctl -u couchdb.service
+ps -fu couchdb --forest
+
+
+Multi-version ( master-master ) concurrency in COUCHDB 
+   Allows write operations to take place at any node of the distributed system. 
+   It may happen that a same document d is modified concurrently on two distinct nodes N1 and N2, thereby creating two conflicting versions.
+   Conflicts can be reported with the following view:
+function(doc) { 
+  if(doc._conflicts) { 
+    emit(doc._conflicts, null); 
+  } 
+}
+
+[root@cos8cdb3node1 ~]# curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/conflicts
+{"total_rows":0,"offset":0,"rows":[
+
+]}
+[root@cos8cdb3node1 ~]#
+
+
+Querying views with MAP REDUCE  
+ - how many DRAMA records : 
+
+    "genrecount": {
+      "reduce": "_count",
+      "map": "function (doc) { emit(doc.genre, doc.title) ; }"
+    }
+
+
+[root@cos8cdb3node1 ~]#
+[root@cos8cdb3node1 ~]# curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genrecount?key=\"Drama\"
+{"rows":[
+{"key":null,"value":2}
+]}
+
+ - JQ can be used only when result is JSON ;  
+ - JQ display error when parsing a SHOW View ! 
+
+[root@cos8cdb3node1 ~]# curl -s GET http://admin:dba@localhost:5984/movies_restored_20210103/_design/sample/_view/genre?key=\"Drama\" | jq
+{
+  "total_rows": 5,
+  "offset": 2,
+  "rows": [
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f0097ad",
+      "key": "Drama",
+      "value": "Marie Antoinette"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "key": "Drama",
+      "value": "The Social network"
+    }
+  ]
+}
+[root@cos8cdb3node1 ~]#
+
+
+
+movies_restore_bulk_docs () {
+# BEGIN restore_bulk_docs
+cat > /root/movies.db.dump.json << ENDJSON
+{
+  "docs": [
+    {
+      "_id": "_design/sample",
+      "views": {
+        "actors": {
+          "map": "function(doc) { if (doc.actors) { for (i = 0; i < doc.actors.length; i++) { emit([doc.actors[i].first_name, doc.actors[i].last_name], doc.title); } } }"
+        },
+        "directors": {
+          "map": "function(doc) { emit(doc.title, doc.director) }"
+        },
+        "actorsdirectors": {
+          "map": "function(doc) { if (doc.actors) { for (i = 0; i < doc.actors.length; i++) { emit([doc.actors[i].first_name, doc.actors[i].last_name], [ doc.title , doc.director] ); } } }"
+        },
+        "genrecount": {
+          "reduce": "_count",
+          "map": "function (doc) { emit(doc.genre, doc.title) ; }"
+        },
+        "genre": {
+          "map": "function (doc) { emit(doc.genre, doc.title) ; }"
+        },
+        "conflicts": {
+          "map": "function (doc) {  if(doc._conflicts) {  emit(doc._conflicts, null); } }"
+        }
+      },
+      "shows": {
+        "title": "function(doc, req) { if (doc.title != null) { return '<h1>' + doc.title + '</h1>' } }",
+        "detail": "function(doc, req) { var output ; if (doc.title !== null) { output =  '<h1>' + doc.title + '</h1>' ; output += '<p>' + doc.genre + '</p>' ; output += '<p>'  + doc.year    + '</p>' ; output += '<p>'  + doc.country + '</p>' ; output += '<p>'  + ' Director = ' + doc.director.last_name +  ' ' + doc.director.first_name + '</p>' ; output += '<h2>' + doc.summary + '</h2><ul>' ; for(i=0;i<doc.actors.length;i++) { output += '<li>' + doc.actors[i].first_name + ' ' + doc.actors[i].last_name + ' as ' + doc.actors[i].role + '</li>' ; } output += '</ul>' ; return output } }"
+      },
+      "language": "javascript"
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f004b74",
+      "title": "Spider-Man",
+      "year": "2002",
+      "genre": "Action",
+      "summary": "On a school field trip, Peter Parker (Maguire) is bitten by a genetically modified spider. He wakes up the next morning with incredible powers. After witnessing the death of his uncle (Robertson), Parkers decides to put his new skills to use in order to rid the city of evil, but someone else has other plans. The Green Goblin (Dafoe) sees Spider-Man as a threat and must dispose of him.",
+      "country": "USA",
+      "director": {
+        "last_name": "Raimi",
+        "first_name": "Sam",
+        "birth_date": "1959"
+      },
+      "actors": [
+        {
+          "first_name": "Tobey",
+          "last_name": "Maguire",
+          "birth_date": "1975",
+          "role": "Spider-Man / Peter Parker"
+        },
+        {
+          "first_name": "Kirsten",
+          "last_name": "Dunst",
+          "birth_date": "1982",
+          "role": "Mary Jane Watson"
+        },
+        {
+          "first_name": "Willem",
+          "last_name": "Dafoe",
+          "birth_date": "1955",
+          "role": "Green Goblin / Norman Osborn"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f0088d0",
+      "title": "Unforgiven",
+      "year": "1992",
+      "genre": "Western",
+      "summary": "The town of Big Whisky is full of normal people trying to lead quiet lives. Cowboys try to make a living. Sheriff 'Little Bill' tries to build a house and keep a heavy-handed order. The town whores just try to get by.Then a couple of cowboys cut up a whore. Unsatisfied with Bill's justice, the prostitutes put a bounty on the cowboys. The bounty attracts a young gun billing himself as 'The Schofield Kid', and aging killer William Munny. Munny reformed for his young wife, and has been raising crops and two children in peace. But his wife is gone. Farm life is hard. And Munny is no good at it. So he calls his old partner Ned, saddles his ornery nag, and rides off to kill one more time, blurring the lines between heroism and villainy, man and myth.",
+      "country": "USA",
+      "director": {
+        "last_name": "Eastwood",
+        "first_name": "Clint",
+        "birth_date": "1930"
+      },
+      "actors": [
+        {
+          "first_name": "Clint",
+          "last_name": "Eastwood",
+          "birth_date": "1930",
+          "role": "William Munny"
+        },
+        {
+          "first_name": "Gene",
+          "last_name": "Hackman",
+          "birth_date": "1930",
+          "role": "Little Bill Dagget"
+        },
+        {
+          "first_name": "Morgan",
+          "last_name": "Freeman",
+          "birth_date": "1937",
+          "role": "Ned Logan"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f00913b",
+      "title": "A History of Violence",
+      "year": "2005",
+      "genre": "Crime",
+      "summary": "Tom Stall, a humble family man and owner of a popular neighborhood restaurant, lives a quiet but fulfilling existence in the Midwest. One night Tom foils a crime at his place of business and, to his chagrin, is plastered all over the news for his heroics. Following this, mysterious people follow the Stalls' every move, concerning Tom more than anyone else. As this situation is confronted, more lurks out over where all these occurrences have stemmed from compromising his marriage, family relationship and the main characters' former relations in the process.",
+      "country": "USA",
+      "director": {
+        "last_name": "Cronenberg",
+        "first_name": "David",
+        "birth_date": "1943"
+      },
+      "actors": [
+        {
+          "first_name": "Ed",
+          "last_name": "Harris",
+          "birth_date": "1950",
+          "role": "Carl Fogarty"
+        },
+        {
+          "first_name": "Vigo",
+          "last_name": "Mortensen",
+          "birth_date": "1958",
+          "role": "Tom Stall"
+        },
+        {
+          "first_name": "Maria",
+          "last_name": "Bello",
+          "birth_date": "1967",
+          "role": "Eddie Stall"
+        },
+        {
+          "first_name": "William",
+          "last_name": "Hurt",
+          "birth_date": "1950",
+          "role": "Richie Cusack"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f0097ad",
+      "title": "Marie Antoinette",
+      "year": "2006",
+      "genre": "Drama",
+      "summary": "Based on Antonia Fraser's book about the ill-fated Archduchess of Austria and later Queen of France, 'Marie Antoinette' tells the story of the most misunderstood and abused woman in history, from her birth in Imperial Austria to her later life in France.",
+      "country": "USA",
+      "director": {
+        "last_name": "Coppola",
+        "first_name": "Sofia",
+        "birth_date": "1971"
+      },
+      "actors": [
+        {
+          "first_name": "Kirsten",
+          "last_name": "Dunst",
+          "birth_date": "1982",
+          "role": "Marie Antoinette"
+        },
+        {
+          "first_name": "Jason",
+          "last_name": "Schwartzman",
+          "birth_date": "1980",
+          "role": "Louis XVI"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "title": "The Social network",
+      "year": "2010",
+      "genre": "Drama",
+      "summary": "On a fall night in 2003, Harvard undergrad and computer programming genius Mark Zuckerberg sits down at his computer and heatedly begins working on a new idea. In a fury of blogging and programming, what begins in his dorm room soon becomes a global social network and a revolution in communication. A mere six years and 500 million     friends later, Mark Zuckerberg is the youngest billionaire in history... but for this entrepreneur, success leads to both personal and legal complications.",
+      "country": "USA",
+      "director": {
+        "last_name": "Fincher",
+        "first_name": "David",
+        "birth_date": "1962"
+      },
+      "actors": [
+        {
+          "first_name": "Jesse",
+          "last_name": "Eisenberg",
+          "birth_date": "1983",
+          "role": "Mark Zuckerberg"
+        },
+        {
+          "first_name": "Rooney",
+          "last_name": "Mara",
+          "birth_date": "1985",
+          "role": "Erica Albright"
+        },
+        {
+          "first_name": "Andrew",
+          "last_name": "Garfield",
+          "birth_date": "1983",
+          "role": "Eduardo Saverin"
+        },
+        {
+          "first_name": "Justin",
+          "last_name": "Timberlake",
+          "birth_date": "1981",
+          "role": "Sean Parker"
+        }
+      ]
+    }
+  ]
+}
+ENDJSON
+
+curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210101
+curl -d @/root/movies.db.dump.json -H "Content-type: application/json" -X POST http://admin:atos@localhost:5984/movies_restored_20210101/_bulk_docs
+
+# END restore_bulk_docs
+}
+
+
+
+[root@cos8cdb3node1 ~]# curl -s http://admin:dba@localhost:5984/movies/_design/sample/_view/directors
+{"total_rows":5,"offset":0,"rows":[
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":"A History of Violence","value":{"last_name":"Cronenberg","first_name":"David","birth_date":"1943"}},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0097ad","key":"Marie Antoinette","value":{"last_name":"Coppola","first_name":"Sofia","birth_date":"1971"}},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":"Spider-Man","value":{"last_name":"Raimi","first_name":"Sam","birth_date":"1959"}},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":"The Social network","value":{"last_name":"Fincher","first_name":"David","birth_date":"1962"}},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":"Unforgiven","value":{"last_name":"Eastwood","first_name":"Clint","birth_date":"1930"}}
+]}
+[root@cos8cdb3node1 ~]#
+
+
+[root@cos8cdb3node1 ~]# curl -s http://admin:dba@localhost:5984/movies/_design/sample/_view/actorsdirectors
+{"total_rows":16,"offset":0,"rows":[
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Andrew","Garfield"],"value":["The Social network",{"last_name":"Fincher","first_name":"David","birth_date":"1962"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":["Clint","Eastwood"],"value":["Unforgiven",{"last_name":"Eastwood","first_name":"Clint","birth_date":"1930"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["Ed","Harris"],"value":["A History of Violence",{"last_name":"Cronenberg","first_name":"David","birth_date":"1943"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":["Gene","Hackman"],"value":["Unforgiven",{"last_name":"Eastwood","first_name":"Clint","birth_date":"1930"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0097ad","key":["Jason","Schwartzman"],"value":["Marie Antoinette",{"last_name":"Coppola","first_name":"Sofia","birth_date":"1971"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Jesse","Eisenberg"],"value":["The Social network",{"last_name":"Fincher","first_name":"David","birth_date":"1962"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Justin","Timberlake"],"value":["The Social network",{"last_name":"Fincher","first_name":"David","birth_date":"1962"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":["Kirsten","Dunst"],"value":["Spider-Man",{"last_name":"Raimi","first_name":"Sam","birth_date":"1959"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0097ad","key":["Kirsten","Dunst"],"value":["Marie Antoinette",{"last_name":"Coppola","first_name":"Sofia","birth_date":"1971"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["Maria","Bello"],"value":["A History of Violence",{"last_name":"Cronenberg","first_name":"David","birth_date":"1943"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","key":["Morgan","Freeman"],"value":["Unforgiven",{"last_name":"Eastwood","first_name":"Clint","birth_date":"1930"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","key":["Rooney","Mara"],"value":["The Social network",{"last_name":"Fincher","first_name":"David","birth_date":"1962"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":["Tobey","Maguire"],"value":["Spider-Man",{"last_name":"Raimi","first_name":"Sam","birth_date":"1959"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["Vigo","Mortensen"],"value":["A History of Violence",{"last_name":"Cronenberg","first_name":"David","birth_date":"1943"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f004b74","key":["Willem","Dafoe"],"value":["Spider-Man",{"last_name":"Raimi","first_name":"Sam","birth_date":"1959"}]},
+{"id":"f96b64a80ecaffd8c12dbd4e4f00913b","key":["William","Hurt"],"value":["A History of Violence",{"last_name":"Cronenberg","first_name":"David","birth_date":"1943"}]}
+]}
+[root@cos8cdb3node1 ~]#
+
+
+----------------------------------------
+MoVie TiTLe DeTaiL JavaScript function 
+----------------------------------------
+
+function(doc, req) { 
+        var output;
+ 
+	if (doc.title != null) { 
+		output =  '<h1>' + doc.title   + '</h1>'
+        	output += '<p>'  + doc.genre   + '</p>';
+        	output += '<p>'  + doc.year    + '</p>';
+        	output += '<p>'  + doc.country + '</p>';
+        	output += '<p>'  + doc.director.last_name + '</p>';
+        	output += '<p>'  + doc.director.first_name + '</p>';
+        	output += '<h2>' + doc.summary + '</h2><ul>';
+		for(i=0;i<doc.actors.length;i++) {
+			output += '<li>' + doc.actors[i].first_name + ' ' + doc.actors[i].last_name + ' as ' + doc.actors[i].role + '</li>';
+		}
+        	output += '</ul>'
+        	return output 
+        } 
+}
+
+----------------------------------------
+
+
+[root@cos8cdb3node1 ~]# curl -s http://admin:dba@localhost:5984/movies_restored_20210101/_design/sample/_view/actors | jq
+{
+  "total_rows": 16,
+  "offset": 0,
+  "rows": [
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "key": [
+        "Andrew",
+        "Garfield"
+      ],
+      "value": "The Social network"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f0088d0",
+      "key": [
+        "Clint",
+        "Eastwood"
+      ],
+      "value": "Unforgiven"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00913b",
+      "key": [
+        "Ed",
+        "Harris"
+      ],
+      "value": "A History of Violence"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f0088d0",
+      "key": [
+        "Gene",
+        "Hackman"
+      ],
+      "value": "Unforgiven"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f0097ad",
+      "key": [
+        "Jason",
+        "Schwartzman"
+      ],
+      "value": "Marie Antoinette"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "key": [
+        "Jesse",
+        "Eisenberg"
+      ],
+      "value": "The Social network"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "key": [
+        "Justin",
+        "Timberlake"
+      ],
+      "value": "The Social network"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f004b74",
+      "key": [
+        "Kirsten",
+        "Dunst"
+      ],
+      "value": "Spider-Man"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f0097ad",
+      "key": [
+        "Kirsten",
+        "Dunst"
+      ],
+      "value": "Marie Antoinette"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00913b",
+      "key": [
+        "Maria",
+        "Bello"
+      ],
+      "value": "A History of Violence"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f0088d0",
+      "key": [
+        "Morgan",
+        "Freeman"
+      ],
+      "value": "Unforgiven"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "key": [
+        "Rooney",
+        "Mara"
+      ],
+      "value": "The Social network"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f004b74",
+      "key": [
+        "Tobey",
+        "Maguire"
+      ],
+      "value": "Spider-Man"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00913b",
+      "key": [
+        "Vigo",
+        "Mortensen"
+      ],
+      "value": "A History of Violence"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f004b74",
+      "key": [
+        "Willem",
+        "Dafoe"
+      ],
+      "value": "Spider-Man"
+    },
+    {
+      "id": "f96b64a80ecaffd8c12dbd4e4f00913b",
+      "key": [
+        "William",
+        "Hurt"
+      ],
+      "value": "A History of Violence"
+    }
+  ]
+}
+[root@cos8cdb3node1 ~]#
+
+
+   cand se doreste ca baza sa genereze _id trebuie folosit la POST : 
+              << -H "Content-type: application/json" >> 
+
+   ( daca folosim PUT , putem sa stabilim _id in commandline - tsn ) 
+
+curl -X PUT  $COUCHDB/movies
+curl -X PUT  $COUCHDB/movies/tsn -d @The_Social_Network.json
+curl -X POST $COUCHDB/movies     -d @The_Social_Network.json    -H "Content-Type: application/json"
+curl -X POST $COUCHDB/movies     -d @A_History_Of_Violence.json -H "Content-Type: application/json"
+curl -X POST $COUCHDB/movies     -d @Marie-Antoinette.json      -H "Content-Type: application/json"
+curl -X POST $COUCHDB/movies     -d @Unforgiven.json            -H "Content-Type: application/json"
+curl -X POST $COUCHDB/movies     -d @Spider-Man.json -H "Content-Type: application/json"
+
+
+[root@cos8cdb3node1 ~]# cat The_Social_Network.json
+{
+    "title" : "The Social network",
+    "year" : "2010",
+    "genre" : "Drama",
+    "summary" : "On a fall night in 2003, Harvard undergrad and computer programming genius Mark Zuckerberg sits down at his computer and heatedly begins working on a new idea. In a fury of blogging and programming, what begins in his dorm room soon becomes a global social network and a revolution in communication. A mere six years and 500 million     friends later, Mark Zuckerberg is the youngest billionaire in history... but for this entrepreneur, success leads to both personal and legal complications.",
+    "country" : "USA",
+        "director" : {
+            "last_name"  : "Fincher",
+            "first_name" : "David",
+            "birth_date" : "1962"
+        },
+        "actors" : [
+                {
+                    "first_name" : "Jesse",
+                    "last_name"  : "Eisenberg",
+                    "birth_date" : "1983",
+                    "role"       : "Mark Zuckerberg"
+                },
+                {
+                    "first_name" : "Rooney",
+                    "last_name"  : "Mara",
+                    "birth_date" : "1985",
+                    "role"       : "Erica Albright"
+                },
+                {
+                    "first_name" : "Andrew",
+                    "last_name"  : "Garfield",
+                    "birth_date" : "1983",
+                    "role"       : "Eduardo Saverin"
+                },
+                {
+                    "first_name" : "Justin",
+                    "last_name"  : "Timberlake",
+                    "birth_date" : "1981",
+                    "role"       : "Sean Parker"
+                }
+        ]
+}
+[root@cos8cdb3node1 ~]#
+
+
+
+
+
+[root@cos8cdb3node1 ~]# curl -s -X GET $COUCHDB/movies/tsn | jq
+{
+  "_id": "tsn",
+  "_rev": "1-d3ea1b5a4e6b014c10123f4e9f5fbad8",
+  "title": "The Social network",
+  "year": "2010",
+  "genre": "Drama",
+  "summary": "On a fall night in 2003, Harvard undergrad and computer programming genius Mark Zuckerberg sits down at his computer and heatedly begins working on a new idea. In a fury of blogging and programming, what begins in his dorm room soon becomes a global social network and a revolution in communication. A mere six years and 500 million     friends later, Mark Zuckerberg is the youngest billionaire in history... but for this entrepreneur, success leads to both personal and legal complications.",
+  "country": "USA",
+  "director": {
+    "last_name": "Fincher",
+    "first_name": "David",
+    "birth_date": "1962"
+  },
+  "actors": [
+    {
+      "first_name": "Jesse",
+      "last_name": "Eisenberg",
+      "birth_date": "1983",
+      "role": "Mark Zuckerberg"
+    },
+    {
+      "first_name": "Rooney",
+      "last_name": "Mara",
+      "birth_date": "1985",
+      "role": "Erica Albright"
+    },
+    {
+      "first_name": "Andrew",
+      "last_name": "Garfield",
+      "birth_date": "1983",
+      "role": "Eduardo Saverin"
+    },
+    {
+      "first_name": "Justin",
+      "last_name": "Timberlake",
+      "birth_date": "1981",
+      "role": "Sean Parker"
+    }
+  ]
+}
+[root@cos8cdb3node1 ~]#
+
+
+
+
+[root@cos8cdb3node1 ~]# cat Spider-Man.json
+{
+    "title"    : "Spider-Man",
+    "year"     : "2002",
+    "genre"    : "Action",
+    "summary"  : "On a school field trip, Peter Parker (Maguire) is bitten by a genetically modified spider. He wakes up the next morning with incredible powers. After witnessing the death of his uncle (Robertson), Parkers decides to put his new skills to use in order to rid the city of evil, but someone else has other plans. The Green Goblin (Dafoe) sees Spider-Man as a threat and must dispose of him.",
+    "country"  : "USA",
+    "director" : {
+            "last_name"  : "Raimi",
+            "first_name" : "Sam",
+            "birth_date" : "1959"
+        },
+        "actors" : [
+                {
+                    "first_name" : "Tobey",
+                    "last_name"  : "Maguire",
+                    "birth_date" : "1975",
+                    "role"       : "Spider-Man / Peter Parker"
+                },
+                {
+                    "first_name" : "Kirsten",
+                    "last_name"  : "Dunst",
+                    "birth_date" : "1982",
+                    "role"       : "Mary Jane Watson"
+                },
+                {
+                    "first_name" : "Willem",
+                    "last_name"  : "Dafoe",
+                    "birth_date" : "1955",
+                    "role"       : "Green Goblin / Norman Osborn"
+                }
+        ]
+}[root@cos8cdb3node1 ~]#
+
+
+
+[root@cos8cdb3node1 ~]# echo $COUCHDB
+http://admin:atos@localhost:5984
+[root@cos8cdb3node1 ~]#
+
+
+[root@cos8cdb3node1 ~]# curl -s -X GET $COUCHDB/movies_restored_20210102/f96b64a80ecaffd8c12dbd4e4f004b74 | jq
+{
+  "_id": "f96b64a80ecaffd8c12dbd4e4f004b74",
+  "_rev": "1-55f2ec9c7c53fec192cdb16c9c4f50c9",
+  "title": "Spider-Man",
+  "year": "2002",
+  "genre": "Action",
+  "summary": "On a school field trip, Peter Parker (Maguire) is bitten by a genetically modified spider. He wakes up the next morning with incredible powers. After witnessing the death of his uncle (Robertson), Parkers decides to put his new skills to use in order to rid the city of evil, but someone else has other plans. The Green Goblin (Dafoe) sees Spider-Man as a threat and must dispose of him.",
+  "country": "USA",
+  "director": {
+    "last_name": "Raimi",
+    "first_name": "Sam",
+    "birth_date": "1959"
+  },
+  "actors": [
+    {
+      "first_name": "Tobey",
+      "last_name": "Maguire",
+      "birth_date": "1975",
+      "role": "Spider-Man / Peter Parker"
+    },
+    {
+      "first_name": "Kirsten",
+      "last_name": "Dunst",
+      "birth_date": "1982",
+      "role": "Mary Jane Watson"
+    },
+    {
+      "first_name": "Willem",
+      "last_name": "Dafoe",
+      "birth_date": "1955",
+      "role": "Green Goblin / Norman Osborn"
+    }
+  ]
+}
+[root@cos8cdb3node1 ~]#
+
+
+[root@cos8cdb3node1 ~]# cat Unforgiven.json
+{
+    "title": "Unforgiven",
+    "year": "1992",
+    "genre": "Western",
+    "summary": "The town of Big Whisky is full of normal people trying to lead quiet lives. Cowboys try to make a living. Sheriff 'Little Bill' tries to build a house and keep a heavy-handed order. The town whores just try to get by.Then a couple of cowboys cut up a whore. Unsatisfied with Bill's justice, the prostitutes put a bounty on the cowboys. The bounty attracts a young gun billing himself as 'The Schofield Kid', and aging killer William Munny. Munny reformed for his young wife, and has been raising crops and two children in peace. But his wife is gone. Farm life is hard. And Munny is no good at it. So he calls his old partner Ned, saddles his ornery nag, and rides off to kill one more time, blurring the lines between heroism and villainy, man and myth.",
+    "country": "USA",
+        "director": {
+            "last_name": "Eastwood",
+            "first_name": "Clint",
+            "birth_date": "1930"
+        },
+        "actors": [
+                {
+                    "first_name": "Clint",
+                    "last_name": "Eastwood",
+                    "birth_date": "1930",
+                    "role": "William Munny"
+                },
+                {
+                    "first_name": "Gene",
+                    "last_name": "Hackman",
+                    "birth_date": "1930",
+                    "role": "Little Bill Dagget"
+                },
+                {
+                    "first_name": "Morgan",
+                    "last_name": "Freeman",
+                    "birth_date": "1937",
+                    "role": "Ned Logan"
+                }
+        ]
+}[root@cos8cdb3node1 ~]#
+
+
+
+
+
+[root@cos8cdb3node1 ~]# cat A_History_Of_Violence.json
+{
+    "title": "A History of Violence",
+    "year": "2005",
+    "genre": "Crime",
+    "summary": "Tom Stall, a humble family man and owner of a popular neighborhood restaurant, lives a quiet but fulfilling existence in the Midwest. One night Tom foils a crime at his place of business and, to his chagrin, is plastered all over the news for his heroics. Following this, mysterious people follow the Stalls' every move, concerning Tom more than anyone else. As this situation is confronted, more lurks out over where all these occurrences have stemmed from compromising his marriage, family relationship and the main characters' former relations in the process.",
+        "country": "USA",
+        "director": {
+            "last_name": "Cronenberg",
+            "first_name": "David",
+            "birth_date": "1943"
+        },
+        "actors": [
+                {
+                    "first_name": "Ed",
+                    "last_name": "Harris",
+                    "birth_date": "1950",
+                    "role": "Carl Fogarty"
+                },
+                {
+                    "first_name": "Vigo",
+                    "last_name": "Mortensen",
+                    "birth_date": "1958",
+                    "role": "Tom Stall"
+                },
+                {
+                    "first_name": "Maria",
+                    "last_name": "Bello",
+                    "birth_date": "1967",
+                    "role": "Eddie Stall"
+                },
+                {
+                    "first_name": "William",
+                    "last_name": "Hurt",
+                    "birth_date": "1950",
+                    "role": "Richie Cusack"
+                }
+        ]
+}[root@cos8cdb3node1 ~]#
+
+
+
+
+
+[root@cos8cdb3node1 ~]# cat Marie-Antoinette.json
+{
+    "title": "Marie Antoinette",
+    "year": "2006",
+    "genre": "Drama",
+    "summary": "Based on Antonia Fraser's book about the ill-fated Archduchess of Austria and later Queen of France, 'Marie Antoinette' tells the story of the most misunderstood and abused woman in history, from her birth in Imperial Austria to her later life in France.",
+    "country": "USA",
+        "director": {
+            "last_name": "Coppola",
+            "first_name": "Sofia",
+            "birth_date": "1971"
+        },
+        "actors": [
+                {
+                    "first_name": "Kirsten",
+                    "last_name": "Dunst",
+                    "birth_date": "1982",
+                    "role": "Marie Antoinette"
+                },
+                {
+                    "first_name": "Jason",
+                    "last_name": "Schwartzman",
+                    "birth_date": "1980",
+                    "role": "Louis XVI"
+                }
+        ]
+}[root@cos8cdb3node1 ~]#
+
+
+
+[root@cos8cdb3node1 ~]# history | grep -i restored | grep -i put
+ 1191  # curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210101
+ 1192  curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210101
+ 1246  # curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210101
+ 1247  curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210102
+ 1253  # curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210102
+ 1328  curl -X PUT http://admin:dba@localhost:5984/movies_restored_20210103
+ 1351  history | grep -i restored | grep put
+ 1352  history | grep -i restored | grep -i put
+[root@cos8cdb3node1 ~]#
+
+
+[root@cos8cdb3node1 ~]# history | grep -i restored | grep -i post
+ 1198  # curl -d @/root/movies.db.dump.json -H "Content-type: application/json" -X POST http://admin:dba@localhost:5984/movies_restored_20210101/_bulk_docs
+ 1199  curl -d @/root/movies.db.dump.json -H "Content-type: application/json" -X POST http://admin:dba@localhost:5984/movies_restored_20210101/_bulk_docs
+ 1245  # curl -d @/root/movies.db.dump.json -H "Content-type: application/json" -X POST http://admin:dba@localhost:5984/movies_restored_20210101/_bulk_docs
+ 1254  curl -d @/root/movies.db.202001.dump.json -H "Content-type: application/json" -X POST http://admin:dba@localhost:5984/movies_restored_20210102/_bulk_docs
+ 1329  curl -d @/root/movies.db.2020-01.02_1958.dump.json -H "Content-type: application/json" -X POST http://admin:dba@localhost:5984/movies_restored_20210103/_bulk_docs
+ 1353  history | grep -i restored | grep -i post
+[root@cos8cdb3node1 ~]#
+
+
+[root@cos8cdb3node1 ~]# history | grep -i restored | grep -i get
+ 1267  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genre?key=\"Drama\"
+ 1268  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genre
+ 1269  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genre?key=\"Drama\"
+ 1270  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genrecount?key=\"Drama\"
+ 1271  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genre
+ 1272  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/conflicts
+ 1273  curl -s -X GET http://admin:dba@localhost:5984/movies_restored_20210102/_all_docs?include_docs=true | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > ./movies.db.20200102.dump.json
+ 1284  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/conflicts
+ 1287  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genrecount?key=\"Drama\"
+ 1288  curl -s -X GET $COUCHDB/movies_restored_20210102/f96b64a80ecaffd8c12dbd4e4f004b74
+ 1289  curl -s -X GET $COUCHDB/movies_restored_20210102/f96b64a80ecaffd8c12dbd4e4f004b74 | jq
+ 1292  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genrecount?key=\"Drama\"
+ 1293  curl -s GET http://admin:dba@localhost:5984/movies_restored_20210102/_design/sample/_view/genre?key=\"Drama\"
+ 1294  curl -s -X GET http://admin:dba@localhost:5984/movies_restored_20210102/_all_docs?include_docs=true | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > ./movies.db.202001021557.dump.json
+ 1302  curl -s -X GET http://admin:dba@localhost:5984/movies_restored_20210102/_all_docs?include_docs=true | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > ./movies.db.2020-01.02_1958.dump.json
+ 1342  # curl -s -X GET http://admin:dba@localhost:5984/movies_restored_20210103/_all_docs?include_docs=true | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > ./movies.db.2020-01.02_1958.dump.json
+ 1344  # curl -s -X GET http://admin:dba@localhost:5984/movies_restored_20210103/_all_docs?include_docs=true | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > ./movies.db.2020-01.02_2025.dump.json
+ 1346  curl -s -X GET http://admin:dba@localhost:5984/movies_restored_20210103/_all_docs?include_docs=true | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > ./movies.db.2020-01.02_2025.dump.json
+ 1354  history | grep -i restored | grep -i get
+[root@cos8cdb3node1 ~]#
+
+
+
+[root@cos8cdb3node1 ~]# ls -lastrh /root/movies.*.json
+8.0K -rw-r--r-- 1 root root 6.8K Dec 28 11:02 /root/movies.db.dump.json
+8.0K -rw-r--r-- 1 root root 7.1K Dec 28 12:45 /root/movies.db.202001.dump.json
+8.0K -rw-r--r-- 1 root root 7.6K Dec 28 15:03 /root/movies.db.20200102.dump.json
+ 12K -rw-r--r-- 1 root root 9.0K Dec 28 19:29 /root/movies.db.202001021557.dump.json
+ 12K -rw-r--r-- 1 root root  11K Dec 28 19:59 /root/movies.db.2020-01.02_1958.dump.json
+ 12K -rw-r--r-- 1 root root 8.2K Dec 28 20:26 /root/movies.db.2020-01.02_2025.dump.json
+[root@cos8cdb3node1 ~]#
+
+
+
+
+[root@cos8cdb3node1 ~]#
+[root@cos8cdb3node1 ~]# cat /root/movies.db.2020-01.02_2025.dump.json
+{
+  "docs": [
+    {
+      "_id": "_design/sample",
+      "views": {
+        "actors": {
+          "map": "function(doc) { if (doc.actors) { for (i = 0; i < doc.actors.length; i++) { emit([doc.actors[i].first_name, doc.actors[i].last_name], doc.title); } } }"
+        },
+        "directors": {
+          "map": "function(doc) { emit(doc.title, doc.director) }"
+        },
+        "actorsdirectors": {
+          "map": "function(doc) { if (doc.actors) { for (i = 0; i < doc.actors.length; i++) { emit([doc.actors[i].first_name, doc.actors[i].last_name], [ doc.title , doc.director] ); } } }"
+        },
+        "genrecount": {
+          "reduce": "_count",
+          "map": "function (doc) { emit(doc.genre, doc.title) ; }"
+        },
+        "genre": {
+          "map": "function (doc) { emit(doc.genre, doc.title) ; }"
+        },
+        "conflicts": {
+          "map": "function (doc) {  if(doc._conflicts) {  emit(doc._conflicts, null); } }"
+        }
+      },
+      "shows": {
+        "title": "function(doc, req) { if (doc.title != null) { return '<h1>' + doc.title + '</h1>' } }",
+        "detail": "function(doc, req) { var output ; if (doc.title !== null) { output =  '<h1>' + doc.title + '</h1>' ; output += '<p>' + doc.genre + '</p>' ; output += '<p>'  + doc.year    + '</p>' ; output += '<p>'  + doc.country + '</p>' ; output += '<p>'  + ' Director = ' + doc.director.last_name +  ' ' + doc.director.first_name + '</p>' ; output += '<h2>' + doc.summary + '</h2><ul>' ; for(i=0;i<doc.actors.length;i++) { output += '<li>' + doc.actors[i].first_name + ' ' + doc.actors[i].last_name + ' as ' + doc.actors[i].role + '</li>' ; } output += '</ul>' ; return output } }"
+      },
+      "language": "javascript"
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f004b74",
+      "title": "Spider-Man",
+      "year": "2002",
+      "genre": "Action",
+      "summary": "On a school field trip, Peter Parker (Maguire) is bitten by a genetically modified spider. He wakes up the next morning with incredible powers. After witnessing the death of his uncle (Robertson), Parkers decides to put his new skills to use in order to rid the city of evil, but someone else has other plans. The Green Goblin (Dafoe) sees Spider-Man as a threat and must dispose of him.",
+      "country": "USA",
+      "director": {
+        "last_name": "Raimi",
+        "first_name": "Sam",
+        "birth_date": "1959"
+      },
+      "actors": [
+        {
+          "first_name": "Tobey",
+          "last_name": "Maguire",
+          "birth_date": "1975",
+          "role": "Spider-Man / Peter Parker"
+        },
+        {
+          "first_name": "Kirsten",
+          "last_name": "Dunst",
+          "birth_date": "1982",
+          "role": "Mary Jane Watson"
+        },
+        {
+          "first_name": "Willem",
+          "last_name": "Dafoe",
+          "birth_date": "1955",
+          "role": "Green Goblin / Norman Osborn"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f0088d0",
+      "title": "Unforgiven",
+      "year": "1992",
+      "genre": "Western",
+      "summary": "The town of Big Whisky is full of normal people trying to lead quiet lives. Cowboys try to make a living. Sheriff 'Little Bill' tries to build a house and keep a heavy-handed order. The town whores just try to get by.Then a couple of cowboys cut up a whore. Unsatisfied with Bill's justice, the prostitutes put a bounty on the cowboys. The bounty attracts a young gun billing himself as 'The Schofield Kid', and aging killer William Munny. Munny reformed for his young wife, and has been raising crops and two children in peace. But his wife is gone. Farm life is hard. And Munny is no good at it. So he calls his old partner Ned, saddles his ornery nag, and rides off to kill one more time, blurring the lines between heroism and villainy, man and myth.",
+      "country": "USA",
+      "director": {
+        "last_name": "Eastwood",
+        "first_name": "Clint",
+        "birth_date": "1930"
+      },
+      "actors": [
+        {
+          "first_name": "Clint",
+          "last_name": "Eastwood",
+          "birth_date": "1930",
+          "role": "William Munny"
+        },
+        {
+          "first_name": "Gene",
+          "last_name": "Hackman",
+          "birth_date": "1930",
+          "role": "Little Bill Dagget"
+        },
+        {
+          "first_name": "Morgan",
+          "last_name": "Freeman",
+          "birth_date": "1937",
+          "role": "Ned Logan"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f00913b",
+      "title": "A History of Violence",
+      "year": "2005",
+      "genre": "Crime",
+      "summary": "Tom Stall, a humble family man and owner of a popular neighborhood restaurant, lives a quiet but fulfilling existence in the Midwest. One night Tom foils a crime at his place of business and, to his chagrin, is plastered all over the news for his heroics. Following this, mysterious people follow the Stalls' every move, concerning Tom more than anyone else. As this situation is confronted, more lurks out over where all these occurrences have stemmed from compromising his marriage, family relationship and the main characters' former relations in the process.",
+      "country": "USA",
+      "director": {
+        "last_name": "Cronenberg",
+        "first_name": "David",
+        "birth_date": "1943"
+      },
+      "actors": [
+        {
+          "first_name": "Ed",
+          "last_name": "Harris",
+          "birth_date": "1950",
+          "role": "Carl Fogarty"
+        },
+        {
+          "first_name": "Vigo",
+          "last_name": "Mortensen",
+          "birth_date": "1958",
+          "role": "Tom Stall"
+        },
+        {
+          "first_name": "Maria",
+          "last_name": "Bello",
+          "birth_date": "1967",
+          "role": "Eddie Stall"
+        },
+        {
+          "first_name": "William",
+          "last_name": "Hurt",
+          "birth_date": "1950",
+          "role": "Richie Cusack"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f0097ad",
+      "title": "Marie Antoinette",
+      "year": "2006",
+      "genre": "Drama",
+      "summary": "Based on Antonia Fraser's book about the ill-fated Archduchess of Austria and later Queen of France, 'Marie Antoinette' tells the story of the most misunderstood and abused woman in history, from her birth in Imperial Austria to her later life in France.",
+      "country": "USA",
+      "director": {
+        "last_name": "Coppola",
+        "first_name": "Sofia",
+        "birth_date": "1971"
+      },
+      "actors": [
+        {
+          "first_name": "Kirsten",
+          "last_name": "Dunst",
+          "birth_date": "1982",
+          "role": "Marie Antoinette"
+        },
+        {
+          "first_name": "Jason",
+          "last_name": "Schwartzman",
+          "birth_date": "1980",
+          "role": "Louis XVI"
+        }
+      ]
+    },
+    {
+      "_id": "f96b64a80ecaffd8c12dbd4e4f00bf3f",
+      "title": "The Social network",
+      "year": "2010",
+      "genre": "Drama",
+      "summary": "On a fall night in 2003, Harvard undergrad and computer programming genius Mark Zuckerberg sits down at his computer and heatedly begins working on a new idea. In a fury of blogging and programming, what begins in his dorm room soon becomes a global social network and a revolution in communication. A mere six years and 500 million     friends later, Mark Zuckerberg is the youngest billionaire in history... but for this entrepreneur, success leads to both personal and legal complications.",
+      "country": "USA",
+      "director": {
+        "last_name": "Fincher",
+        "first_name": "David",
+        "birth_date": "1962"
+      },
+      "actors": [
+        {
+          "first_name": "Jesse",
+          "last_name": "Eisenberg",
+          "birth_date": "1983",
+          "role": "Mark Zuckerberg"
+        },
+        {
+          "first_name": "Rooney",
+          "last_name": "Mara",
+          "birth_date": "1985",
+          "role": "Erica Albright"
+        },
+        {
+          "first_name": "Andrew",
+          "last_name": "Garfield",
+          "birth_date": "1983",
+          "role": "Eduardo Saverin"
+        },
+        {
+          "first_name": "Justin",
+          "last_name": "Timberlake",
+          "birth_date": "1981",
+          "role": "Sean Parker"
+        }
+      ]
+    }
+  ]
+}
+[root@cos8cdb3node1 ~]#
+
+
+
+Commands to manage CouchDB Database Service must be executed as couchdb user with sudo privilege . 
+As part of the install , these commands are already in sudoers list for couchdb user as follows :
+
+sudo systemctl stop couchdb.service
+sudo systemctl start couchdb.service
+sudo systemctl restart couchdb.service
+sudo systemctl status couchdb.service
+sudo systemctl enable couchdb.service
+sudo systemctl disable couchdb.service
+
+ cat /etc/sudoers | tail -n3
+
+## allows couchdb user to run CouchDB NoSQL database service :
+couchdb ALL=NOPASSWD: /bin/systemctl start couchdb.service, /bin/systemctl restart couchdb.service, /bin/systemctl stop couchdb.service, /bin/systemctl status couchdb.service, /bin/systemctl enable couchdb.service, /bin/systemctl disable couchdb.service

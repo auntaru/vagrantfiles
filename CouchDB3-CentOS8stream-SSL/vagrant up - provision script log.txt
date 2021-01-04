@@ -1,0 +1,2239 @@
+vagrant up - provision script log
+
+alex@Lenovo-Legion:/home/vagrant/CouchDB/CentOS8/ssl/movies$ 
+alex@Lenovo-Legion:/home/vagrant/CouchDB/CentOS8/ssl/movies$ vagrant up
+Bringing machine 'node1cos8cdb3' up with 'virtualbox' provider...
+Bringing machine 'node2cos8cdb3' up with 'virtualbox' provider...
+==> node1cos8cdb3: Importing base box 'centos/8'...
+==> node1cos8cdb3: Matching MAC address for NAT networking...
+==> node1cos8cdb3: Checking if box 'centos/8' version '1905.1' is up to date...
+==> node1cos8cdb3: Setting the name of the VM: movies_node1cos8cdb3_1609784783636_50421
+==> node1cos8cdb3: Clearing any previously set network interfaces...
+==> node1cos8cdb3: Preparing network interfaces based on configuration...
+    node1cos8cdb3: Adapter 1: nat
+    node1cos8cdb3: Adapter 2: hostonly
+==> node1cos8cdb3: Forwarding ports...
+    node1cos8cdb3: 22 (guest) => 2222 (host) (adapter 1)
+==> node1cos8cdb3: Running 'pre-boot' VM customizations...
+==> node1cos8cdb3: Booting VM...
+==> node1cos8cdb3: Waiting for machine to boot. This may take a few minutes...
+    node1cos8cdb3: SSH address: 127.0.0.1:2222
+    node1cos8cdb3: SSH username: vagrant
+    node1cos8cdb3: SSH auth method: private key
+    node1cos8cdb3: 
+    node1cos8cdb3: Vagrant insecure key detected. Vagrant will automatically replace
+    node1cos8cdb3: this with a newly generated keypair for better security.
+    node1cos8cdb3: 
+    node1cos8cdb3: Inserting generated public key within guest...
+    node1cos8cdb3: Removing insecure key from the guest if it's present...
+    node1cos8cdb3: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> node1cos8cdb3: Machine booted and ready!
+==> node1cos8cdb3: Checking for guest additions in VM...
+    node1cos8cdb3: No guest additions were detected on the base box for this VM! Guest
+    node1cos8cdb3: additions are required for forwarded ports, shared folders, host only
+    node1cos8cdb3: networking, and more. If SSH fails on this machine, please install
+    node1cos8cdb3: the guest additions and repackage the box to continue.
+    node1cos8cdb3: 
+    node1cos8cdb3: This is not an error message; everything may continue to work properly,
+    node1cos8cdb3: in which case you may ignore this message.
+==> node1cos8cdb3: Setting hostname...
+==> node1cos8cdb3: Configuring and enabling network interfaces...
+==> node1cos8cdb3: Rsyncing folder: /home/vagrant/CouchDB/CentOS8/ssl/movies/ => /vagrant
+==> node1cos8cdb3: Running provisioner: shell...
+    node1cos8cdb3: Running: /tmp/vagrant-shell20210104-29254-98kojh.sh
+    node1cos8cdb3: ++ getenforce
+    node1cos8cdb3: + test Enforcing = Enforcing
+    node1cos8cdb3: + setenforce 0
+    node1cos8cdb3: + sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+    node1cos8cdb3: + systemctl stop firewalld
+    node1cos8cdb3: + systemctl disable firewalld
+    node1cos8cdb3: + cat
+    node1cos8cdb3: + dnf clean packages
+    node1cos8cdb3: 0 files removed
+    node1cos8cdb3: + dnf -y install epel-release
+    node1cos8cdb3: CentOS-8 - AppStream                            1.5 MB/s | 6.3 MB     00:04    
+    node1cos8cdb3: CentOS-8 - Base                                 601 kB/s | 2.3 MB     00:03    
+    node1cos8cdb3: CentOS-8 - Extras                               2.4 kB/s | 8.6 kB     00:03    
+    node1cos8cdb3: bintray--apache-couchdb-rpm                      40 kB/s |  94 kB     00:02    
+    node1cos8cdb3: Dependencies resolved.
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3:  Package               Arch            Version            Repository       Size
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3: Installing:
+    node1cos8cdb3:  epel-release          noarch          8-8.el8            extras           23 k
+    node1cos8cdb3: 
+    node1cos8cdb3: Transaction Summary
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3: Install  1 Package
+    node1cos8cdb3: Total download size: 23 k
+    node1cos8cdb3: Installed size: 32 k
+    node1cos8cdb3: Downloading Packages:
+    node1cos8cdb3: epel-release-8-8.el8.noarch.rpm                  20 kB/s |  23 kB     00:01    
+    node1cos8cdb3: --------------------------------------------------------------------------------
+    node1cos8cdb3: Total                                            12 kB/s |  23 kB     00:01     
+    node1cos8cdb3: warning: /var/cache/dnf/extras-6f30eee3842aa66c/packages/epel-release-8-8.el8.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID 8483c65d: NOKEY
+    node1cos8cdb3: CentOS-8 - Extras                               1.6 MB/s | 1.6 kB     00:00    
+    node1cos8cdb3: Importing GPG key 0x8483C65D:
+    node1cos8cdb3:  Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+    node1cos8cdb3:  Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+    node1cos8cdb3:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+    node1cos8cdb3: Key imported successfully
+    node1cos8cdb3: Running transaction check
+    node1cos8cdb3: Transaction check succeeded.
+    node1cos8cdb3: Running transaction test
+    node1cos8cdb3: Transaction test succeeded.
+    node1cos8cdb3: Running transaction
+    node1cos8cdb3:   Preparing        :                                                        1/1
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : epel-release-8-8.el8.noarch                            1/1
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: epel-release-8-8.el8.noarch                            1/1
+    node1cos8cdb3:  
+    node1cos8cdb3:   Verifying        : epel-release-8-8.el8.noarch                            1/1
+    node1cos8cdb3:  
+    node1cos8cdb3: 
+    node1cos8cdb3: Installed:
+    node1cos8cdb3:   epel-release-8-8.el8.noarch                                                   
+    node1cos8cdb3: 
+    node1cos8cdb3: Complete!
+    node1cos8cdb3: + dnf clean packages
+    node1cos8cdb3: 0 files removed
+    node1cos8cdb3: + dnf -y install yum-utils mc iproute net-tools curl jq
+    node1cos8cdb3: CentOS-8 - AppStream                            2.4 kB/s | 4.3 kB     00:01    
+    node1cos8cdb3: CentOS-8 - Base                                 2.4 kB/s | 3.9 kB     00:01    
+    node1cos8cdb3: CentOS-8 - Extras                               805  B/s | 1.5 kB     00:01    
+    node1cos8cdb3: bintray--apache-couchdb-rpm                     1.1 kB/s | 1.3 kB     00:01    
+    node1cos8cdb3: Extra Packages for Enterprise Linux Modular 8 - 123 kB/s | 527 kB     00:04    
+    node1cos8cdb3: Extra Packages for Enterprise Linux 8 - x86_64  1.1 MB/s | 8.7 MB     00:07    
+    node1cos8cdb3: Package iproute-4.18.0-11.el8.x86_64 is already installed.
+    node1cos8cdb3: Package curl-7.61.1-8.el8.x86_64 is already installed.
+    node1cos8cdb3: Dependencies resolved.
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3:  Package                     Arch    Version                   Repository  Size
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3: Installing:
+    node1cos8cdb3:  jq                          x86_64  1.5-12.el8                AppStream  161 k
+    node1cos8cdb3:  mc                          x86_64  1:4.8.19-9.el8            AppStream  1.9 M
+    node1cos8cdb3:  net-tools                   x86_64  2.0-0.52.20160912git.el8  BaseOS     322 k
+    node1cos8cdb3:  yum-utils                   noarch  4.0.17-5.el8              BaseOS      68 k
+    node1cos8cdb3:      replacing  dnf-utils.noarch 4.0.2.2-3.el8
+    node1cos8cdb3: Upgrading:
+    node1cos8cdb3:  curl                        x86_64  7.61.1-14.el8             BaseOS     353 k
+    node1cos8cdb3:  dnf                         noarch  4.2.23-4.el8              BaseOS     513 k
+    node1cos8cdb3:  dnf-data                    noarch  4.2.23-4.el8              BaseOS     149 k
+    node1cos8cdb3:  dnf-plugins-core            noarch  4.0.17-5.el8              BaseOS      66 k
+    node1cos8cdb3:  elfutils-libelf             x86_64  0.180-1.el8               BaseOS     215 k
+    node1cos8cdb3:  elfutils-libs               x86_64  0.180-1.el8               BaseOS     293 k
+    node1cos8cdb3:  iproute                     x86_64  5.3.0-5.el8               BaseOS     665 k
+    node1cos8cdb3:  libcurl                     x86_64  7.61.1-14.el8             BaseOS     298 k
+    node1cos8cdb3:  libdnf                      x86_64  0.48.0-5.el8              BaseOS     650 k
+    node1cos8cdb3:  librepo                     x86_64  1.12.0-2.el8              BaseOS      90 k
+    node1cos8cdb3:  libsolv                     x86_64  0.7.11-1.el8              BaseOS     358 k
+    node1cos8cdb3:  libssh                      x86_64  0.9.4-2.el8               BaseOS     215 k
+    node1cos8cdb3:  openssl                     x86_64  1:1.1.1g-11.el8           BaseOS     706 k
+    node1cos8cdb3:  openssl-libs                x86_64  1:1.1.1g-11.el8           BaseOS     1.5 M
+    node1cos8cdb3:  python3-dnf                 noarch  4.2.23-4.el8              BaseOS     526 k
+    node1cos8cdb3:  python3-dnf-plugins-core    noarch  4.0.17-5.el8              BaseOS     221 k
+    node1cos8cdb3:  python3-hawkey              x86_64  0.48.0-5.el8              BaseOS     111 k
+    node1cos8cdb3:  python3-libdnf              x86_64  0.48.0-5.el8              BaseOS     756 k
+    node1cos8cdb3:  python3-librepo             x86_64  1.12.0-2.el8              BaseOS      52 k
+    node1cos8cdb3:  python3-rpm                 x86_64  4.14.3-4.el8              BaseOS     157 k
+    node1cos8cdb3:  rpm                         x86_64  4.14.3-4.el8              BaseOS     541 k
+    node1cos8cdb3:  rpm-build-libs              x86_64  4.14.3-4.el8              BaseOS     154 k
+    node1cos8cdb3:  rpm-libs                    x86_64  4.14.3-4.el8              BaseOS     338 k
+    node1cos8cdb3:  rpm-plugin-selinux          x86_64  4.14.3-4.el8              BaseOS      75 k
+    node1cos8cdb3:  rpm-plugin-systemd-inhibit  x86_64  4.14.3-4.el8              BaseOS      76 k
+    node1cos8cdb3:  yum                         noarch  4.2.23-4.el8              BaseOS     192 k
+    node1cos8cdb3: Installing dependencies:
+    node1cos8cdb3:  gpm-libs                    x86_64  1.20.7-15.el8             AppStream   39 k
+    node1cos8cdb3:  oniguruma                   x86_64  6.8.2-2.el8               AppStream  187 k
+    node1cos8cdb3:  libmodulemd                 x86_64  2.9.4-2.el8               BaseOS     189 k
+    node1cos8cdb3:  libssh-config               noarch  0.9.4-2.el8               BaseOS      18 k
+    node1cos8cdb3:  libzstd                     x86_64  1.4.4-1.el8               BaseOS     266 k
+    node1cos8cdb3:  perl-Carp                   noarch  1.42-396.el8              BaseOS      30 k
+    node1cos8cdb3:  perl-Errno                  x86_64  1.28-416.el8              BaseOS      76 k
+    node1cos8cdb3:  perl-Exporter               noarch  5.72-396.el8              BaseOS      34 k
+    node1cos8cdb3:  perl-File-Path              noarch  2.15-2.el8                BaseOS      38 k
+    node1cos8cdb3:  perl-File-Temp              noarch  0.230.600-1.el8           BaseOS      63 k
+    node1cos8cdb3:  perl-IO                     x86_64  1.38-416.el8              BaseOS     141 k
+    node1cos8cdb3:  perl-PathTools              x86_64  3.74-1.el8                BaseOS      90 k
+    node1cos8cdb3:  perl-Scalar-List-Utils      x86_64  3:1.49-2.el8              BaseOS      68 k
+    node1cos8cdb3:  perl-Socket                 x86_64  4:2.027-3.el8             BaseOS      59 k
+    node1cos8cdb3:  perl-Text-Tabs+Wrap         noarch  2013.0523-395.el8         BaseOS      24 k
+    node1cos8cdb3:  perl-Unicode-Normalize      x86_64  1.25-396.el8              BaseOS      82 k
+    node1cos8cdb3:  perl-constant               noarch  1.33-396.el8              BaseOS      25 k
+    node1cos8cdb3:  perl-interpreter            x86_64  4:5.26.3-416.el8          BaseOS     6.3 M
+    node1cos8cdb3:  perl-libs                   x86_64  4:5.26.3-416.el8          BaseOS     1.6 M
+    node1cos8cdb3:  perl-macros                 x86_64  4:5.26.3-416.el8          BaseOS      72 k
+    node1cos8cdb3:  perl-parent                 noarch  1:0.237-1.el8             BaseOS      20 k
+    node1cos8cdb3:  perl-threads                x86_64  1:2.21-2.el8              BaseOS      61 k
+    node1cos8cdb3:  perl-threads-shared         x86_64  1.58-2.el8                BaseOS      48 k
+    node1cos8cdb3: Installing weak dependencies:
+    node1cos8cdb3:  elfutils-debuginfod-client  x86_64  0.180-1.el8               BaseOS      64 k
+    node1cos8cdb3: 
+    node1cos8cdb3: Transaction Summary
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3: Install  28 Packages
+    node1cos8cdb3: Upgrade  26 Packages
+    node1cos8cdb3: Total download size: 21 M
+    node1cos8cdb3: Downloading Packages:
+    node1cos8cdb3: (1/54): gpm-libs-1.20.7-15.el8.x86_64.rpm       407 kB/s |  39 kB     00:00    
+    node1cos8cdb3: (2/54): jq-1.5-12.el8.x86_64.rpm                881 kB/s | 161 kB     00:00    
+    node1cos8cdb3: (3/54): oniguruma-6.8.2-2.el8.x86_64.rpm        1.6 MB/s | 187 kB     00:00    
+    node1cos8cdb3: (4/54): elfutils-debuginfod-client-0.180-1.el8. 527 kB/s |  64 kB     00:00    
+    node1cos8cdb3: (5/54): libssh-config-0.9.4-2.el8.noarch.rpm    764 kB/s |  18 kB     00:00    
+    node1cos8cdb3: (6/54): libmodulemd-2.9.4-2.el8.x86_64.rpm      667 kB/s | 189 kB     00:00    
+    node1cos8cdb3: (7/54): libzstd-1.4.4-1.el8.x86_64.rpm          1.1 MB/s | 266 kB     00:00    
+    node1cos8cdb3: (8/54): perl-Carp-1.42-396.el8.noarch.rpm       1.2 MB/s |  30 kB     00:00    
+    node1cos8cdb3: (9/54): perl-Errno-1.28-416.el8.x86_64.rpm      819 kB/s |  76 kB     00:00    
+    node1cos8cdb3: (10/54): perl-Exporter-5.72-396.el8.noarch.rpm  1.4 MB/s |  34 kB     00:00    
+    node1cos8cdb3: (11/54): net-tools-2.0-0.52.20160912git.el8.x86 1.3 MB/s | 322 kB     00:00    
+    node1cos8cdb3: (12/54): perl-File-Path-2.15-2.el8.noarch.rpm   1.0 MB/s |  38 kB     00:00    
+    node1cos8cdb3: (13/54): perl-File-Temp-0.230.600-1.el8.noarch. 1.0 MB/s |  63 kB     00:00    
+    node1cos8cdb3: (14/54): perl-IO-1.38-416.el8.x86_64.rpm        1.2 MB/s | 141 kB     00:00    
+    node1cos8cdb3: (15/54): perl-PathTools-3.74-1.el8.x86_64.rpm   1.1 MB/s |  90 kB     00:00    
+    node1cos8cdb3: (16/54): perl-Scalar-List-Utils-1.49-2.el8.x86_ 1.1 MB/s |  68 kB     00:00    
+    node1cos8cdb3: (17/54): perl-Socket-2.027-3.el8.x86_64.rpm     836 kB/s |  59 kB     00:00    
+    node1cos8cdb3: (18/54): perl-Text-Tabs+Wrap-2013.0523-395.el8. 1.0 MB/s |  24 kB     00:00    
+    node1cos8cdb3: (19/54): perl-constant-1.33-396.el8.noarch.rpm  950 kB/s |  25 kB     00:00    
+    node1cos8cdb3: (20/54): perl-Unicode-Normalize-1.25-396.el8.x8 1.4 MB/s |  82 kB     00:00    
+    node1cos8cdb3: (21/54): perl-libs-5.26.3-416.el8.x86_64.rpm    2.8 MB/s | 1.6 MB     00:00    
+    node1cos8cdb3: (22/54): mc-4.8.19-9.el8.x86_64.rpm             1.2 MB/s | 1.9 MB     00:01    
+    node1cos8cdb3: (23/54): perl-macros-5.26.3-416.el8.x86_64.rpm  1.6 MB/s |  72 kB     00:00    
+    node1cos8cdb3: (24/54): perl-threads-2.21-2.el8.x86_64.rpm     1.6 MB/s |  61 kB     00:00    
+    node1cos8cdb3: (25/54): perl-parent-0.237-1.el8.noarch.rpm     198 kB/s |  20 kB     00:00    
+    node1cos8cdb3: (26/54): perl-threads-shared-1.58-2.el8.x86_64. 983 kB/s |  48 kB     00:00    
+    node1cos8cdb3: (27/54): curl-7.61.1-14.el8.x86_64.rpm          3.8 MB/s | 353 kB     00:00    
+    node1cos8cdb3: (28/54): yum-utils-4.0.17-5.el8.noarch.rpm      639 kB/s |  68 kB     00:00    
+    node1cos8cdb3: (29/54): dnf-4.2.23-4.el8.noarch.rpm            3.3 MB/s | 513 kB     00:00    
+    node1cos8cdb3: (30/54): dnf-plugins-core-4.0.17-5.el8.noarch.r 1.6 MB/s |  66 kB     00:00    
+    node1cos8cdb3: (31/54): dnf-data-4.2.23-4.el8.noarch.rpm       783 kB/s | 149 kB     00:00    
+    node1cos8cdb3: (32/54): elfutils-libelf-0.180-1.el8.x86_64.rpm 3.2 MB/s | 215 kB     00:00    
+    node1cos8cdb3: (33/54): iproute-5.3.0-5.el8.x86_64.rpm         4.9 MB/s | 665 kB     00:00    
+    node1cos8cdb3: (34/54): perl-interpreter-5.26.3-416.el8.x86_64 5.0 MB/s | 6.3 MB     00:01    
+    node1cos8cdb3: (35/54): elfutils-libs-0.180-1.el8.x86_64.rpm   1.2 MB/s | 293 kB     00:00    
+    node1cos8cdb3: (36/54): libcurl-7.61.1-14.el8.x86_64.rpm       3.6 MB/s | 298 kB     00:00    
+    node1cos8cdb3: (37/54): libdnf-0.48.0-5.el8.x86_64.rpm         6.5 MB/s | 650 kB     00:00    
+    node1cos8cdb3: (38/54): librepo-1.12.0-2.el8.x86_64.rpm        920 kB/s |  90 kB     00:00    
+    node1cos8cdb3: (39/54): libsolv-0.7.11-1.el8.x86_64.rpm        3.5 MB/s | 358 kB     00:00    
+    node1cos8cdb3: (40/54): libssh-0.9.4-2.el8.x86_64.rpm          3.7 MB/s | 215 kB     00:00    
+    node1cos8cdb3: (41/54): python3-dnf-4.2.23-4.el8.noarch.rpm    7.5 MB/s | 526 kB     00:00    
+    node1cos8cdb3: (42/54): python3-dnf-plugins-core-4.0.17-5.el8. 5.2 MB/s | 221 kB     00:00    
+    node1cos8cdb3: (43/54): python3-hawkey-0.48.0-5.el8.x86_64.rpm 3.9 MB/s | 111 kB     00:00    
+    node1cos8cdb3: (44/54): openssl-libs-1.1.1g-11.el8.x86_64.rpm  7.2 MB/s | 1.5 MB     00:00    
+    node1cos8cdb3: (45/54): python3-librepo-1.12.0-2.el8.x86_64.rp 1.7 MB/s |  52 kB     00:00    
+    node1cos8cdb3: (46/54): python3-libdnf-0.48.0-5.el8.x86_64.rpm  11 MB/s | 756 kB     00:00    
+    node1cos8cdb3: (47/54): python3-rpm-4.14.3-4.el8.x86_64.rpm    4.4 MB/s | 157 kB     00:00    
+    node1cos8cdb3: (48/54): rpm-4.14.3-4.el8.x86_64.rpm            8.9 MB/s | 541 kB     00:00    
+    node1cos8cdb3: (49/54): openssl-1.1.1g-11.el8.x86_64.rpm       2.1 MB/s | 706 kB     00:00    
+    node1cos8cdb3: (50/54): rpm-build-libs-4.14.3-4.el8.x86_64.rpm 2.6 MB/s | 154 kB     00:00    
+    node1cos8cdb3: (51/54): rpm-libs-4.14.3-4.el8.x86_64.rpm       8.7 MB/s | 338 kB     00:00    
+    node1cos8cdb3: (52/54): rpm-plugin-selinux-4.14.3-4.el8.x86_64 1.6 MB/s |  75 kB     00:00    
+    node1cos8cdb3: (53/54): rpm-plugin-systemd-inhibit-4.14.3-4.el 2.3 MB/s |  76 kB     00:00    
+    node1cos8cdb3: (54/54): yum-4.2.23-4.el8.noarch.rpm            6.8 MB/s | 192 kB     00:00    
+    node1cos8cdb3: --------------------------------------------------------------------------------
+    node1cos8cdb3: Total                                           5.6 MB/s |  21 MB     00:03     
+    node1cos8cdb3: Running transaction check
+    node1cos8cdb3: Transaction check succeeded.
+    node1cos8cdb3: Running transaction test
+    node1cos8cdb3: Transaction test succeeded.
+    node1cos8cdb3: Running transaction
+    node1cos8cdb3:   Preparing        :                                                        1/1
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: openssl-libs-1:1.1.1g-11.el8.x86_64                    1/1
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : openssl-libs-1:1.1.1g-11.el8.x86_64                   1/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: openssl-libs-1:1.1.1g-11.el8.x86_64                   1/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Exporter-5.72-396.el8.noarch                     2/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-libs-4:5.26.3-416.el8.x86_64                     3/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Carp-1.42-396.el8.noarch                         4/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : elfutils-libelf-0.180-1.el8.x86_64                    5/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : libzstd-1.4.4-1.el8.x86_64                            6/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64            7/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-parent-1:0.237-1.el8.noarch                      8/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-macros-4:5.26.3-416.el8.x86_64                   9/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Errno-1.28-416.el8.x86_64                       10/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Socket-4:2.027-3.el8.x86_64                     11/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         12/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-Unicode-Normalize-1.25-396.el8.x86_64           13/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-File-Path-2.15-2.el8.noarch                     14/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-IO-1.38-416.el8.x86_64                          15/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-PathTools-3.74-1.el8.x86_64                     16/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-constant-1.33-396.el8.noarch                    17/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-threads-1:2.21-2.el8.x86_64                     18/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-threads-shared-1.58-2.el8.x86_64                19/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-interpreter-4:5.26.3-416.el8.x86_64             20/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : perl-File-Temp-0.230.600-1.el8.noarch                21/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : dnf-data-4.2.23-4.el8.noarch                         22/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : libssh-config-0.9.4-2.el8.noarch                     23/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : libssh-0.9.4-2.el8.x86_64                            24/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : libcurl-7.61.1-14.el8.x86_64                         25/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : librepo-1.12.0-2.el8.x86_64                          26/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : elfutils-libs-0.180-1.el8.x86_64                     27/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : elfutils-debuginfod-client-0.180-1.el8.x86_64        28/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : curl-7.61.1-14.el8.x86_64                            29/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : rpm-libs-4.14.3-4.el8.x86_64                         30/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: rpm-libs-4.14.3-4.el8.x86_64                         30/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : rpm-4.14.3-4.el8.x86_64                              31/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : libmodulemd-2.9.4-2.el8.x86_64                       32/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : libsolv-0.7.11-1.el8.x86_64                          33/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : libdnf-0.48.0-5.el8.x86_64                           34/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : python3-libdnf-0.48.0-5.el8.x86_64                   35/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : python3-hawkey-0.48.0-5.el8.x86_64                   36/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : rpm-build-libs-4.14.3-4.el8.x86_64                   37/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: rpm-build-libs-4.14.3-4.el8.x86_64                   37/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : python3-rpm-4.14.3-4.el8.x86_64                      38/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : rpm-plugin-systemd-inhibit-4.14.3-4.el8.x86_64       39/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : python3-dnf-4.2.23-4.el8.noarch                      40/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : dnf-4.2.23-4.el8.noarch                              41/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: dnf-4.2.23-4.el8.noarch                              41/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : python3-dnf-plugins-core-4.0.17-5.el8.noarch         42/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : dnf-plugins-core-4.0.17-5.el8.noarch                 43/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : oniguruma-6.8.2-2.el8.x86_64                         44/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: oniguruma-6.8.2-2.el8.x86_64                         44/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : gpm-libs-1.20.7-15.el8.x86_64                        45/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: gpm-libs-1.20.7-15.el8.x86_64                        45/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : mc-1:4.8.19-9.el8.x86_64                             46/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : jq-1.5-12.el8.x86_64                                 47/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : yum-utils-4.0.17-5.el8.noarch                        48/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : yum-4.2.23-4.el8.noarch                              49/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : rpm-plugin-selinux-4.14.3-4.el8.x86_64               50/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : python3-librepo-1.12.0-2.el8.x86_64                  51/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : iproute-5.3.0-5.el8.x86_64                           52/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Upgrading        : openssl-1:1.1.1g-11.el8.x86_64                       53/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : net-tools-2.0-0.52.20160912git.el8.x86_64            54/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: net-tools-2.0-0.52.20160912git.el8.x86_64            54/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Obsoleting       : dnf-utils-4.0.2.2-3.el8.noarch                       55/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : openssl-1:1.1.1-8.el8.x86_64                         56/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : rpm-plugin-selinux-4.14.2-9.el8.x86_64               57/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : python3-librepo-1.9.2-1.el8.x86_64                   58/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : iproute-4.18.0-11.el8.x86_64                         59/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : dnf-plugins-core-4.0.2.2-3.el8.noarch                60/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : python3-dnf-plugins-core-4.0.2.2-3.el8.noarch        61/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : yum-4.0.9.2-5.el8.noarch                             62/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: dnf-4.0.9.2-5.el8.noarch                             63/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : dnf-4.0.9.2-5.el8.noarch                             63/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: dnf-4.0.9.2-5.el8.noarch                             63/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : python3-dnf-4.0.9.2-5.el8.noarch                     64/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : python3-hawkey-0.22.5-4.el8.x86_64                   65/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : python3-libdnf-0.22.5-4.el8.x86_64                   66/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : libdnf-0.22.5-4.el8.x86_64                           67/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : python3-rpm-4.14.2-9.el8.x86_64                      68/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : rpm-build-libs-4.14.2-9.el8.x86_64                   69/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: rpm-build-libs-4.14.2-9.el8.x86_64                   69/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : elfutils-libs-0.174-6.el8.x86_64                     70/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : rpm-plugin-systemd-inhibit-4.14.2-9.el8.x86_64       71/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : dnf-data-4.0.9.2-5.el8.noarch                        72/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : librepo-1.9.2-1.el8.x86_64                           73/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : libsolv-0.6.35-6.el8.x86_64                          74/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : rpm-4.14.2-9.el8.x86_64                              75/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : rpm-libs-4.14.2-9.el8.x86_64                         76/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: rpm-libs-4.14.2-9.el8.x86_64                         76/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : curl-7.61.1-8.el8.x86_64                             77/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : libcurl-7.61.1-8.el8.x86_64                          78/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : libssh-0.8.5-2.el8.x86_64                            79/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : openssl-libs-1:1.1.1-8.el8.x86_64                    80/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: openssl-libs-1:1.1.1-8.el8.x86_64                    80/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Cleanup          : elfutils-libelf-0.174-6.el8.x86_64                   81/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: elfutils-libelf-0.174-6.el8.x86_64                   81/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Verifying        : gpm-libs-1.20.7-15.el8.x86_64                         1/81 
+    node1cos8cdb3:   Verifying        : jq-1.5-12.el8.x86_64                                  2/81 
+    node1cos8cdb3:   Verifying        : mc-1:4.8.19-9.el8.x86_64                              3/81 
+    node1cos8cdb3:   Verifying        : oniguruma-6.8.2-2.el8.x86_64                          4/81 
+    node1cos8cdb3:   Verifying        : elfutils-debuginfod-client-0.180-1.el8.x86_64         5/81 
+    node1cos8cdb3:   Verifying        : libmodulemd-2.9.4-2.el8.x86_64                        6/81 
+    node1cos8cdb3:   Verifying        : libssh-config-0.9.4-2.el8.noarch                      7/81 
+    node1cos8cdb3:   Verifying        : libzstd-1.4.4-1.el8.x86_64                            8/81 
+    node1cos8cdb3:   Verifying        : net-tools-2.0-0.52.20160912git.el8.x86_64             9/81 
+    node1cos8cdb3:   Verifying        : perl-Carp-1.42-396.el8.noarch                        10/81 
+    node1cos8cdb3:   Verifying        : perl-Errno-1.28-416.el8.x86_64                       11/81
+    node1cos8cdb3:  
+    node1cos8cdb3:   Verifying        : perl-Exporter-5.72-396.el8.noarch                    12/81 
+    node1cos8cdb3:   Verifying        : perl-File-Path-2.15-2.el8.noarch                     13/81 
+    node1cos8cdb3:   Verifying        : perl-File-Temp-0.230.600-1.el8.noarch                14/81 
+    node1cos8cdb3:   Verifying        : perl-IO-1.38-416.el8.x86_64                          15/81 
+    node1cos8cdb3:   Verifying        : perl-PathTools-3.74-1.el8.x86_64                     16/81 
+    node1cos8cdb3:   Verifying        : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64           17/81 
+    node1cos8cdb3:   Verifying        : perl-Socket-4:2.027-3.el8.x86_64                     18/81 
+    node1cos8cdb3:   Verifying        : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         19/81 
+    node1cos8cdb3:   Verifying        : perl-Unicode-Normalize-1.25-396.el8.x86_64           20/81 
+    node1cos8cdb3:   Verifying        : perl-constant-1.33-396.el8.noarch                    21/81 
+    node1cos8cdb3:   Verifying        : perl-interpreter-4:5.26.3-416.el8.x86_64             22/81 
+    node1cos8cdb3:   Verifying        : perl-libs-4:5.26.3-416.el8.x86_64                    23/81 
+    node1cos8cdb3:   Verifying        : perl-macros-4:5.26.3-416.el8.x86_64                  24/81 
+    node1cos8cdb3:   Verifying        : perl-parent-1:0.237-1.el8.noarch                     25/81 
+    node1cos8cdb3:   Verifying        : perl-threads-1:2.21-2.el8.x86_64                     26/81 
+    node1cos8cdb3:   Verifying        : perl-threads-shared-1.58-2.el8.x86_64                27/81 
+    node1cos8cdb3:   Verifying        : yum-utils-4.0.17-5.el8.noarch                        28/81 
+    node1cos8cdb3:   Verifying        : dnf-utils-4.0.2.2-3.el8.noarch                       29/81 
+    node1cos8cdb3:   Verifying        : curl-7.61.1-14.el8.x86_64                            30/81 
+    node1cos8cdb3:   Verifying        : curl-7.61.1-8.el8.x86_64                             31/81 
+    node1cos8cdb3:   Verifying        : dnf-4.2.23-4.el8.noarch                              32/81 
+    node1cos8cdb3:   Verifying        : dnf-4.0.9.2-5.el8.noarch                             33/81 
+    node1cos8cdb3:   Verifying        : dnf-data-4.2.23-4.el8.noarch                         34/81 
+    node1cos8cdb3:   Verifying        : dnf-data-4.0.9.2-5.el8.noarch                        35/81 
+    node1cos8cdb3:   Verifying        : dnf-plugins-core-4.0.17-5.el8.noarch                 36/81 
+    node1cos8cdb3:   Verifying        : dnf-plugins-core-4.0.2.2-3.el8.noarch                37/81 
+    node1cos8cdb3:   Verifying        : elfutils-libelf-0.180-1.el8.x86_64                   38/81 
+    node1cos8cdb3:   Verifying        : elfutils-libelf-0.174-6.el8.x86_64                   39/81 
+    node1cos8cdb3:   Verifying        : elfutils-libs-0.180-1.el8.x86_64                     40/81 
+    node1cos8cdb3:   Verifying        : elfutils-libs-0.174-6.el8.x86_64                     41/81 
+    node1cos8cdb3:   Verifying        : iproute-5.3.0-5.el8.x86_64                           42/81 
+    node1cos8cdb3:   Verifying        : iproute-4.18.0-11.el8.x86_64                         43/81 
+    node1cos8cdb3:   Verifying        : libcurl-7.61.1-14.el8.x86_64                         44/81 
+    node1cos8cdb3:   Verifying        : libcurl-7.61.1-8.el8.x86_64                          45/81 
+    node1cos8cdb3:   Verifying        : libdnf-0.48.0-5.el8.x86_64                           46/81 
+    node1cos8cdb3:   Verifying        : libdnf-0.22.5-4.el8.x86_64                           47/81 
+    node1cos8cdb3:   Verifying        : librepo-1.12.0-2.el8.x86_64                          48/81 
+    node1cos8cdb3:   Verifying        : librepo-1.9.2-1.el8.x86_64                           49/81 
+    node1cos8cdb3:   Verifying        : libsolv-0.7.11-1.el8.x86_64                          50/81 
+    node1cos8cdb3:   Verifying        : libsolv-0.6.35-6.el8.x86_64                          51/81 
+    node1cos8cdb3:   Verifying        : libssh-0.9.4-2.el8.x86_64                            52/81 
+    node1cos8cdb3:   Verifying        : libssh-0.8.5-2.el8.x86_64                            53/81 
+    node1cos8cdb3:   Verifying        : openssl-1:1.1.1g-11.el8.x86_64                       54/81 
+    node1cos8cdb3:   Verifying        : openssl-1:1.1.1-8.el8.x86_64                         55/81 
+    node1cos8cdb3:   Verifying        : openssl-libs-1:1.1.1g-11.el8.x86_64                  56/81 
+    node1cos8cdb3:   Verifying        : openssl-libs-1:1.1.1-8.el8.x86_64                    57/81 
+    node1cos8cdb3:   Verifying        : python3-dnf-4.2.23-4.el8.noarch                      58/81 
+    node1cos8cdb3:   Verifying        : python3-dnf-4.0.9.2-5.el8.noarch                     59/81 
+    node1cos8cdb3:   Verifying        : python3-dnf-plugins-core-4.0.17-5.el8.noarch         60/81 
+    node1cos8cdb3:   Verifying        : python3-dnf-plugins-core-4.0.2.2-3.el8.noarch        61/81 
+    node1cos8cdb3:   Verifying        : python3-hawkey-0.48.0-5.el8.x86_64                   62/81 
+    node1cos8cdb3:   Verifying        : python3-hawkey-0.22.5-4.el8.x86_64                   63/81 
+    node1cos8cdb3:   Verifying        : python3-libdnf-0.48.0-5.el8.x86_64                   64/81 
+    node1cos8cdb3:   Verifying        : python3-libdnf-0.22.5-4.el8.x86_64                   65/81 
+    node1cos8cdb3:   Verifying        : python3-librepo-1.12.0-2.el8.x86_64                  66/81 
+    node1cos8cdb3:   Verifying        : python3-librepo-1.9.2-1.el8.x86_64                   67/81 
+    node1cos8cdb3:   Verifying        : python3-rpm-4.14.3-4.el8.x86_64                      68/81 
+    node1cos8cdb3:   Verifying        : python3-rpm-4.14.2-9.el8.x86_64                      69/81 
+    node1cos8cdb3:   Verifying        : rpm-4.14.3-4.el8.x86_64                              70/81 
+    node1cos8cdb3:   Verifying        : rpm-4.14.2-9.el8.x86_64                              71/81 
+    node1cos8cdb3:   Verifying        : rpm-build-libs-4.14.3-4.el8.x86_64                   72/81 
+    node1cos8cdb3:   Verifying        : rpm-build-libs-4.14.2-9.el8.x86_64                   73/81 
+    node1cos8cdb3:   Verifying        : rpm-libs-4.14.3-4.el8.x86_64                         74/81 
+    node1cos8cdb3:   Verifying        : rpm-libs-4.14.2-9.el8.x86_64                         75/81 
+    node1cos8cdb3:   Verifying        : rpm-plugin-selinux-4.14.3-4.el8.x86_64               76/81 
+    node1cos8cdb3:   Verifying        : rpm-plugin-selinux-4.14.2-9.el8.x86_64               77/81 
+    node1cos8cdb3:   Verifying        : rpm-plugin-systemd-inhibit-4.14.3-4.el8.x86_64       78/81 
+    node1cos8cdb3:   Verifying        : rpm-plugin-systemd-inhibit-4.14.2-9.el8.x86_64       79/81 
+    node1cos8cdb3:   Verifying        : yum-4.2.23-4.el8.noarch                              80/81 
+    node1cos8cdb3:   Verifying        : yum-4.0.9.2-5.el8.noarch                             81/81
+    node1cos8cdb3:  
+    node1cos8cdb3: 
+    node1cos8cdb3: Upgraded:
+    node1cos8cdb3:   curl-7.61.1-14.el8.x86_64                                                     
+    node1cos8cdb3:   dnf-4.2.23-4.el8.noarch                                                       
+    node1cos8cdb3:   dnf-data-4.2.23-4.el8.noarch                                                  
+    node1cos8cdb3:   dnf-plugins-core-4.0.17-5.el8.noarch                                          
+    node1cos8cdb3:   elfutils-libelf-0.180-1.el8.x86_64                                            
+    node1cos8cdb3:   elfutils-libs-0.180-1.el8.x86_64                                              
+    node1cos8cdb3:   iproute-5.3.0-5.el8.x86_64                                                    
+    node1cos8cdb3:   libcurl-7.61.1-14.el8.x86_64                                                  
+    node1cos8cdb3:   libdnf-0.48.0-5.el8.x86_64                                                    
+    node1cos8cdb3:   librepo-1.12.0-2.el8.x86_64                                                   
+    node1cos8cdb3:   libsolv-0.7.11-1.el8.x86_64                                                   
+    node1cos8cdb3:   libssh-0.9.4-2.el8.x86_64                                                     
+    node1cos8cdb3:   openssl-1:1.1.1g-11.el8.x86_64                                                
+    node1cos8cdb3:   openssl-libs-1:1.1.1g-11.el8.x86_64                                           
+    node1cos8cdb3:   python3-dnf-4.2.23-4.el8.noarch                                               
+    node1cos8cdb3:   python3-dnf-plugins-core-4.0.17-5.el8.noarch                                  
+    node1cos8cdb3:   python3-hawkey-0.48.0-5.el8.x86_64                                            
+    node1cos8cdb3:   python3-libdnf-0.48.0-5.el8.x86_64                                            
+    node1cos8cdb3:   python3-librepo-1.12.0-2.el8.x86_64                                           
+    node1cos8cdb3:   python3-rpm-4.14.3-4.el8.x86_64                                               
+    node1cos8cdb3:   rpm-4.14.3-4.el8.x86_64                                                       
+    node1cos8cdb3:   rpm-build-libs-4.14.3-4.el8.x86_64                                            
+    node1cos8cdb3:   rpm-libs-4.14.3-4.el8.x86_64                                                  
+    node1cos8cdb3:   rpm-plugin-selinux-4.14.3-4.el8.x86_64                                        
+    node1cos8cdb3:   rpm-plugin-systemd-inhibit-4.14.3-4.el8.x86_64                                
+    node1cos8cdb3:   yum-4.2.23-4.el8.noarch                                                       
+    node1cos8cdb3: 
+    node1cos8cdb3: Installed:
+    node1cos8cdb3:   jq-1.5-12.el8.x86_64                                                          
+    node1cos8cdb3:   mc-1:4.8.19-9.el8.x86_64                                                      
+    node1cos8cdb3:   net-tools-2.0-0.52.20160912git.el8.x86_64                                     
+    node1cos8cdb3:   yum-utils-4.0.17-5.el8.noarch                                                 
+    node1cos8cdb3:   elfutils-debuginfod-client-0.180-1.el8.x86_64                                 
+    node1cos8cdb3:   gpm-libs-1.20.7-15.el8.x86_64                                                 
+    node1cos8cdb3:   oniguruma-6.8.2-2.el8.x86_64                                                  
+    node1cos8cdb3:   libmodulemd-2.9.4-2.el8.x86_64                                                
+    node1cos8cdb3:   libssh-config-0.9.4-2.el8.noarch                                              
+    node1cos8cdb3:   libzstd-1.4.4-1.el8.x86_64                                                    
+    node1cos8cdb3:   perl-Carp-1.42-396.el8.noarch                                                 
+    node1cos8cdb3:   perl-Errno-1.28-416.el8.x86_64                                                
+    node1cos8cdb3:   perl-Exporter-5.72-396.el8.noarch                                             
+    node1cos8cdb3:   perl-File-Path-2.15-2.el8.noarch                                              
+    node1cos8cdb3:   perl-File-Temp-0.230.600-1.el8.noarch                                         
+    node1cos8cdb3:   perl-IO-1.38-416.el8.x86_64                                                   
+    node1cos8cdb3:   perl-PathTools-3.74-1.el8.x86_64                                              
+    node1cos8cdb3:   perl-Scalar-List-Utils-3:1.49-2.el8.x86_64                                    
+    node1cos8cdb3:   perl-Socket-4:2.027-3.el8.x86_64                                              
+    node1cos8cdb3:   perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch                                  
+    node1cos8cdb3:   perl-Unicode-Normalize-1.25-396.el8.x86_64                                    
+    node1cos8cdb3:   perl-constant-1.33-396.el8.noarch                                             
+    node1cos8cdb3:   perl-interpreter-4:5.26.3-416.el8.x86_64                                      
+    node1cos8cdb3:   perl-libs-4:5.26.3-416.el8.x86_64                                             
+    node1cos8cdb3:   perl-macros-4:5.26.3-416.el8.x86_64                                           
+    node1cos8cdb3:   perl-parent-1:0.237-1.el8.noarch                                              
+    node1cos8cdb3:   perl-threads-1:2.21-2.el8.x86_64                                              
+    node1cos8cdb3:   perl-threads-shared-1.58-2.el8.x86_64                                         
+    node1cos8cdb3: Complete!
+    node1cos8cdb3: + dnf clean packages
+    node1cos8cdb3: 0 files removed
+    node1cos8cdb3: + dnf -y --enablerepo=bintray--apache-couchdb-rpm clean metadata
+    node1cos8cdb3: Cache was expired
+    node1cos8cdb3: 46 files removed
+    node1cos8cdb3: + dnf -y install couchdb
+    node1cos8cdb3: CentOS-8 - AppStream                            1.9 MB/s | 6.3 MB     00:03    
+    node1cos8cdb3: CentOS-8 - Base                                 1.3 MB/s | 2.3 MB     00:01    
+    node1cos8cdb3: CentOS-8 - Extras                               8.8 kB/s | 8.6 kB     00:00    
+    node1cos8cdb3: bintray--apache-couchdb-rpm                     195 kB/s |  94 kB     00:00    
+    node1cos8cdb3: Extra Packages for Enterprise Linux Modular 8 - 220 kB/s | 527 kB     00:02    
+    node1cos8cdb3: Extra Packages for Enterprise Linux 8 - x86_64  1.8 MB/s | 8.7 MB     00:04    
+    node1cos8cdb3: Dependencies resolved.
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3:  Package     Arch       Version           Repository                       Size
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3: Installing:
+    node1cos8cdb3:  couchdb     x86_64     3.1.1-1.el8       bintray--apache-couchdb-rpm      24 M
+    node1cos8cdb3: Installing dependencies:
+    node1cos8cdb3:  mozjs60     x86_64     60.9.0-4.el8      BaseOS                          6.6 M
+    node1cos8cdb3: 
+    node1cos8cdb3: Transaction Summary
+    node1cos8cdb3: ================================================================================
+    node1cos8cdb3: Install  2 Packages
+    node1cos8cdb3: Total download size: 30 M
+    node1cos8cdb3: Installed size: 74 M
+    node1cos8cdb3: Downloading Packages:
+    node1cos8cdb3: (1/2): couchdb-3.1.1-1.el8.x86_64.rpm            16 MB/s |  24 MB     00:01    
+    node1cos8cdb3: (2/2): mozjs60-60.9.0-4.el8.x86_64.rpm          3.5 MB/s | 6.6 MB     00:01    
+    node1cos8cdb3: --------------------------------------------------------------------------------
+    node1cos8cdb3: Total                                            14 MB/s |  30 MB     00:02     
+    node1cos8cdb3: Running transaction check
+    node1cos8cdb3: Transaction check succeeded.
+    node1cos8cdb3: Running transaction test
+    node1cos8cdb3: Transaction test succeeded.
+    node1cos8cdb3: Running transaction
+    node1cos8cdb3:   Preparing        :                                                        1/1
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : mozjs60-60.9.0-4.el8.x86_64                            1/2
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: couchdb-3.1.1-1.el8.x86_64                             2/2
+    node1cos8cdb3:  
+    node1cos8cdb3:   Installing       : couchdb-3.1.1-1.el8.x86_64                             2/2
+    node1cos8cdb3:  
+    node1cos8cdb3:   Running scriptlet: couchdb-3.1.1-1.el8.x86_64                             2/2
+    node1cos8cdb3:  
+    node1cos8cdb3:   Verifying        : mozjs60-60.9.0-4.el8.x86_64                            1/2
+    node1cos8cdb3:  
+    node1cos8cdb3:   Verifying        : couchdb-3.1.1-1.el8.x86_64                             2/2
+    node1cos8cdb3:  
+    node1cos8cdb3: 
+    node1cos8cdb3: Installed:
+    node1cos8cdb3:   couchdb-3.1.1-1.el8.x86_64             mozjs60-60.9.0-4.el8.x86_64            
+    node1cos8cdb3: Complete!
+    node1cos8cdb3: + dnf clean packages
+    node1cos8cdb3: 0 files removed
+    node1cos8cdb3: + sed -n '/^;/!p' /opt/couchdb/etc/local.ini
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [couchdb]
+    node1cos8cdb3: 
+    node1cos8cdb3: [couch_peruser]
+    node1cos8cdb3: 
+    node1cos8cdb3: [chttpd]
+    node1cos8cdb3: 
+    node1cos8cdb3: [httpd]
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [couch_httpd_auth]
+    node1cos8cdb3: 
+    node1cos8cdb3: [ssl]
+    node1cos8cdb3: 
+    node1cos8cdb3: [vhosts]
+    node1cos8cdb3: 
+    node1cos8cdb3: [admins]
+    node1cos8cdb3: + sed -n '/^;/!p' /opt/couchdb/etc/default.ini
+    node1cos8cdb3: [vendor]
+    node1cos8cdb3: name = The Apache Software Foundation
+    node1cos8cdb3: 
+    node1cos8cdb3: [couchdb]
+    node1cos8cdb3: uuid = 
+    node1cos8cdb3: database_dir = ./data
+    node1cos8cdb3: view_index_dir = ./data
+    node1cos8cdb3: os_process_timeout = 5000 ; 5 seconds. for view servers.
+    node1cos8cdb3: max_dbs_open = 500
+    node1cos8cdb3: file_compression = snappy
+    node1cos8cdb3: attachment_stream_buffer_size = 4096
+    node1cos8cdb3: default_security = admin_only
+    node1cos8cdb3: changes_doc_ids_optimization_threshold = 100
+    node1cos8cdb3: max_document_size = 8000000 ; bytes
+    node1cos8cdb3: default_engine = couch
+    node1cos8cdb3: 
+    node1cos8cdb3: users_db_security_editable = false
+    node1cos8cdb3: 
+    node1cos8cdb3: [purge]
+    node1cos8cdb3: 
+    node1cos8cdb3: [couchdb_engines]
+    node1cos8cdb3: couch = couch_bt_engine
+    node1cos8cdb3: 
+    node1cos8cdb3: [process_priority]
+    node1cos8cdb3: 
+    node1cos8cdb3: [cluster]
+    node1cos8cdb3: q=2
+    node1cos8cdb3: n=3
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [chttpd]
+    node1cos8cdb3: port = 5984
+    node1cos8cdb3: bind_address = 127.0.0.1
+    node1cos8cdb3: backlog = 512
+    node1cos8cdb3: socket_options = [{sndbuf, 262144}, {nodelay, true}]
+    node1cos8cdb3: server_options = [{recbuf, undefined}]
+    node1cos8cdb3: require_valid_user = false
+    node1cos8cdb3: prefer_minimal = Cache-Control, Content-Length, Content-Range, Content-Type, ETag, Server, Transfer-Encoding, Vary
+    node1cos8cdb3: max_db_number_for_dbs_info_req = 100
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [couch_peruser]
+    node1cos8cdb3: enable = false
+    node1cos8cdb3: delete_dbs = false
+    node1cos8cdb3: database_prefix = userdb-
+    node1cos8cdb3: 
+    node1cos8cdb3: [httpd]
+    node1cos8cdb3: port = 5986
+    node1cos8cdb3: bind_address = 127.0.0.1
+    node1cos8cdb3: authentication_handlers = {couch_httpd_auth, cookie_authentication_handler}, {couch_httpd_auth, default_authentication_handler}
+    node1cos8cdb3: secure_rewrites = true
+    node1cos8cdb3: allow_jsonp = false
+    node1cos8cdb3: socket_options = [{sndbuf, 262144}]
+    node1cos8cdb3: enable_cors = false
+    node1cos8cdb3: enable_xframe_options = false
+    node1cos8cdb3: max_http_request_size = 4294967296 ; 4GB
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [ssl]
+    node1cos8cdb3: port = 6984
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [couch_httpd_auth]
+    node1cos8cdb3: authentication_db = _users
+    node1cos8cdb3: authentication_redirect = /_utils/session.html
+    node1cos8cdb3: require_valid_user = false
+    node1cos8cdb3: timeout = 600 ; number of seconds before automatic logout
+    node1cos8cdb3: auth_cache_size = 50 ; size is number of cache entries
+    node1cos8cdb3: allow_persistent_cookies = true ; set to false to disallow persistent cookies
+    node1cos8cdb3: iterations = 10 ; iterations for password hashing
+    node1cos8cdb3: 
+    node1cos8cdb3: [csp]
+    node1cos8cdb3: enable = true
+    node1cos8cdb3: 
+    node1cos8cdb3: [cors]
+    node1cos8cdb3: credentials = false
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [x_frame_options]
+    node1cos8cdb3: 
+    node1cos8cdb3: [native_query_servers]
+    node1cos8cdb3: 
+    node1cos8cdb3: [query_server_config]
+    node1cos8cdb3: reduce_limit = true
+    node1cos8cdb3: os_process_limit = 100
+    node1cos8cdb3: 
+    node1cos8cdb3: [mango]
+    node1cos8cdb3: 
+    node1cos8cdb3: [indexers]
+    node1cos8cdb3: couch_mrview = true
+    node1cos8cdb3: 
+    node1cos8cdb3: [feature_flags]
+    node1cos8cdb3: partitioned||* = true
+    node1cos8cdb3: 
+    node1cos8cdb3: [uuids]
+    node1cos8cdb3: algorithm = sequential
+    node1cos8cdb3: utc_id_suffix =
+    node1cos8cdb3: # Maximum number of UUIDs retrievable from /_uuids in a single request
+    node1cos8cdb3: max_count = 1000
+    node1cos8cdb3: 
+    node1cos8cdb3: [attachments]
+    node1cos8cdb3: compression_level = 8 ; from 1 (lowest, fastest) to 9 (highest, slowest), 0 to disable compression
+    node1cos8cdb3: compressible_types = text/*, application/javascript, application/json, application/xml
+    node1cos8cdb3: 
+    node1cos8cdb3: [replicator]
+    node1cos8cdb3: startup_jitter = 5000
+    node1cos8cdb3: max_jobs = 500
+    node1cos8cdb3: interval = 60000
+    node1cos8cdb3: max_churn = 20
+    node1cos8cdb3: worker_processes = 4
+    node1cos8cdb3: worker_batch_size = 500
+    node1cos8cdb3: http_connections = 20
+    node1cos8cdb3: connection_timeout = 30000
+    node1cos8cdb3: retries_per_request = 5
+    node1cos8cdb3: socket_options = [{keepalive, true}, {nodelay, false}]
+    node1cos8cdb3: verify_ssl_certificates = false
+    node1cos8cdb3: ssl_certificate_max_depth = 3
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [log]
+    node1cos8cdb3: level = info
+    node1cos8cdb3: writer = stderr
+    node1cos8cdb3: 
+    node1cos8cdb3: [stats]
+    node1cos8cdb3: 
+    node1cos8cdb3: [smoosh]
+    node1cos8cdb3: 
+    node1cos8cdb3: [ioq]
+    node1cos8cdb3: concurrency = 10
+    node1cos8cdb3: 
+    node1cos8cdb3: ratio = 0.01
+    node1cos8cdb3: 
+    node1cos8cdb3: [ioq.bypass]
+    node1cos8cdb3: 
+    node1cos8cdb3: os_process = true
+    node1cos8cdb3: 
+    node1cos8cdb3: read = true
+    node1cos8cdb3: 
+    node1cos8cdb3: write = true
+    node1cos8cdb3: 
+    node1cos8cdb3: view_update = true
+    node1cos8cdb3: 
+    node1cos8cdb3: shard_sync = false
+    node1cos8cdb3: 
+    node1cos8cdb3: compaction = false
+    node1cos8cdb3: 
+    node1cos8cdb3: [dreyfus]
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3:  
+    node1cos8cdb3: 
+    node1cos8cdb3: 
+    node1cos8cdb3: [reshard]
+    node1cos8cdb3: + create_certificates
+    node1cos8cdb3: + set -x
+    node1cos8cdb3: + set -e
+    node1cos8cdb3: + country=RO
+    node1cos8cdb3: + state=Europe
+    node1cos8cdb3: + locality=TSR
+    node1cos8cdb3: + organization=DBA
+    node1cos8cdb3: + organizationalunit=CLOUD
+    node1cos8cdb3: + commonname=couchdb.eu
+    node1cos8cdb3: + email=admin@couchdb.eu
+    node1cos8cdb3: + sudo openssl genrsa -out /opt/couchdb/couch.key 2048
+    node1cos8cdb3: Generating RSA private key, 2048 bit long modulus (2 primes)
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: .
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: +
+    node1cos8cdb3: e is 65537 (0x010001)
+    node1cos8cdb3: + sudo openssl req -new -key /opt/couchdb/couch.key -out /opt/couchdb/couch.csr -subj /C=RO/ST=Europe/L=TSR/O=DBA/OU=CLOUD/CN=couchdb.eu/emailAddress=admin@couchdb.eu
+    node1cos8cdb3: + sudo openssl x509 -req -sha256 -days 1095 -in /opt/couchdb/couch.csr -signkey /opt/couchdb/couch.key -out /opt/couchdb/couch.crt
+    node1cos8cdb3: Signature ok
+    node1cos8cdb3: subject=C = RO, ST = Europe, L = TSR, O = DBA, OU = CLOUD, CN = couchdb.eu, emailAddress = admin@couchdb.eu
+    node1cos8cdb3: Getting Private key
+    node1cos8cdb3: + sudo usermod -aG wheel couchdb
+    node1cos8cdb3: + passwd couchdb
+    node1cos8cdb3: + sudo echo -e 'couch24\ncouch24'
+    node1cos8cdb3: New password: 
+    node1cos8cdb3: BAD PASSWORD: The password is shorter than 8 characters
+    node1cos8cdb3: Retype new password: 
+    node1cos8cdb3: Changing password for user couchdb.
+    node1cos8cdb3: passwd: all authentication tokens updated successfully.
+    node1cos8cdb3: + sudo chown couchdb:couchdb /opt/couchdb/couch.crt
+    node1cos8cdb3: + sudo chown couchdb:couchdb /opt/couchdb/couch.key
+    node1cos8cdb3: + cat /opt/couchdb/etc/default.ini
+    node1cos8cdb3: + grep bind_address
+    node1cos8cdb3: bind_address = 127.0.0.1
+    node1cos8cdb3: bind_address = 127.0.0.1
+    node1cos8cdb3: + cat /opt/couchdb/etc/default.ini
+    node1cos8cdb3: + grep port
+    node1cos8cdb3: ; the specified engine module will use. This is important so
+    node1cos8cdb3: ; These settings affect the main, clustered port (5984 by default).
+    node1cos8cdb3: port = 5984
+    node1cos8cdb3: port = 5986
+    node1cos8cdb3: ; Maximum allowed http request size. Applies to both clustered and local port.
+    node1cos8cdb3: port = 6984
+    node1cos8cdb3: ; WARNING! This only affects the node-local port (5986 by default).
+    node1cos8cdb3: ; CSP (Content Security Policy) Support for _utils
+    node1cos8cdb3: ; syslog_port = 514
+    node1cos8cdb3: + sed -i 's/^;bind_address =.*/bind_address = 0.0.0.0/' /opt/couchdb/etc/default.ini
+    node1cos8cdb3: + sed -i 's/^;port =.*/port = 5984/' /opt/couchdb/etc/local.ini
+    node1cos8cdb3: + cat
+    node1cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node1cos8cdb3: 
+    node1cos8cdb3: [chttpd]
+    node1cos8cdb3: port = 5984
+    node1cos8cdb3: bind_address = 0.0.0.0
+    node1cos8cdb3: 
+    node1cos8cdb3: [ssl]
+    node1cos8cdb3: enable = true
+    node1cos8cdb3: cert_file = /opt/couchdb/couch.crt
+    node1cos8cdb3: key_file = /opt/couchdb/couch.key
+    node1cos8cdb3: 
+    node1cos8cdb3: [admins]
+    node1cos8cdb3: admin = dba
+    node1cos8cdb3: couchdb = couch24
+    node1cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node1cos8cdb3: + grep bind_address
+    node1cos8cdb3: bind_address = 0.0.0.0
+    node1cos8cdb3: port = 5984
+    node1cos8cdb3: + grep port
+    node1cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node1cos8cdb3: [admins]
+    node1cos8cdb3: admin = dba
+    node1cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node1cos8cdb3: + grep admin
+    node1cos8cdb3: + grep name
+    node1cos8cdb3: + cat /opt/couchdb/etc/vm.args
+    node1cos8cdb3: # Each node in the system must have a unique name. These are specified through
+    node1cos8cdb3: # the Erlang -name flag, which takes the form:
+    node1cos8cdb3: #    -name nodename@<FQDN>
+    node1cos8cdb3: #    -name nodename@<IP-ADDRESS>
+    node1cos8cdb3: #    -name couchdb@127.0.0.1
+    node1cos8cdb3: #    -name couchdb@my.host.domain.com
+    node1cos8cdb3: #    -name couchdb@192.168.0.1
+    node1cos8cdb3: -name couchdb@127.0.0.1
+    node1cos8cdb3: define-first
+    node1cos8cdb3: + echo define-first
+    node1cos8cdb3: + '[' define-first == define-first ']'
+    node1cos8cdb3: + grep name
+    node1cos8cdb3: + cat /opt/couchdb/etc/vm.args
+    node1cos8cdb3: # Each node in the system must have a unique name. These are specified through
+    node1cos8cdb3: # the Erlang -name flag, which takes the form:
+    node1cos8cdb3: #    -name nodename@<FQDN>
+    node1cos8cdb3: #    -name nodename@<IP-ADDRESS>
+    node1cos8cdb3: #    -name couchdb@127.0.0.1
+    node1cos8cdb3: #    -name couchdb@my.host.domain.com
+    node1cos8cdb3: #    -name couchdb@192.168.0.1
+    node1cos8cdb3: -name couchdb@127.0.0.1
+    node1cos8cdb3: + sed -i 's/^-name.*/-name couchdb@192.168.83.86/' /opt/couchdb/etc/vm.args
+    node1cos8cdb3:  entered if : define-first 
+    node1cos8cdb3: + echo ' entered if : define-first '
+    node1cos8cdb3: + echo '-kernel inet_dist_listen_min 9100'
+    node1cos8cdb3: + echo '-kernel inet_dist_listen_max 9200'
+    node1cos8cdb3: + systemctl enable --now couchdb.service
+    node1cos8cdb3: Created symlink /etc/systemd/system/multi-user.target.wants/couchdb.service → /usr/lib/systemd/system/couchdb.service.
+    node1cos8cdb3: + systemctl status couchdb
+    node1cos8cdb3: ● couchdb.service - Apache CouchDB
+    node1cos8cdb3:    Loaded: loaded (/usr/lib/systemd/system/couchdb.service; enabled; vendor preset: disabled)
+    node1cos8cdb3:    Active: active (running) since Mon 2021-01-04 18:28:07 UTC; 8ms ago
+    node1cos8cdb3:  Main PID: 25259 (couchdb)
+    node1cos8cdb3:     Tasks: 2 (limit: 6106)
+    node1cos8cdb3:    Memory: 632.0K
+    node1cos8cdb3:    CGroup: /system.slice/couchdb.service
+    node1cos8cdb3:            ├─25259 /bin/sh /opt/couchdb/bin/couchdb
+    node1cos8cdb3:            ├─25261 /bin/sh /opt/couchdb/bin/couchdb
+    node1cos8cdb3:            └─25262 
+    node1cos8cdb3: 
+    node1cos8cdb3: Jan 04 18:28:07 cos8cdb3node1 systemd[1]: Started Apache CouchDB.
+    node1cos8cdb3: + netstat -plntu
+    node1cos8cdb3: Active Internet connections (only servers)
+    node1cos8cdb3: Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+    node1cos8cdb3: tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      663/sshd            
+    node1cos8cdb3: tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/systemd           
+    node1cos8cdb3: tcp        0      0 0.0.0.0:4369            0.0.0.0:*               LISTEN      -                   
+    node1cos8cdb3: tcp6       0      0 :::22                   :::*                    LISTEN      663/sshd            
+    node1cos8cdb3: tcp6       0      0 :::111                  :::*                    LISTEN      1/systemd           
+    node1cos8cdb3: tcp6       0      0 :::4369                 :::*                    LISTEN      -                   
+    node1cos8cdb3: udp        0      0 127.0.0.1:323           0.0.0.0:*                           590/chronyd         
+    node1cos8cdb3: udp        0      0 10.0.2.15:68            0.0.0.0:*                           3803/NetworkManager 
+    node1cos8cdb3: udp        0      0 0.0.0.0:111             0.0.0.0:*                           1/systemd           
+    node1cos8cdb3: udp6       0      0 ::1:323                 :::*                                590/chronyd         
+    node1cos8cdb3: udp6       0      0 :::111                  :::*                                1/systemd           
+    node1cos8cdb3: + ps -fu couchdb --forest
+    node1cos8cdb3: UID        PID  PPID  C STIME TTY          TIME CMD
+    node1cos8cdb3: couchdb  25273     1  0 18:28 ?        00:00:00 /opt/couchdb/bin/../erts-9.3.3.14/bin/epmd -daemon
+    node1cos8cdb3: couchdb  25259     1  0 18:28 ?        00:00:00 /opt/couchdb/bin/../erts-9.3.3.14/bin/beam.smp -K true -A 16 -Bd -- -root /opt/couchdb/bin/.. -progname couchdb -- -home /opt/couchdb -- -boot /opt/couchdb/bin/../releases/3.1.1/couchdb -name couchdb@192.168.83.86 -setcookie monster -kernel error_logger silent -sasl sasl_error_logger false -noshell -noinput -smp enable -ssl session_lifetime 300 -kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9200 -config /opt/couchdb/bin/../releases/3.1.1/sys.config
+    node1cos8cdb3: + sleep 10
+    node1cos8cdb3: + curl -s http://admin:dba@localhost:5984
+    node1cos8cdb3: {"couchdb":"Welcome","version":"3.1.1","git_sha":"ce596c65d","uuid":"020f5349b96fbc500b6926cfd0cdfe5c","features":["access-ready","partitioned","pluggable-storage-engines","reshard","scheduler"],"vendor":{"name":"The Apache Software Foundation"}}
+    node1cos8cdb3: + curl -X GET http://admin:dba@localhost:5984/_all_dbs
+    node1cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node1cos8cdb3:                                  Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    node1cos8cdb3: []
+100     3    0     3    0     0     78      0 --:--:-- --:--:-- --:--:--    78
+    node1cos8cdb3: + curl -i -k -X GET https://admin:dba@localhost:6984
+    node1cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node1cos8cdb3:                                  Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    node1cos8cdb3: HTTP/1.1 200 OK
+    node1cos8cdb3: Cache-Control: must-revalidate
+    node1cos8cdb3: Content-Length: 247
+    node1cos8cdb3: Content-Type: application/json
+    node1cos8cdb3: Date: Mon, 04 Jan 2021 18:28:16 GMT
+    node1cos8cdb3: Server: CouchDB/3.1.1 (Erlang OTP/20)
+    node1cos8cdb3: X-Couch-Request-ID: b2ec27b01a
+    node1cos8cdb3: X-CouchDB-Body-Time: 0
+    node1cos8cdb3: 
+    node1cos8cdb3: {"couchdb":"Welcome","version":"3.1.1","git_sha":"ce596c65d","uuid":"020f5349b96fbc500b6926cfd0cdfe5c","features":["access-ready","partitioned","pluggable-storage-engines","reshard","scheduler"],"vendor":{"name":"The Apache Software Foundation"}}
+100   247  100   247    0     0   7484      0 --:--:-- --:--:-- --:--:--  7484
+    node1cos8cdb3:  entered if :  define-first 
+    node1cos8cdb3: Complete
+    node1cos8cdb3: + '[' define-first == define-first ']'
+    node1cos8cdb3: + echo ' entered if :  define-first '
+    node1cos8cdb3: + echo Complete
+==> node2cos8cdb3: Importing base box 'centos/8'...
+==> node2cos8cdb3: Matching MAC address for NAT networking...
+==> node2cos8cdb3: Checking if box 'centos/8' version '1905.1' is up to date...
+==> node2cos8cdb3: Setting the name of the VM: movies_node2cos8cdb3_1609784902997_51516
+==> node2cos8cdb3: Fixed port collision for 22 => 2222. Now on port 2200.
+==> node2cos8cdb3: Clearing any previously set network interfaces...
+==> node2cos8cdb3: Preparing network interfaces based on configuration...
+    node2cos8cdb3: Adapter 1: nat
+    node2cos8cdb3: Adapter 2: hostonly
+==> node2cos8cdb3: Forwarding ports...
+    node2cos8cdb3: 22 (guest) => 2200 (host) (adapter 1)
+==> node2cos8cdb3: Running 'pre-boot' VM customizations...
+==> node2cos8cdb3: Booting VM...
+==> node2cos8cdb3: Waiting for machine to boot. This may take a few minutes...
+    node2cos8cdb3: SSH address: 127.0.0.1:2200
+    node2cos8cdb3: SSH username: vagrant
+    node2cos8cdb3: SSH auth method: private key
+    node2cos8cdb3: 
+    node2cos8cdb3: Vagrant insecure key detected. Vagrant will automatically replace
+    node2cos8cdb3: this with a newly generated keypair for better security.
+    node2cos8cdb3: 
+    node2cos8cdb3: Inserting generated public key within guest...
+    node2cos8cdb3: Removing insecure key from the guest if it's present...
+    node2cos8cdb3: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> node2cos8cdb3: Machine booted and ready!
+==> node2cos8cdb3: Checking for guest additions in VM...
+    node2cos8cdb3: No guest additions were detected on the base box for this VM! Guest
+    node2cos8cdb3: additions are required for forwarded ports, shared folders, host only
+    node2cos8cdb3: networking, and more. If SSH fails on this machine, please install
+    node2cos8cdb3: the guest additions and repackage the box to continue.
+    node2cos8cdb3: 
+    node2cos8cdb3: This is not an error message; everything may continue to work properly,
+    node2cos8cdb3: in which case you may ignore this message.
+==> node2cos8cdb3: Setting hostname...
+==> node2cos8cdb3: Configuring and enabling network interfaces...
+==> node2cos8cdb3: Rsyncing folder: /home/vagrant/CouchDB/CentOS8/ssl/movies/ => /vagrant
+==> node2cos8cdb3: Running provisioner: shell...
+    node2cos8cdb3: Running: /tmp/vagrant-shell20210104-29254-1wrcbvh.sh
+    node2cos8cdb3: ++ getenforce
+    node2cos8cdb3: + test Enforcing = Enforcing
+    node2cos8cdb3: + setenforce 0
+    node2cos8cdb3: + sed -Ei 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+    node2cos8cdb3: + systemctl stop firewalld
+    node2cos8cdb3: + systemctl disable firewalld
+    node2cos8cdb3: + cat
+    node2cos8cdb3: + dnf clean packages
+    node2cos8cdb3: 0 files removed
+    node2cos8cdb3: + dnf -y install epel-release
+    node2cos8cdb3: CentOS-8 - AppStream                            1.4 MB/s | 6.3 MB     00:04    
+    node2cos8cdb3: CentOS-8 - Base                                 726 kB/s | 2.3 MB     00:03    
+    node2cos8cdb3: CentOS-8 - Extras                               3.9 kB/s | 8.6 kB     00:02    
+    node2cos8cdb3: bintray--apache-couchdb-rpm                      40 kB/s |  94 kB     00:02    
+    node2cos8cdb3: Dependencies resolved.
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3:  Package               Arch            Version            Repository       Size
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3: Installing:
+    node2cos8cdb3:  epel-release          noarch          8-8.el8            extras           23 k
+    node2cos8cdb3: 
+    node2cos8cdb3: Transaction Summary
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3: Install  1 Package
+    node2cos8cdb3: Total download size: 23 k
+    node2cos8cdb3: Installed size: 32 k
+    node2cos8cdb3: Downloading Packages:
+    node2cos8cdb3: epel-release-8-8.el8.noarch.rpm                  21 kB/s |  23 kB     00:01    
+    node2cos8cdb3: --------------------------------------------------------------------------------
+    node2cos8cdb3: Total                                           8.3 kB/s |  23 kB     00:02     
+    node2cos8cdb3: warning: /var/cache/dnf/extras-6f30eee3842aa66c/packages/epel-release-8-8.el8.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID 8483c65d: NOKEY
+    node2cos8cdb3: CentOS-8 - Extras                               1.6 MB/s | 1.6 kB     00:00    
+    node2cos8cdb3: Importing GPG key 0x8483C65D:
+    node2cos8cdb3:  Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+    node2cos8cdb3:  Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+    node2cos8cdb3:  From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+    node2cos8cdb3: Key imported successfully
+    node2cos8cdb3: Running transaction check
+    node2cos8cdb3: Transaction check succeeded.
+    node2cos8cdb3: Running transaction test
+    node2cos8cdb3: Transaction test succeeded.
+    node2cos8cdb3: Running transaction
+    node2cos8cdb3:   Preparing        :                                                        1/1
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : epel-release-8-8.el8.noarch                            1/1
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: epel-release-8-8.el8.noarch                            1/1
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : epel-release-8-8.el8.noarch                            1/1
+    node2cos8cdb3:  
+    node2cos8cdb3: 
+    node2cos8cdb3: Installed:
+    node2cos8cdb3:   epel-release-8-8.el8.noarch                                                   
+    node2cos8cdb3: Complete!
+    node2cos8cdb3: + dnf clean packages
+    node2cos8cdb3: 0 files removed
+    node2cos8cdb3: + dnf -y install yum-utils mc iproute net-tools curl jq
+    node2cos8cdb3: CentOS-8 - AppStream                            1.5 kB/s | 4.3 kB     00:02    
+    node2cos8cdb3: CentOS-8 - Base                                 3.4 kB/s | 3.9 kB     00:01    
+    node2cos8cdb3: CentOS-8 - Extras                               1.1 kB/s | 1.5 kB     00:01    
+    node2cos8cdb3: bintray--apache-couchdb-rpm                     1.1 kB/s | 1.3 kB     00:01    
+    node2cos8cdb3: Extra Packages for Enterprise Linux Modular 8 -  82 kB/s | 527 kB     00:06    
+    node2cos8cdb3: Extra Packages for Enterprise Linux 8 - x86_64  1.4 MB/s | 8.7 MB     00:06    
+    node2cos8cdb3: Package iproute-4.18.0-11.el8.x86_64 is already installed.
+    node2cos8cdb3: Package curl-7.61.1-8.el8.x86_64 is already installed.
+    node2cos8cdb3: Dependencies resolved.
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3:  Package                     Arch    Version                   Repository  Size
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3: Installing:
+    node2cos8cdb3:  jq                          x86_64  1.5-12.el8                AppStream  161 k
+    node2cos8cdb3:  mc                          x86_64  1:4.8.19-9.el8            AppStream  1.9 M
+    node2cos8cdb3:  net-tools                   x86_64  2.0-0.52.20160912git.el8  BaseOS     322 k
+    node2cos8cdb3:  yum-utils                   noarch  4.0.17-5.el8              BaseOS      68 k
+    node2cos8cdb3:      replacing  dnf-utils.noarch 4.0.2.2-3.el8
+    node2cos8cdb3: Upgrading:
+    node2cos8cdb3:  curl                        x86_64  7.61.1-14.el8             BaseOS     353 k
+    node2cos8cdb3:  dnf                         noarch  4.2.23-4.el8              BaseOS     513 k
+    node2cos8cdb3:  dnf-data                    noarch  4.2.23-4.el8              BaseOS     149 k
+    node2cos8cdb3:  dnf-plugins-core            noarch  4.0.17-5.el8              BaseOS      66 k
+    node2cos8cdb3:  elfutils-libelf             x86_64  0.180-1.el8               BaseOS     215 k
+    node2cos8cdb3:  elfutils-libs               x86_64  0.180-1.el8               BaseOS     293 k
+    node2cos8cdb3:  iproute                     x86_64  5.3.0-5.el8               BaseOS     665 k
+    node2cos8cdb3:  libcurl                     x86_64  7.61.1-14.el8             BaseOS     298 k
+    node2cos8cdb3:  libdnf                      x86_64  0.48.0-5.el8              BaseOS     650 k
+    node2cos8cdb3:  librepo                     x86_64  1.12.0-2.el8              BaseOS      90 k
+    node2cos8cdb3:  libsolv                     x86_64  0.7.11-1.el8              BaseOS     358 k
+    node2cos8cdb3:  libssh                      x86_64  0.9.4-2.el8               BaseOS     215 k
+    node2cos8cdb3:  openssl                     x86_64  1:1.1.1g-11.el8           BaseOS     706 k
+    node2cos8cdb3:  openssl-libs                x86_64  1:1.1.1g-11.el8           BaseOS     1.5 M
+    node2cos8cdb3:  python3-dnf                 noarch  4.2.23-4.el8              BaseOS     526 k
+    node2cos8cdb3:  python3-dnf-plugins-core    noarch  4.0.17-5.el8              BaseOS     221 k
+    node2cos8cdb3:  python3-hawkey              x86_64  0.48.0-5.el8              BaseOS     111 k
+    node2cos8cdb3:  python3-libdnf              x86_64  0.48.0-5.el8              BaseOS     756 k
+    node2cos8cdb3:  python3-librepo             x86_64  1.12.0-2.el8              BaseOS      52 k
+    node2cos8cdb3:  python3-rpm                 x86_64  4.14.3-4.el8              BaseOS     157 k
+    node2cos8cdb3:  rpm                         x86_64  4.14.3-4.el8              BaseOS     541 k
+    node2cos8cdb3:  rpm-build-libs              x86_64  4.14.3-4.el8              BaseOS     154 k
+    node2cos8cdb3:  rpm-libs                    x86_64  4.14.3-4.el8              BaseOS     338 k
+    node2cos8cdb3:  rpm-plugin-selinux          x86_64  4.14.3-4.el8              BaseOS      75 k
+    node2cos8cdb3:  rpm-plugin-systemd-inhibit  x86_64  4.14.3-4.el8              BaseOS      76 k
+    node2cos8cdb3:  yum                         noarch  4.2.23-4.el8              BaseOS     192 k
+    node2cos8cdb3: Installing dependencies:
+    node2cos8cdb3:  gpm-libs                    x86_64  1.20.7-15.el8             AppStream   39 k
+    node2cos8cdb3:  oniguruma                   x86_64  6.8.2-2.el8               AppStream  187 k
+    node2cos8cdb3:  libmodulemd                 x86_64  2.9.4-2.el8               BaseOS     189 k
+    node2cos8cdb3:  libssh-config               noarch  0.9.4-2.el8               BaseOS      18 k
+    node2cos8cdb3:  libzstd                     x86_64  1.4.4-1.el8               BaseOS     266 k
+    node2cos8cdb3:  perl-Carp                   noarch  1.42-396.el8              BaseOS      30 k
+    node2cos8cdb3:  perl-Errno                  x86_64  1.28-416.el8              BaseOS      76 k
+    node2cos8cdb3:  perl-Exporter               noarch  5.72-396.el8              BaseOS      34 k
+    node2cos8cdb3:  perl-File-Path              noarch  2.15-2.el8                BaseOS      38 k
+    node2cos8cdb3:  perl-File-Temp              noarch  0.230.600-1.el8           BaseOS      63 k
+    node2cos8cdb3:  perl-IO                     x86_64  1.38-416.el8              BaseOS     141 k
+    node2cos8cdb3:  perl-PathTools              x86_64  3.74-1.el8                BaseOS      90 k
+    node2cos8cdb3:  perl-Scalar-List-Utils      x86_64  3:1.49-2.el8              BaseOS      68 k
+    node2cos8cdb3:  perl-Socket                 x86_64  4:2.027-3.el8             BaseOS      59 k
+    node2cos8cdb3:  perl-Text-Tabs+Wrap         noarch  2013.0523-395.el8         BaseOS      24 k
+    node2cos8cdb3:  perl-Unicode-Normalize      x86_64  1.25-396.el8              BaseOS      82 k
+    node2cos8cdb3:  perl-constant               noarch  1.33-396.el8              BaseOS      25 k
+    node2cos8cdb3:  perl-interpreter            x86_64  4:5.26.3-416.el8          BaseOS     6.3 M
+    node2cos8cdb3:  perl-libs                   x86_64  4:5.26.3-416.el8          BaseOS     1.6 M
+    node2cos8cdb3:  perl-macros                 x86_64  4:5.26.3-416.el8          BaseOS      72 k
+    node2cos8cdb3:  perl-parent                 noarch  1:0.237-1.el8             BaseOS      20 k
+    node2cos8cdb3:  perl-threads                x86_64  1:2.21-2.el8              BaseOS      61 k
+    node2cos8cdb3:  perl-threads-shared         x86_64  1.58-2.el8                BaseOS      48 k
+    node2cos8cdb3: Installing weak dependencies:
+    node2cos8cdb3:  elfutils-debuginfod-client  x86_64  0.180-1.el8               BaseOS      64 k
+    node2cos8cdb3: 
+    node2cos8cdb3: Transaction Summary
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3: Install  28 Packages
+    node2cos8cdb3: Upgrade  26 Packages
+    node2cos8cdb3: Total download size: 21 M
+    node2cos8cdb3: Downloading Packages:
+    node2cos8cdb3: (1/54): gpm-libs-1.20.7-15.el8.x86_64.rpm        35 kB/s |  39 kB     00:01    
+    node2cos8cdb3: (2/54): jq-1.5-12.el8.x86_64.rpm                138 kB/s | 161 kB     00:01    
+    node2cos8cdb3: (3/54): oniguruma-6.8.2-2.el8.x86_64.rpm        2.0 MB/s | 187 kB     00:00    
+    node2cos8cdb3: (4/54): elfutils-debuginfod-client-0.180-1.el8. 466 kB/s |  64 kB     00:00    
+    node2cos8cdb3: (5/54): libssh-config-0.9.4-2.el8.noarch.rpm    723 kB/s |  18 kB     00:00    
+    node2cos8cdb3: (6/54): libmodulemd-2.9.4-2.el8.x86_64.rpm      669 kB/s | 189 kB     00:00    
+    node2cos8cdb3: (7/54): libzstd-1.4.4-1.el8.x86_64.rpm          1.0 MB/s | 266 kB     00:00    
+    node2cos8cdb3: (8/54): perl-Carp-1.42-396.el8.noarch.rpm       806 kB/s |  30 kB     00:00    
+    node2cos8cdb3: (9/54): mc-4.8.19-9.el8.x86_64.rpm              1.2 MB/s | 1.9 MB     00:01    
+    node2cos8cdb3: (10/54): perl-Errno-1.28-416.el8.x86_64.rpm     1.0 MB/s |  76 kB     00:00    
+    node2cos8cdb3: (11/54): net-tools-2.0-0.52.20160912git.el8.x86 1.3 MB/s | 322 kB     00:00    
+    node2cos8cdb3: (12/54): perl-File-Path-2.15-2.el8.noarch.rpm   791 kB/s |  38 kB     00:00    
+    node2cos8cdb3: (13/54): perl-Exporter-5.72-396.el8.noarch.rpm  340 kB/s |  34 kB     00:00    
+    node2cos8cdb3: (14/54): perl-File-Temp-0.230.600-1.el8.noarch. 1.2 MB/s |  63 kB     00:00    
+    node2cos8cdb3: (15/54): perl-Scalar-List-Utils-1.49-2.el8.x86_ 1.1 MB/s |  68 kB     00:00    
+    node2cos8cdb3: (16/54): perl-IO-1.38-416.el8.x86_64.rpm        1.4 MB/s | 141 kB     00:00    
+    node2cos8cdb3: (17/54): perl-Text-Tabs+Wrap-2013.0523-395.el8. 637 kB/s |  24 kB     00:00    
+    node2cos8cdb3: (18/54): perl-Socket-2.027-3.el8.x86_64.rpm     1.2 MB/s |  59 kB     00:00    
+    node2cos8cdb3: (19/54): perl-PathTools-3.74-1.el8.x86_64.rpm   781 kB/s |  90 kB     00:00    
+    node2cos8cdb3: (20/54): perl-constant-1.33-396.el8.noarch.rpm  570 kB/s |  25 kB     00:00    
+    node2cos8cdb3: (21/54): perl-Unicode-Normalize-1.25-396.el8.x8 1.1 MB/s |  82 kB     00:00    
+    node2cos8cdb3: (22/54): perl-macros-5.26.3-416.el8.x86_64.rpm  1.1 MB/s |  72 kB     00:00    
+    node2cos8cdb3: (23/54): perl-parent-0.237-1.el8.noarch.rpm     873 kB/s |  20 kB     00:00    
+    node2cos8cdb3: (24/54): perl-threads-2.21-2.el8.x86_64.rpm     1.4 MB/s |  61 kB     00:00    
+    node2cos8cdb3: (25/54): perl-threads-shared-1.58-2.el8.x86_64. 1.5 MB/s |  48 kB     00:00    
+    node2cos8cdb3: (26/54): yum-utils-4.0.17-5.el8.noarch.rpm      1.2 MB/s |  68 kB     00:00    
+    node2cos8cdb3: (27/54): curl-7.61.1-14.el8.x86_64.rpm          2.0 MB/s | 353 kB     00:00    
+    node2cos8cdb3: (28/54): perl-libs-5.26.3-416.el8.x86_64.rpm    2.9 MB/s | 1.6 MB     00:00    
+    node2cos8cdb3: (29/54): dnf-data-4.2.23-4.el8.noarch.rpm       2.9 MB/s | 149 kB     00:00    
+    node2cos8cdb3: (30/54): dnf-4.2.23-4.el8.noarch.rpm            2.9 MB/s | 513 kB     00:00    
+    node2cos8cdb3: (31/54): dnf-plugins-core-4.0.17-5.el8.noarch.r 2.2 MB/s |  66 kB     00:00    
+    node2cos8cdb3: (32/54): elfutils-libelf-0.180-1.el8.x86_64.rpm 3.6 MB/s | 215 kB     00:00    
+    node2cos8cdb3: (33/54): elfutils-libs-0.180-1.el8.x86_64.rpm   3.1 MB/s | 293 kB     00:00    
+    node2cos8cdb3: (34/54): iproute-5.3.0-5.el8.x86_64.rpm         4.1 MB/s | 665 kB     00:00    
+    node2cos8cdb3: (35/54): libcurl-7.61.1-14.el8.x86_64.rpm       2.8 MB/s | 298 kB     00:00    
+    node2cos8cdb3: (36/54): librepo-1.12.0-2.el8.x86_64.rpm        3.3 MB/s |  90 kB     00:00    
+    node2cos8cdb3: (37/54): libdnf-0.48.0-5.el8.x86_64.rpm         5.5 MB/s | 650 kB     00:00    
+    node2cos8cdb3: (38/54): libsolv-0.7.11-1.el8.x86_64.rpm        4.2 MB/s | 358 kB     00:00    
+    node2cos8cdb3: (39/54): libssh-0.9.4-2.el8.x86_64.rpm          2.9 MB/s | 215 kB     00:00    
+    node2cos8cdb3: (40/54): openssl-1.1.1g-11.el8.x86_64.rpm       5.4 MB/s | 706 kB     00:00    
+    node2cos8cdb3: (41/54): python3-dnf-4.2.23-4.el8.noarch.rpm    5.2 MB/s | 526 kB     00:00    
+    node2cos8cdb3: (42/54): python3-dnf-plugins-core-4.0.17-5.el8. 7.0 MB/s | 221 kB     00:00    
+    node2cos8cdb3: (43/54): python3-hawkey-0.48.0-5.el8.x86_64.rpm 2.9 MB/s | 111 kB     00:00    
+    node2cos8cdb3: (44/54): openssl-libs-1.1.1g-11.el8.x86_64.rpm  5.7 MB/s | 1.5 MB     00:00    
+    node2cos8cdb3: (45/54): python3-librepo-1.12.0-2.el8.x86_64.rp 1.1 MB/s |  52 kB     00:00    
+    node2cos8cdb3: (46/54): python3-libdnf-0.48.0-5.el8.x86_64.rpm 6.2 MB/s | 756 kB     00:00    
+    node2cos8cdb3: (47/54): python3-rpm-4.14.3-4.el8.x86_64.rpm    3.4 MB/s | 157 kB     00:00    
+    node2cos8cdb3: (48/54): rpm-build-libs-4.14.3-4.el8.x86_64.rpm 4.0 MB/s | 154 kB     00:00    
+    node2cos8cdb3: (49/54): rpm-4.14.3-4.el8.x86_64.rpm            7.1 MB/s | 541 kB     00:00    
+    node2cos8cdb3: (50/54): rpm-libs-4.14.3-4.el8.x86_64.rpm       5.4 MB/s | 338 kB     00:00    
+    node2cos8cdb3: (51/54): rpm-plugin-selinux-4.14.3-4.el8.x86_64 2.1 MB/s |  75 kB     00:00    
+    node2cos8cdb3: (52/54): perl-interpreter-5.26.3-416.el8.x86_64 4.0 MB/s | 6.3 MB     00:01    
+    node2cos8cdb3: (53/54): rpm-plugin-systemd-inhibit-4.14.3-4.el 1.3 MB/s |  76 kB     00:00    
+    node2cos8cdb3: (54/54): yum-4.2.23-4.el8.noarch.rpm            3.4 MB/s | 192 kB     00:00    
+    node2cos8cdb3: --------------------------------------------------------------------------------
+    node2cos8cdb3: Total                                           5.7 MB/s |  21 MB     00:03     
+    node2cos8cdb3: Running transaction check
+    node2cos8cdb3: Transaction check succeeded.
+    node2cos8cdb3: Running transaction test
+    node2cos8cdb3: Transaction test succeeded.
+    node2cos8cdb3: Running transaction
+    node2cos8cdb3:   Preparing        :                                                        1/1
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: openssl-libs-1:1.1.1g-11.el8.x86_64                    1/1
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : openssl-libs-1:1.1.1g-11.el8.x86_64                   1/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: openssl-libs-1:1.1.1g-11.el8.x86_64                   1/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Exporter-5.72-396.el8.noarch                     2/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-libs-4:5.26.3-416.el8.x86_64                     3/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Carp-1.42-396.el8.noarch                         4/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : elfutils-libelf-0.180-1.el8.x86_64                    5/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : libzstd-1.4.4-1.el8.x86_64                            6/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64            7/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-parent-1:0.237-1.el8.noarch                      8/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-macros-4:5.26.3-416.el8.x86_64                   9/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Errno-1.28-416.el8.x86_64                       10/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Socket-4:2.027-3.el8.x86_64                     11/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         12/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-Unicode-Normalize-1.25-396.el8.x86_64           13/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-File-Path-2.15-2.el8.noarch                     14/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-IO-1.38-416.el8.x86_64                          15/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-PathTools-3.74-1.el8.x86_64                     16/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-constant-1.33-396.el8.noarch                    17/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-threads-1:2.21-2.el8.x86_64                     18/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-threads-shared-1.58-2.el8.x86_64                19/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-interpreter-4:5.26.3-416.el8.x86_64             20/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : perl-File-Temp-0.230.600-1.el8.noarch                21/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : dnf-data-4.2.23-4.el8.noarch                         22/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : libssh-config-0.9.4-2.el8.noarch                     23/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : libssh-0.9.4-2.el8.x86_64                            24/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : libcurl-7.61.1-14.el8.x86_64                         25/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : librepo-1.12.0-2.el8.x86_64                          26/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : elfutils-libs-0.180-1.el8.x86_64                     27/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : elfutils-debuginfod-client-0.180-1.el8.x86_64        28/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : curl-7.61.1-14.el8.x86_64                            29/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : rpm-libs-4.14.3-4.el8.x86_64                         30/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: rpm-libs-4.14.3-4.el8.x86_64                         30/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : rpm-4.14.3-4.el8.x86_64                              31/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : libmodulemd-2.9.4-2.el8.x86_64                       32/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : libsolv-0.7.11-1.el8.x86_64                          33/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : libdnf-0.48.0-5.el8.x86_64                           34/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : python3-libdnf-0.48.0-5.el8.x86_64                   35/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : python3-hawkey-0.48.0-5.el8.x86_64                   36/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : rpm-build-libs-4.14.3-4.el8.x86_64                   37/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: rpm-build-libs-4.14.3-4.el8.x86_64                   37/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : python3-rpm-4.14.3-4.el8.x86_64                      38/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : rpm-plugin-systemd-inhibit-4.14.3-4.el8.x86_64       39/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : python3-dnf-4.2.23-4.el8.noarch                      40/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : dnf-4.2.23-4.el8.noarch                              41/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: dnf-4.2.23-4.el8.noarch                              41/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : python3-dnf-plugins-core-4.0.17-5.el8.noarch         42/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : dnf-plugins-core-4.0.17-5.el8.noarch                 43/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : oniguruma-6.8.2-2.el8.x86_64                         44/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: oniguruma-6.8.2-2.el8.x86_64                         44/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : gpm-libs-1.20.7-15.el8.x86_64                        45/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: gpm-libs-1.20.7-15.el8.x86_64                        45/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : mc-1:4.8.19-9.el8.x86_64                             46/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : jq-1.5-12.el8.x86_64                                 47/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : yum-utils-4.0.17-5.el8.noarch                        48/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : yum-4.2.23-4.el8.noarch                              49/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : rpm-plugin-selinux-4.14.3-4.el8.x86_64               50/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : python3-librepo-1.12.0-2.el8.x86_64                  51/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : iproute-5.3.0-5.el8.x86_64                           52/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Upgrading        : openssl-1:1.1.1g-11.el8.x86_64                       53/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : net-tools-2.0-0.52.20160912git.el8.x86_64            54/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: net-tools-2.0-0.52.20160912git.el8.x86_64            54/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Obsoleting       : dnf-utils-4.0.2.2-3.el8.noarch                       55/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : openssl-1:1.1.1-8.el8.x86_64                         56/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : rpm-plugin-selinux-4.14.2-9.el8.x86_64               57/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : python3-librepo-1.9.2-1.el8.x86_64                   58/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : iproute-4.18.0-11.el8.x86_64                         59/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : dnf-plugins-core-4.0.2.2-3.el8.noarch                60/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : python3-dnf-plugins-core-4.0.2.2-3.el8.noarch        61/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : yum-4.0.9.2-5.el8.noarch                             62/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: dnf-4.0.9.2-5.el8.noarch                             63/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : dnf-4.0.9.2-5.el8.noarch                             63/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: dnf-4.0.9.2-5.el8.noarch                             63/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : python3-dnf-4.0.9.2-5.el8.noarch                     64/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : python3-hawkey-0.22.5-4.el8.x86_64                   65/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : python3-libdnf-0.22.5-4.el8.x86_64                   66/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : libdnf-0.22.5-4.el8.x86_64                           67/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : python3-rpm-4.14.2-9.el8.x86_64                      68/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : rpm-build-libs-4.14.2-9.el8.x86_64                   69/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: rpm-build-libs-4.14.2-9.el8.x86_64                   69/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : elfutils-libs-0.174-6.el8.x86_64                     70/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : rpm-plugin-systemd-inhibit-4.14.2-9.el8.x86_64       71/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : dnf-data-4.0.9.2-5.el8.noarch                        72/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : librepo-1.9.2-1.el8.x86_64                           73/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : libsolv-0.6.35-6.el8.x86_64                          74/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : rpm-4.14.2-9.el8.x86_64                              75/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : rpm-libs-4.14.2-9.el8.x86_64                         76/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: rpm-libs-4.14.2-9.el8.x86_64                         76/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : curl-7.61.1-8.el8.x86_64                             77/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : libcurl-7.61.1-8.el8.x86_64                          78/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : libssh-0.8.5-2.el8.x86_64                            79/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : openssl-libs-1:1.1.1-8.el8.x86_64                    80/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: openssl-libs-1:1.1.1-8.el8.x86_64                    80/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Cleanup          : elfutils-libelf-0.174-6.el8.x86_64                   81/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: elfutils-libelf-0.174-6.el8.x86_64                   81/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : gpm-libs-1.20.7-15.el8.x86_64                         1/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : jq-1.5-12.el8.x86_64                                  2/81 
+    node2cos8cdb3:   Verifying        : mc-1:4.8.19-9.el8.x86_64                              3/81 
+    node2cos8cdb3:   Verifying        : oniguruma-6.8.2-2.el8.x86_64                          4/81 
+    node2cos8cdb3:   Verifying        : elfutils-debuginfod-client-0.180-1.el8.x86_64         5/81 
+    node2cos8cdb3:   Verifying        : libmodulemd-2.9.4-2.el8.x86_64                        6/81 
+    node2cos8cdb3:   Verifying        : libssh-config-0.9.4-2.el8.noarch                      7/81 
+    node2cos8cdb3:   Verifying        : libzstd-1.4.4-1.el8.x86_64                            8/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : net-tools-2.0-0.52.20160912git.el8.x86_64             9/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-Carp-1.42-396.el8.noarch                        10/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-Errno-1.28-416.el8.x86_64                       11/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-Exporter-5.72-396.el8.noarch                    12/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-File-Path-2.15-2.el8.noarch                     13/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-File-Temp-0.230.600-1.el8.noarch                14/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-IO-1.38-416.el8.x86_64                          15/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-PathTools-3.74-1.el8.x86_64                     16/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-Scalar-List-Utils-3:1.49-2.el8.x86_64           17/81 
+    node2cos8cdb3:   Verifying        : perl-Socket-4:2.027-3.el8.x86_64                     18/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch         19/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-Unicode-Normalize-1.25-396.el8.x86_64           20/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-constant-1.33-396.el8.noarch                    21/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-interpreter-4:5.26.3-416.el8.x86_64             22/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-libs-4:5.26.3-416.el8.x86_64                    23/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-macros-4:5.26.3-416.el8.x86_64                  24/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-parent-1:0.237-1.el8.noarch                     25/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-threads-1:2.21-2.el8.x86_64                     26/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : perl-threads-shared-1.58-2.el8.x86_64                27/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : yum-utils-4.0.17-5.el8.noarch                        28/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-utils-4.0.2.2-3.el8.noarch                       29/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : curl-7.61.1-14.el8.x86_64                            30/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : curl-7.61.1-8.el8.x86_64                             31/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-4.2.23-4.el8.noarch                              32/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-4.0.9.2-5.el8.noarch                             33/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-data-4.2.23-4.el8.noarch                         34/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-data-4.0.9.2-5.el8.noarch                        35/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-plugins-core-4.0.17-5.el8.noarch                 36/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : dnf-plugins-core-4.0.2.2-3.el8.noarch                37/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : elfutils-libelf-0.180-1.el8.x86_64                   38/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : elfutils-libelf-0.174-6.el8.x86_64                   39/81 
+    node2cos8cdb3:   Verifying        : elfutils-libs-0.180-1.el8.x86_64                     40/81 
+    node2cos8cdb3:   Verifying        : elfutils-libs-0.174-6.el8.x86_64                     41/81 
+    node2cos8cdb3:   Verifying        : iproute-5.3.0-5.el8.x86_64                           42/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : iproute-4.18.0-11.el8.x86_64                         43/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libcurl-7.61.1-14.el8.x86_64                         44/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libcurl-7.61.1-8.el8.x86_64                          45/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libdnf-0.48.0-5.el8.x86_64                           46/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libdnf-0.22.5-4.el8.x86_64                           47/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : librepo-1.12.0-2.el8.x86_64                          48/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : librepo-1.9.2-1.el8.x86_64                           49/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libsolv-0.7.11-1.el8.x86_64                          50/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libsolv-0.6.35-6.el8.x86_64                          51/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : libssh-0.9.4-2.el8.x86_64                            52/81 
+    node2cos8cdb3:   Verifying        : libssh-0.8.5-2.el8.x86_64                            53/81 
+    node2cos8cdb3:   Verifying        : openssl-1:1.1.1g-11.el8.x86_64                       54/81 
+    node2cos8cdb3:   Verifying        : openssl-1:1.1.1-8.el8.x86_64                         55/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : openssl-libs-1:1.1.1g-11.el8.x86_64                  56/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : openssl-libs-1:1.1.1-8.el8.x86_64                    57/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : python3-dnf-4.2.23-4.el8.noarch                      58/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : python3-dnf-4.0.9.2-5.el8.noarch                     59/81 
+    node2cos8cdb3:   Verifying        : python3-dnf-plugins-core-4.0.17-5.el8.noarch         60/81 
+    node2cos8cdb3:   Verifying        : python3-dnf-plugins-core-4.0.2.2-3.el8.noarch        61/81 
+    node2cos8cdb3:   Verifying        : python3-hawkey-0.48.0-5.el8.x86_64                   62/81 
+    node2cos8cdb3:   Verifying        : python3-hawkey-0.22.5-4.el8.x86_64                   63/81 
+    node2cos8cdb3:   Verifying        : python3-libdnf-0.48.0-5.el8.x86_64                   64/81 
+    node2cos8cdb3:   Verifying        : python3-libdnf-0.22.5-4.el8.x86_64                   65/81 
+    node2cos8cdb3:   Verifying        : python3-librepo-1.12.0-2.el8.x86_64                  66/81 
+    node2cos8cdb3:   Verifying        : python3-librepo-1.9.2-1.el8.x86_64                   67/81 
+    node2cos8cdb3:   Verifying        : python3-rpm-4.14.3-4.el8.x86_64                      68/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : python3-rpm-4.14.2-9.el8.x86_64                      69/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : rpm-4.14.3-4.el8.x86_64                              70/81 
+    node2cos8cdb3:   Verifying        : rpm-4.14.2-9.el8.x86_64                              71/81 
+    node2cos8cdb3:   Verifying        : rpm-build-libs-4.14.3-4.el8.x86_64                   72/81 
+    node2cos8cdb3:   Verifying        : rpm-build-libs-4.14.2-9.el8.x86_64                   73/81 
+    node2cos8cdb3:   Verifying        : rpm-libs-4.14.3-4.el8.x86_64                         74/81
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : rpm-libs-4.14.2-9.el8.x86_64                         75/81 
+    node2cos8cdb3:   Verifying        : rpm-plugin-selinux-4.14.3-4.el8.x86_64               76/81 
+    node2cos8cdb3:   Verifying        : rpm-plugin-selinux-4.14.2-9.el8.x86_64               77/81 
+    node2cos8cdb3:   Verifying        : rpm-plugin-systemd-inhibit-4.14.3-4.el8.x86_64       78/81 
+    node2cos8cdb3:   Verifying        : rpm-plugin-systemd-inhibit-4.14.2-9.el8.x86_64       79/81 
+    node2cos8cdb3:   Verifying        : yum-4.2.23-4.el8.noarch                              80/81 
+    node2cos8cdb3:   Verifying        : yum-4.0.9.2-5.el8.noarch                             81/81
+    node2cos8cdb3:  
+    node2cos8cdb3: 
+    node2cos8cdb3: Upgraded:
+    node2cos8cdb3:   curl-7.61.1-14.el8.x86_64                                                     
+    node2cos8cdb3:   dnf-4.2.23-4.el8.noarch                                                       
+    node2cos8cdb3:   dnf-data-4.2.23-4.el8.noarch                                                  
+    node2cos8cdb3:   dnf-plugins-core-4.0.17-5.el8.noarch                                          
+    node2cos8cdb3:   elfutils-libelf-0.180-1.el8.x86_64                                            
+    node2cos8cdb3:   elfutils-libs-0.180-1.el8.x86_64                                              
+    node2cos8cdb3:   iproute-5.3.0-5.el8.x86_64                                                    
+    node2cos8cdb3:   libcurl-7.61.1-14.el8.x86_64                                                  
+    node2cos8cdb3:   libdnf-0.48.0-5.el8.x86_64                                                    
+    node2cos8cdb3:   librepo-1.12.0-2.el8.x86_64                                                   
+    node2cos8cdb3:   libsolv-0.7.11-1.el8.x86_64                                                   
+    node2cos8cdb3:   libssh-0.9.4-2.el8.x86_64                                                     
+    node2cos8cdb3:   openssl-1:1.1.1g-11.el8.x86_64                                                
+    node2cos8cdb3:   openssl-libs-1:1.1.1g-11.el8.x86_64                                           
+    node2cos8cdb3:   python3-dnf-4.2.23-4.el8.noarch                                               
+    node2cos8cdb3:   python3-dnf-plugins-core-4.0.17-5.el8.noarch                                  
+    node2cos8cdb3:   python3-hawkey-0.48.0-5.el8.x86_64                                            
+    node2cos8cdb3:   python3-libdnf-0.48.0-5.el8.x86_64                                            
+    node2cos8cdb3:   python3-librepo-1.12.0-2.el8.x86_64                                           
+    node2cos8cdb3:   python3-rpm-4.14.3-4.el8.x86_64                                               
+    node2cos8cdb3:   rpm-4.14.3-4.el8.x86_64                                                       
+    node2cos8cdb3:   rpm-build-libs-4.14.3-4.el8.x86_64                                            
+    node2cos8cdb3:   rpm-libs-4.14.3-4.el8.x86_64                                                  
+    node2cos8cdb3:   rpm-plugin-selinux-4.14.3-4.el8.x86_64                                        
+    node2cos8cdb3:   rpm-plugin-systemd-inhibit-4.14.3-4.el8.x86_64                                
+    node2cos8cdb3:   yum-4.2.23-4.el8.noarch                                                       
+    node2cos8cdb3: 
+    node2cos8cdb3: Installed:
+    node2cos8cdb3:   jq-1.5-12.el8.x86_64                                                          
+    node2cos8cdb3:   mc-1:4.8.19-9.el8.x86_64                                                      
+    node2cos8cdb3:   net-tools-2.0-0.52.20160912git.el8.x86_64                                     
+    node2cos8cdb3:   yum-utils-4.0.17-5.el8.noarch                                                 
+    node2cos8cdb3:   elfutils-debuginfod-client-0.180-1.el8.x86_64                                 
+    node2cos8cdb3:   gpm-libs-1.20.7-15.el8.x86_64                                                 
+    node2cos8cdb3:   oniguruma-6.8.2-2.el8.x86_64                                                  
+    node2cos8cdb3:   libmodulemd-2.9.4-2.el8.x86_64                                                
+    node2cos8cdb3:   libssh-config-0.9.4-2.el8.noarch                                              
+    node2cos8cdb3:   libzstd-1.4.4-1.el8.x86_64                                                    
+    node2cos8cdb3:   perl-Carp-1.42-396.el8.noarch                                                 
+    node2cos8cdb3:   perl-Errno-1.28-416.el8.x86_64                                                
+    node2cos8cdb3:   perl-Exporter-5.72-396.el8.noarch                                             
+    node2cos8cdb3:   perl-File-Path-2.15-2.el8.noarch                                              
+    node2cos8cdb3:   perl-File-Temp-0.230.600-1.el8.noarch                                         
+    node2cos8cdb3:   perl-IO-1.38-416.el8.x86_64                                                   
+    node2cos8cdb3:   perl-PathTools-3.74-1.el8.x86_64                                              
+    node2cos8cdb3:   perl-Scalar-List-Utils-3:1.49-2.el8.x86_64                                    
+    node2cos8cdb3:   perl-Socket-4:2.027-3.el8.x86_64                                              
+    node2cos8cdb3:   perl-Text-Tabs+Wrap-2013.0523-395.el8.noarch                                  
+    node2cos8cdb3:   perl-Unicode-Normalize-1.25-396.el8.x86_64                                    
+    node2cos8cdb3:   perl-constant-1.33-396.el8.noarch                                             
+    node2cos8cdb3:   perl-interpreter-4:5.26.3-416.el8.x86_64                                      
+    node2cos8cdb3:   perl-libs-4:5.26.3-416.el8.x86_64                                             
+    node2cos8cdb3:   perl-macros-4:5.26.3-416.el8.x86_64                                           
+    node2cos8cdb3:   perl-parent-1:0.237-1.el8.noarch                                              
+    node2cos8cdb3:   perl-threads-1:2.21-2.el8.x86_64                                              
+    node2cos8cdb3:   perl-threads-shared-1.58-2.el8.x86_64                                         
+    node2cos8cdb3: Complete!
+    node2cos8cdb3: + dnf clean packages
+    node2cos8cdb3: 0 files removed
+    node2cos8cdb3: + dnf -y --enablerepo=bintray--apache-couchdb-rpm clean metadata
+    node2cos8cdb3: Cache was expired
+    node2cos8cdb3: 46 files removed
+    node2cos8cdb3: + dnf -y install couchdb
+    node2cos8cdb3: CentOS-8 - AppStream                            5.1 MB/s | 6.3 MB     00:01    
+    node2cos8cdb3: CentOS-8 - Base                                 2.0 MB/s | 2.3 MB     00:01    
+    node2cos8cdb3: CentOS-8 - Extras                                39 kB/s | 8.6 kB     00:00    
+    node2cos8cdb3: bintray--apache-couchdb-rpm                     242 kB/s |  94 kB     00:00    
+    node2cos8cdb3: Extra Packages for Enterprise Linux Modular 8 - 267 kB/s | 527 kB     00:01    
+    node2cos8cdb3: Extra Packages for Enterprise Linux 8 - x86_64  1.2 MB/s | 8.7 MB     00:07    
+    node2cos8cdb3: Dependencies resolved.
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3:  Package     Arch       Version           Repository                       Size
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3: Installing:
+    node2cos8cdb3:  couchdb     x86_64     3.1.1-1.el8       bintray--apache-couchdb-rpm      24 M
+    node2cos8cdb3: Installing dependencies:
+    node2cos8cdb3:  mozjs60     x86_64     60.9.0-4.el8      BaseOS                          6.6 M
+    node2cos8cdb3: 
+    node2cos8cdb3: Transaction Summary
+    node2cos8cdb3: ================================================================================
+    node2cos8cdb3: Install  2 Packages
+    node2cos8cdb3: Total download size: 30 M
+    node2cos8cdb3: Installed size: 74 M
+    node2cos8cdb3: Downloading Packages:
+    node2cos8cdb3: (1/2): mozjs60-60.9.0-4.el8.x86_64.rpm          6.8 MB/s | 6.6 MB     00:00    
+    node2cos8cdb3: (2/2): couchdb-3.1.1-1.el8.x86_64.rpm            19 MB/s |  24 MB     00:01    
+    node2cos8cdb3: --------------------------------------------------------------------------------
+    node2cos8cdb3: Total                                            23 MB/s |  30 MB     00:01     
+    node2cos8cdb3: Running transaction check
+    node2cos8cdb3: Transaction check succeeded.
+    node2cos8cdb3: Running transaction test
+    node2cos8cdb3: Transaction test succeeded.
+    node2cos8cdb3: Running transaction
+    node2cos8cdb3:   Preparing        :                                                        1/1
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : mozjs60-60.9.0-4.el8.x86_64                            1/2
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: couchdb-3.1.1-1.el8.x86_64                             2/2
+    node2cos8cdb3:  
+    node2cos8cdb3:   Installing       : couchdb-3.1.1-1.el8.x86_64                             2/2
+    node2cos8cdb3:  
+    node2cos8cdb3:   Running scriptlet: couchdb-3.1.1-1.el8.x86_64                             2/2
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : mozjs60-60.9.0-4.el8.x86_64                            1/2
+    node2cos8cdb3:  
+    node2cos8cdb3:   Verifying        : couchdb-3.1.1-1.el8.x86_64                             2/2
+    node2cos8cdb3:  
+    node2cos8cdb3: 
+    node2cos8cdb3: Installed:
+    node2cos8cdb3:   couchdb-3.1.1-1.el8.x86_64             mozjs60-60.9.0-4.el8.x86_64            
+    node2cos8cdb3: Complete!
+    node2cos8cdb3: + dnf clean packages
+    node2cos8cdb3: 0 files removed
+    node2cos8cdb3: + sed -n '/^;/!p' /opt/couchdb/etc/local.ini
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [couchdb]
+    node2cos8cdb3: 
+    node2cos8cdb3: [couch_peruser]
+    node2cos8cdb3: 
+    node2cos8cdb3: [chttpd]
+    node2cos8cdb3: 
+    node2cos8cdb3: [httpd]
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [couch_httpd_auth]
+    node2cos8cdb3: 
+    node2cos8cdb3: [ssl]
+    node2cos8cdb3: 
+    node2cos8cdb3: [vhosts]
+    node2cos8cdb3: 
+    node2cos8cdb3: [admins]
+    node2cos8cdb3: + sed -n '/^;/!p' /opt/couchdb/etc/default.ini
+    node2cos8cdb3: [vendor]
+    node2cos8cdb3: name = The Apache Software Foundation
+    node2cos8cdb3: 
+    node2cos8cdb3: [couchdb]
+    node2cos8cdb3: uuid = 
+    node2cos8cdb3: database_dir = ./data
+    node2cos8cdb3: view_index_dir = ./data
+    node2cos8cdb3: os_process_timeout = 5000 ; 5 seconds. for view servers.
+    node2cos8cdb3: max_dbs_open = 500
+    node2cos8cdb3: file_compression = snappy
+    node2cos8cdb3: attachment_stream_buffer_size = 4096
+    node2cos8cdb3: default_security = admin_only
+    node2cos8cdb3: changes_doc_ids_optimization_threshold = 100
+    node2cos8cdb3: max_document_size = 8000000 ; bytes
+    node2cos8cdb3: default_engine = couch
+    node2cos8cdb3: 
+    node2cos8cdb3: users_db_security_editable = false
+    node2cos8cdb3: 
+    node2cos8cdb3: [purge]
+    node2cos8cdb3: 
+    node2cos8cdb3: [couchdb_engines]
+    node2cos8cdb3: couch = couch_bt_engine
+    node2cos8cdb3: 
+    node2cos8cdb3: [process_priority]
+    node2cos8cdb3: 
+    node2cos8cdb3: [cluster]
+    node2cos8cdb3: q=2
+    node2cos8cdb3: n=3
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [chttpd]
+    node2cos8cdb3: port = 5984
+    node2cos8cdb3: bind_address = 127.0.0.1
+    node2cos8cdb3: backlog = 512
+    node2cos8cdb3: socket_options = [{sndbuf, 262144}, {nodelay, true}]
+    node2cos8cdb3: server_options = [{recbuf, undefined}]
+    node2cos8cdb3: require_valid_user = false
+    node2cos8cdb3: prefer_minimal = Cache-Control, Content-Length, Content-Range, Content-Type, ETag, Server, Transfer-Encoding, Vary
+    node2cos8cdb3: max_db_number_for_dbs_info_req = 100
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [couch_peruser]
+    node2cos8cdb3: enable = false
+    node2cos8cdb3: delete_dbs = false
+    node2cos8cdb3: database_prefix = userdb-
+    node2cos8cdb3: 
+    node2cos8cdb3: [httpd]
+    node2cos8cdb3: port = 5986
+    node2cos8cdb3: bind_address = 127.0.0.1
+    node2cos8cdb3: authentication_handlers = {couch_httpd_auth, cookie_authentication_handler}, {couch_httpd_auth, default_authentication_handler}
+    node2cos8cdb3: secure_rewrites = true
+    node2cos8cdb3: allow_jsonp = false
+    node2cos8cdb3: socket_options = [{sndbuf, 262144}]
+    node2cos8cdb3: enable_cors = false
+    node2cos8cdb3: enable_xframe_options = false
+    node2cos8cdb3: max_http_request_size = 4294967296 ; 4GB
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [ssl]
+    node2cos8cdb3: port = 6984
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [couch_httpd_auth]
+    node2cos8cdb3: authentication_db = _users
+    node2cos8cdb3: authentication_redirect = /_utils/session.html
+    node2cos8cdb3: require_valid_user = false
+    node2cos8cdb3: timeout = 600 ; number of seconds before automatic logout
+    node2cos8cdb3: auth_cache_size = 50 ; size is number of cache entries
+    node2cos8cdb3: allow_persistent_cookies = true ; set to false to disallow persistent cookies
+    node2cos8cdb3: iterations = 10 ; iterations for password hashing
+    node2cos8cdb3: 
+    node2cos8cdb3: [csp]
+    node2cos8cdb3: enable = true
+    node2cos8cdb3: 
+    node2cos8cdb3: [cors]
+    node2cos8cdb3: credentials = false
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [x_frame_options]
+    node2cos8cdb3: 
+    node2cos8cdb3: [native_query_servers]
+    node2cos8cdb3: 
+    node2cos8cdb3: [query_server_config]
+    node2cos8cdb3: reduce_limit = true
+    node2cos8cdb3: os_process_limit = 100
+    node2cos8cdb3: 
+    node2cos8cdb3: [mango]
+    node2cos8cdb3: 
+    node2cos8cdb3: [indexers]
+    node2cos8cdb3: couch_mrview = true
+    node2cos8cdb3: 
+    node2cos8cdb3: [feature_flags]
+    node2cos8cdb3: partitioned||* = true
+    node2cos8cdb3: 
+    node2cos8cdb3: [uuids]
+    node2cos8cdb3: algorithm = sequential
+    node2cos8cdb3: utc_id_suffix =
+    node2cos8cdb3: # Maximum number of UUIDs retrievable from /_uuids in a single request
+    node2cos8cdb3: max_count = 1000
+    node2cos8cdb3: 
+    node2cos8cdb3: [attachments]
+    node2cos8cdb3: compression_level = 8 ; from 1 (lowest, fastest) to 9 (highest, slowest), 0 to disable compression
+    node2cos8cdb3: compressible_types = text/*, application/javascript, application/json, application/xml
+    node2cos8cdb3: 
+    node2cos8cdb3: [replicator]
+    node2cos8cdb3: startup_jitter = 5000
+    node2cos8cdb3: max_jobs = 500
+    node2cos8cdb3: interval = 60000
+    node2cos8cdb3: max_churn = 20
+    node2cos8cdb3: worker_processes = 4
+    node2cos8cdb3: worker_batch_size = 500
+    node2cos8cdb3: http_connections = 20
+    node2cos8cdb3: connection_timeout = 30000
+    node2cos8cdb3: retries_per_request = 5
+    node2cos8cdb3: socket_options = [{keepalive, true}, {nodelay, false}]
+    node2cos8cdb3: verify_ssl_certificates = false
+    node2cos8cdb3: ssl_certificate_max_depth = 3
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [log]
+    node2cos8cdb3: level = info
+    node2cos8cdb3: writer = stderr
+    node2cos8cdb3: 
+    node2cos8cdb3: [stats]
+    node2cos8cdb3: 
+    node2cos8cdb3: [smoosh]
+    node2cos8cdb3: 
+    node2cos8cdb3: [ioq]
+    node2cos8cdb3: concurrency = 10
+    node2cos8cdb3: 
+    node2cos8cdb3: ratio = 0.01
+    node2cos8cdb3: 
+    node2cos8cdb3: [ioq.bypass]
+    node2cos8cdb3: 
+    node2cos8cdb3: os_process = true
+    node2cos8cdb3: 
+    node2cos8cdb3: read = true
+    node2cos8cdb3: 
+    node2cos8cdb3: write = true
+    node2cos8cdb3: 
+    node2cos8cdb3: view_update = true
+    node2cos8cdb3: 
+    node2cos8cdb3: shard_sync = false
+    node2cos8cdb3: 
+    node2cos8cdb3: compaction = false
+    node2cos8cdb3: 
+    node2cos8cdb3: [dreyfus]
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3:  
+    node2cos8cdb3: 
+    node2cos8cdb3: 
+    node2cos8cdb3: [reshard]
+    node2cos8cdb3: + create_certificates
+    node2cos8cdb3: + set -x
+    node2cos8cdb3: + set -e
+    node2cos8cdb3: + country=RO
+    node2cos8cdb3: + state=Europe
+    node2cos8cdb3: + locality=TSR
+    node2cos8cdb3: + organization=DBA
+    node2cos8cdb3: + organizationalunit=CLOUD
+    node2cos8cdb3: + commonname=couchdb.eu
+    node2cos8cdb3: + email=admin@couchdb.eu
+    node2cos8cdb3: + sudo openssl genrsa -out /opt/couchdb/couch.key 2048
+    node2cos8cdb3: Generating RSA private key, 2048 bit long modulus (2 primes)
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: .
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: +
+    node2cos8cdb3: e is 65537 (0x010001)
+    node2cos8cdb3: + sudo openssl req -new -key /opt/couchdb/couch.key -out /opt/couchdb/couch.csr -subj /C=RO/ST=Europe/L=TSR/O=DBA/OU=CLOUD/CN=couchdb.eu/emailAddress=admin@couchdb.eu
+    node2cos8cdb3: + sudo openssl x509 -req -sha256 -days 1095 -in /opt/couchdb/couch.csr -signkey /opt/couchdb/couch.key -out /opt/couchdb/couch.crt
+    node2cos8cdb3: Signature ok
+    node2cos8cdb3: subject=C = RO, ST = Europe, L = TSR, O = DBA, OU = CLOUD, CN = couchdb.eu, emailAddress = admin@couchdb.eu
+    node2cos8cdb3: Getting Private key
+    node2cos8cdb3: + sudo usermod -aG wheel couchdb
+    node2cos8cdb3: + sudo echo -e 'couch24\ncouch24'
+    node2cos8cdb3: + passwd couchdb
+    node2cos8cdb3: New password: 
+    node2cos8cdb3: BAD PASSWORD: The password is shorter than 8 characters
+    node2cos8cdb3: Retype new password: 
+    node2cos8cdb3: Changing password for user couchdb.
+    node2cos8cdb3: passwd: all authentication tokens updated successfully.
+    node2cos8cdb3: + sudo chown couchdb:couchdb /opt/couchdb/couch.crt
+    node2cos8cdb3: + sudo chown couchdb:couchdb /opt/couchdb/couch.key
+    node2cos8cdb3: bind_address = 127.0.0.1
+    node2cos8cdb3: bind_address = 127.0.0.1
+    node2cos8cdb3: + grep bind_address
+    node2cos8cdb3: + cat /opt/couchdb/etc/default.ini
+    node2cos8cdb3: ; the specified engine module will use. This is important so
+    node2cos8cdb3: ; These settings affect the main, clustered port (5984 by default).
+    node2cos8cdb3: port = 5984
+    node2cos8cdb3: port = 5986
+    node2cos8cdb3: ; Maximum allowed http request size. Applies to both clustered and local port.
+    node2cos8cdb3: port = 6984
+    node2cos8cdb3: ; WARNING! This only affects the node-local port (5986 by default).
+    node2cos8cdb3: ; CSP (Content Security Policy) Support for _utils
+    node2cos8cdb3: ; syslog_port = 514
+    node2cos8cdb3: + cat /opt/couchdb/etc/default.ini
+    node2cos8cdb3: + grep port
+    node2cos8cdb3: + sed -i 's/^;bind_address =.*/bind_address = 0.0.0.0/' /opt/couchdb/etc/default.ini
+    node2cos8cdb3: + sed -i 's/^;port =.*/port = 5984/' /opt/couchdb/etc/local.ini
+    node2cos8cdb3: + cat
+    node2cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node2cos8cdb3: 
+    node2cos8cdb3: [chttpd]
+    node2cos8cdb3: port = 5984
+    node2cos8cdb3: bind_address = 0.0.0.0
+    node2cos8cdb3: 
+    node2cos8cdb3: [ssl]
+    node2cos8cdb3: enable = true
+    node2cos8cdb3: cert_file = /opt/couchdb/couch.crt
+    node2cos8cdb3: key_file = /opt/couchdb/couch.key
+    node2cos8cdb3: 
+    node2cos8cdb3: [admins]
+    node2cos8cdb3: admin = dba
+    node2cos8cdb3: couchdb = couch24
+    node2cos8cdb3: bind_address = 0.0.0.0
+    node2cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node2cos8cdb3: + grep bind_address
+    node2cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node2cos8cdb3: port = 5984
+    node2cos8cdb3: + grep port
+    node2cos8cdb3: [admins]
+    node2cos8cdb3: admin = dba
+    node2cos8cdb3: + cat /opt/couchdb/etc/local.ini
+    node2cos8cdb3: + grep admin
+    node2cos8cdb3: # Each node in the system must have a unique name. These are specified through
+    node2cos8cdb3: # the Erlang -name flag, which takes the form:
+    node2cos8cdb3: #    -name nodename@<FQDN>
+    node2cos8cdb3: #    -name nodename@<IP-ADDRESS>
+    node2cos8cdb3: #    -name couchdb@127.0.0.1
+    node2cos8cdb3: #    -name couchdb@my.host.domain.com
+    node2cos8cdb3: #    -name couchdb@192.168.0.1
+    node2cos8cdb3: -name couchdb@127.0.0.1
+    node2cos8cdb3: + cat /opt/couchdb/etc/vm.args
+    node2cos8cdb3: + grep name
+    node2cos8cdb3: define-second
+    node2cos8cdb3:  entered else : define-second 
+    node2cos8cdb3: + echo define-second
+    node2cos8cdb3: + '[' define-second == define-first ']'
+    node2cos8cdb3: + echo ' entered else : define-second '
+    node2cos8cdb3: + sed -i 's/^-name.*/-name couchdb@192.168.83.89/' /opt/couchdb/etc/vm.args
+    node2cos8cdb3: + echo '-kernel inet_dist_listen_min 9100'
+    node2cos8cdb3: + echo '-kernel inet_dist_listen_max 9200'
+    node2cos8cdb3: + systemctl enable --now couchdb.service
+    node2cos8cdb3: Created symlink /etc/systemd/system/multi-user.target.wants/couchdb.service → /usr/lib/systemd/system/couchdb.service.
+    node2cos8cdb3: + systemctl status couchdb
+    node2cos8cdb3: ● couchdb.service - Apache CouchDB
+    node2cos8cdb3:    Loaded: loaded (/usr/lib/systemd/system/couchdb.service; enabled; vendor preset: disabled)
+    node2cos8cdb3:    Active: active (running) since Mon 2021-01-04 18:30:02 UTC; 8ms ago
+    node2cos8cdb3:  Main PID: 25254 ((couchdb))
+    node2cos8cdb3:     Tasks: 0 (limit: 6106)
+    node2cos8cdb3:    Memory: 0B
+    node2cos8cdb3:    CGroup: /system.slice/couchdb.service
+    node2cos8cdb3:            └─25254 (couchdb)
+    node2cos8cdb3: 
+    node2cos8cdb3: Jan 04 18:30:02 cos8cdb3node2 systemd[1]: Started Apache CouchDB.
+    node2cos8cdb3: + netstat -plntu
+    node2cos8cdb3: Active Internet connections (only servers)
+    node2cos8cdb3: Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+    node2cos8cdb3: tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      660/sshd            
+    node2cos8cdb3: tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1/systemd           
+    node2cos8cdb3: tcp6       0      0 :::22                   :::*                    LISTEN      660/sshd            
+    node2cos8cdb3: tcp6       0      0 :::111                  :::*                    LISTEN      1/systemd           
+    node2cos8cdb3: udp        0      0 127.0.0.1:323           0.0.0.0:*                           615/chronyd         
+    node2cos8cdb3: udp        0      0 10.0.2.15:68            0.0.0.0:*                           3803/NetworkManager 
+    node2cos8cdb3: udp        0      0 0.0.0.0:111             0.0.0.0:*                           1/systemd           
+    node2cos8cdb3: udp6       0      0 ::1:323                 :::*                                615/chronyd         
+    node2cos8cdb3: udp6       0      0 :::111                  :::*                                1/systemd           
+    node2cos8cdb3: + ps -fu couchdb --forest
+    node2cos8cdb3: UID        PID  PPID  C STIME TTY          TIME CMD
+    node2cos8cdb3: couchdb  25254     1  0 18:30 ?        00:00:00 /opt/couchdb/bin/../erts-9.3.3.14/bin/beam.smp -K true -A 16 -Bd -- -root /opt/couchdb/bin/.. -progname couchdb -- -home /opt/couchdb -- -boot /opt/couchdb/bin/../releases/3.1.1/couchdb -name couchdb@192.168.83.89 -setcookie monster -kernel error_logger silent -sasl sasl_error_logger false -noshell -noinput -smp enable -ssl session_lifetime 300 -kernel inet_dist_listen_min 9100 -kernel inet_dist_listen_max 9200 -config /opt/couchdb/bin/../releases/3.1.1/sys.config
+    node2cos8cdb3: + sleep 10
+    node2cos8cdb3: + curl -s http://admin:dba@localhost:5984
+    node2cos8cdb3: {"couchdb":"Welcome","version":"3.1.1","git_sha":"ce596c65d","uuid":"03e6f497a4d46a418f5f66a15801953e","features":["access-ready","partitioned","pluggable-storage-engines","reshard","scheduler"],"vendor":{"name":"The Apache Software Foundation"}}
+    node2cos8cdb3: + curl -X GET http://admin:dba@localhost:5984/_all_dbs
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                  Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    node2cos8cdb3: []
+100     3    0     3    0     0     88      0 --:--:-- --:--:-- --:--:--    88
+    node2cos8cdb3: + curl -i -k -X GET https://admin:dba@localhost:6984
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed
+    node2cos8cdb3:    Time    Time     Time  Cur
+    node2cos8cdb3: rent
+    node2cos8cdb3:                                  Dload  Upload   To
+    node2cos8cdb3: tal   Spent   
+    node2cos8cdb3:  Left  Spee
+    node2cos8cdb3: d
+  0 node2cos8cdb3: 
+    node2cos8cdb3:     0    0
+    node2cos8cdb3:      0    
+    node2cos8cdb3: 0     0   
+    node2cos8cdb3:    0      
+    node2cos8cdb3: 0 --:--:-- --:-
+    node2cos8cdb3: -:-- --:--
+    node2cos8cdb3: :--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --
+    node2cos8cdb3: :--:--     0
+    node2cos8cdb3: HTTP/1.1 200 OK
+    node2cos8cdb3: Cache-Control: must-revalidate
+    node2cos8cdb3: Content-Length: 247
+    node2cos8cdb3: Content-Type: application/json
+    node2cos8cdb3: Date: Mon, 04 Jan 2021 18:30:12 GMT
+    node2cos8cdb3: Server: CouchDB/3.1.1 (Erlang OTP/20)
+    node2cos8cdb3: X-Couch-Request-ID: 1858daccea
+    node2cos8cdb3: X-CouchDB-Body-Time: 0
+    node2cos8cdb3: 
+    node2cos8cdb3: {"couchdb":"Welcome","version":"3.1.1","git_sha":"ce596c65d","uuid":"03e6f497a4d46a418f5f66a15801953e","features":["access-ready","partitioned","pluggable-storage-engines","reshard","scheduler"],"vendor":{"name":"The Apache Software Foundation"}}
+100   247  100   247    0     0   6024      0 --:--:-- --:--:-- --:--:--  5880
+    node2cos8cdb3:  entered else : define-second - create cluster & restore_db
+    node2cos8cdb3: + '[' define-second == define-first ']'
+    node2cos8cdb3: + echo ' entered else : define-second - create cluster & restore_db'
+    node2cos8cdb3: + create_cluster
+    node2cos8cdb3: + curl -X POST -H 'Content-Type: application/json' http://admin:dba@192.168.83.86:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"dba", "node_count":"2"}'
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                  Dload  Up
+    node2cos8cdb3: load   Total   Spent    Left  S
+    node2cos8cdb3: peed
+  0     0    0     0    0     0      0      0
+    node2cos8cdb3:  --:--:-- --:--
+    node2cos8cdb3: :-
+    node2cos8cdb3: - --:--:--     0
+    node2cos8cdb3: {"error":"bad_request","reason":"Cluster is already enabled"}
+100   173  100    62  100   111  10333  18500 --:--:-- --:--:-- --:--:-- 28833
+    node2cos8cdb3: + curl -X POST -H 'Content-Type: application/json' http://admin:dba@192.168.83.89:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"dba", "node_count":"2"}'
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                  Dload
+    node2cos8cdb3:   Upload   Total   Spent    
+    node2cos8cdb3: Left  Speed
+  0     0    0     0    0     0      
+    node2cos8cdb3: 0      0 --:--:
+    node2cos8cdb3: -- --:--:-- 
+    node2cos8cdb3: --:--:--   
+    node2cos8cdb3:   0
+    node2cos8cdb3: {"error":"bad_request","reason":"Cluster is already enabled"}
+100   173  100    62  100   111  12400  22200 --:--:-- --:--:-- --:--:-- 34600
+    node2cos8cdb3: + curl -X POST -H 'Content-Type: application/json' http://admin:dba@192.168.83.86:5984/_cluster_setup -d '{"action": "enable_cluster", "bind_address":"0.0.0.0", "username": "admin", "password":"dba", "port": 5984, "node_count": "2", "remote_node": "192.168.83.89", "remote_current_user": "admin", "remote_current_password": "dba" }'
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                
+    node2cos8cdb3:   Dload  Upload   Total   Spent    L
+    node2cos8cdb3: eft  Speed
+  0     0    0     0    0     0      0 
+    node2cos8cdb3:      0 --:--:--
+    node2cos8cdb3:  --:--:-- -
+    node2cos8cdb3: -:--:--    
+    node2cos8cdb3:  0
+100   237  100    12  100   225   1200  22500 --:--
+    node2cos8cdb3: {"ok":true}
+    node2cos8cdb3: :-- --:--:-- --:--:-- 23700
+    node2cos8cdb3: + curl -X POST -H 'Content-Type: application/json' http://admin:dba@192.168.83.86:5984/_cluster_setup -d '{"action": "add_node", "host":"192.168.83.89", "port": "5984", "username": "admin", "password":"atos"}'
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:       
+    node2cos8cdb3:                            D
+    node2cos8cdb3: load  Upload   Total   Spent    Left  Speed
+  0    e2cos8cdb3: 
+    node2cos8cdb3:  0    0     0  
+    node2cos8cdb3:   0     0   
+    node2cos8cdb3:    0      0
+    node2cos8cdb3:  --:--:-- -
+    node2cos8cdb3: -:--:-- --
+    node2cos8cdb3: :--:--     
+    node2cos8cdb3: 0
+100   114  100    12  100   102   6000  510
+    node2cos8cdb3: 00 --:--:-- --:--:-- --:--:-- 57000
+    node2cos8cdb3: {"ok":true}
+    node2cos8cdb3: + curl -X POST -H 'Content-Type: application/json' http://admin:dba@192.168.83.86:5984/_cluster_setup -d '{"action": "finish_cluster"}'
+    node2cos8cdb3:   % Total    % Received % Xferd  Ave
+    node2cos8cdb3: rage Speed   Time    Time   
+    node2cos8cdb3:   Time  Current
+    node2cos8cdb3:  
+    node2cos8cdb3:  
+    node2cos8cdb3:                 
+    node2cos8cdb3:        
+    node2cos8cdb3:         Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100    40  100    12  100    28    545   1272 --:--:-- --:--:-- --:--:--  1818
+    node2cos8cdb3: {"ok":true}
+    node2cos8cdb3: + curl -X GET http://admin:atos@localhost:5984/_membership
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                  Dload  
+    node2cos8cdb3: Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     
+    node2cos8cdb3: 0
+    node2cos8cdb3: {"error":"unauthorized","reason":"Name or password is incorrect."}
+100    67  100    67    0     0  67000      0 --:--:-- --:--:-- --:--:-- 67000
+    node2cos8cdb3: + movies_restore_bulk_docs
+    node2cos8cdb3: + cat
+    node2cos8cdb3: + curl -X PUT http://admin:dba@localhost:5984/movies_restored
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                  Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    node2cos8cdb3: {"ok":true}
+100    12  100    12    0     0    857      0 --:--:-- --:--:-- --:--:--   857
+    node2cos8cdb3: + curl -d @/root/movies.db.dump.json -H 'Content-type: application/json' -X POST http://admin:dba@localhost:5984/movies_restored/_bulk_docs
+    node2cos8cdb3:   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+    node2cos8cdb3:                                  Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+    node2cos8cdb3: [{"ok":true,"id":"_design/sample","rev":"1-4b5394ab93ce1a821ec740a0ec950106"},{"ok":true,"id":"f96b64a80ecaffd8c12dbd4e4f004b74","rev":"1-55f2ec9c7c53fec192cdb16c9c4f50c9"},{"ok":true,"id":"f96b64a80ecaffd8c12dbd4e4f0088d0","rev":"1-576d70babcd04fed2918f5c543bb7cf6"},{"ok":true,"id":"f96b64a80ecaffd8c12dbd4e4f00913b","rev":"1-cba8edd3907e29925aac6ffdbcf921a5"},{"ok":true,"id":"f96b64a80ecaffd8c12dbd4e4f0097ad","rev":"1-b9481b94d092b1a65b64589492d2b49e"},{"ok":true,"id":"f96b64a80ecaffd8c12dbd4e4f00bf3f","rev":"1-d3ea1b5a4e6b014c10123f4e9f5fbad8"}]
+100  8686  100   554  100  8132   8147   116k --:--:-- --:--:-- --:--:--  124k
+    node2cos8cdb3: Complete
+    node2cos8cdb3: + echo Complete
+alex@Lenovo-Legion:/home/vagrant/CouchDB/CentOS8/ssl/movies$ 

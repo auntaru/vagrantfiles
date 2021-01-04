@@ -1,0 +1,42 @@
+
+# cat /opt/couchdb/scripts/couchdb_dump_as_json.sh
+# =================================================
+
+START=$(date +%s)
+if [ $(whoami) !=  'root' ]
+    then
+        echo " no root ! "
+    else
+        echo " ups,  root ...  "
+        exit
+
+fi
+echo " I am `whoami`"
+ur_id=${USER}-on-${HOSTNAME}
+echo "$ur_id"
+
+dumpMachine="127.0.0.1"
+dumpPort="5984"
+
+if [ "$1" != "" ]; then
+    echo "DB name received as parameter"
+    dumpDatabase="$1"
+else
+    echo "DB name is the default one"
+    dumpDatabase="movies"
+fi
+
+dumpFolder="/opt/couchdb/backup"
+# mkdir -m u=rwx ${dumpFolder}
+# chown couchdb:couchdb ${dumpFolder}
+# chmod 777 $dumpFolder
+
+dumpFileName="$dumpFolder/$dumpDatabase.`date +%y%m%d%H%M%S`.db.dump.json"
+curl -X GET "http://admin:dba@$dumpMachine:$dumpPort/$dumpDatabase/_all_docs?include_docs=true" | jq '{"docs": [.rows[].doc]}' | jq 'del(.docs[]._rev)' > $dumpFileName
+
+END=`date +%s`
+ELAPSED=$(($END-$START))
+# let MIN=$(($ELAPSED/60))
+# echo "Dump Elapsed: $MIN minutes"
+echo "Dump : $ELAPSED seconds"
+
